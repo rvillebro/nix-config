@@ -30,14 +30,7 @@
       };
     };
 
-    alacritty = {
-      enable = true;
-      settings = {
-        window.opacity = 0.95;
-        window.dynamic_padding = true;
-        scrolling.history = 10000;
-      };
-    };
+    alacritty.enable = true;
 
     tmux = {
       enable = true;
