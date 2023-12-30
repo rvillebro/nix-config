@@ -10,7 +10,7 @@
     bash.enable = true;
     firefox.enable = true;
     btop.enable = true; # replacement of htop/nmon
-    exa.enable = true; # A modern replacement for ‘ls’
+    eza.enable = true; # A modern replacement for ‘ls’
     ssh.enable = true;
     aria2.enable = true;
 
