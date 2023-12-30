@@ -18,8 +18,6 @@
       pigz
 
       # python
-      python310
-      python311
       python312
 
       # nix tooling
