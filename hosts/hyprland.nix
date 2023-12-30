@@ -13,6 +13,8 @@
 
   environment = {
     sessionVariables = {
+      # if your cursor becomes invisible
+      WLR_NO_HARDWARE_CURSORS = "1";
       # Hint electron apps to use wayland
       NIXOS_OZONE_WL = "1";
     };
@@ -34,8 +36,6 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-    ];
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
 }
