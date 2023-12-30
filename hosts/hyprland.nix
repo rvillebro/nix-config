@@ -8,6 +8,7 @@
 }: {
   programs.hyprland = {
     enable = true;
+    nvidiaPatches = true;
     xwayland.enable = true;
   };
 
@@ -31,7 +32,10 @@
     ];
   };
 
-  hardware.opengl.enable = true;
+  hardware = {
+    opengl.enable = true;
+    nvidia.modesetting.enable = true;
+  }
 
   xdg.portal = {
     enable = true;
