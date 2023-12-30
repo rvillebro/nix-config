@@ -30,6 +30,8 @@
       hyprpaper
       # launcher
       tofi
+
+      kitty
     ];
   };
 
