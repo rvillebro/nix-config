@@ -23,7 +23,7 @@
       dunst
       libnotify
       # wallpaper
-      hyprpapr
+      hyprpaper
       # launcher
       tofi
     ];
