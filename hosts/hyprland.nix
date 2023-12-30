@@ -32,6 +32,8 @@
       hyprpaper
       # launcher
       tofi
+      wofi
+      dolphin
 
       kitty
       gtk3
