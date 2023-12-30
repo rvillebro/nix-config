@@ -44,6 +44,8 @@
     options = lib.mkDefault "--delete-older-than 7d";
   };
 
+  console.keyMap = "dk";
+
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     vim
