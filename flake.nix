@@ -1,5 +1,5 @@
 {
-  description = "Rasmus' NixOS configuration";
+  description = "Rasmus' Nix configuration";
 
   inputs = {
     # Nixpkgs
@@ -63,7 +63,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = inputs;
-            home-manager.users.rasmus = import ./home;
+            home-manager.users.rav = import ./home;
           }
         ];
       };
@@ -78,7 +78,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = inputs;
-            home-manager.users.rasmus = import ./home;
+            home-manager.users.rav = import ./home;
           }
         ];
       };
