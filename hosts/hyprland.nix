@@ -32,6 +32,7 @@
       tofi
 
       kitty
+      gtk3
     ];
   };
 
