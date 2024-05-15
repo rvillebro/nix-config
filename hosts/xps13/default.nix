@@ -25,8 +25,11 @@
     systemd-boot.enable = true;
   };
 
-  networking.hostName = "xps13"; # Define your hostname.
-  networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
+  networking = {
+    hostName = "xps13"; # Define your hostname.
+    wireless.enable = true; # Enables wireless support via wpa_supplicant.
+    networkmanager.enable = true;
+  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
