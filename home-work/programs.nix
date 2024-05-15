@@ -7,10 +7,15 @@
   ...
 }: {
   programs = {
-    bash.enable = true;
-    btop.enable = true; # replacement of htop/nmon
-    eza.enable = true; # A modern replacement for ‘ls’
-    aria2.enable = true;
+    bash = {
+      enable = true;
+      enableCompletion = true;
+      shellAliases = {
+        l = "eza";
+        ll = "eza -lh";
+        la = "eza -alh";
+      };
+    };
 
     direnv = {
       enable = true;
@@ -48,6 +53,11 @@
 
     neovim = {
       enable = true;
-    }
+      vimAlias = true;
+    };
+
+    btop.enable = true; # replacement of htop/nmon
+    eza.enable = true; # A modern replacement for ‘ls’
+    aria2.enable = true;
   };
 }

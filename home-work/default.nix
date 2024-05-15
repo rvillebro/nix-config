@@ -8,6 +8,8 @@
   pkgs,
   ...
 }: {
+  fonts.fontconfig.enable = true;
+
   # You can import other home-manager modules here
   imports = [
     ./home.nix

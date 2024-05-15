@@ -16,7 +16,7 @@
       zip
       unzip
       pigz
-      tar
+      gnutar
 
       # python
       python311
@@ -25,6 +25,9 @@
       alejandra
       deadnix
       statix
+
+      # fonts
+      (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
     ];
     sessionVariables = {
       # clean up ~
@@ -33,7 +36,7 @@
       LESSKEY = "${config.xdg.configHome}/less/lesskey";
 
       # set default applications
-      EDITOR = "vim";
+      EDITOR = "nvim";
     };
   };
 }
