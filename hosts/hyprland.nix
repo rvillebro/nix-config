@@ -39,7 +39,7 @@
 
   hardware = {
     opengl.enable = true;
-    nvidia.modesetting.enable = true;
+    # nvidia.modesetting.enable = true;
   };
 
   xdg.portal = {
@@ -47,4 +47,19 @@
     wlr.enable = true;
     extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
+
+  services.xserver = {
+    enable = true;
+    displayManager.sddm.enable = true;
+    displayManager.sddm.wayland.enable = true;
+  };
+  #services.greetd = {
+  #  enable = true;
+  #  settings = rec {
+  #    initial_session = {
+  #      command = "${pkgs.hyprland}/bin/Hyprland";
+  #      user = "rav";
+  #    };
+  #  };
+  #};
 }
