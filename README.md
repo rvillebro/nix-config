@@ -52,5 +52,7 @@ mkfs.fat -F 32 -n boot /dev/nvme0n1p3
 ```bash
 mount /dev/disk/by-label/nixos /mnt
 mkdir -p /mnt/boot/efi
-mount /dev/disk/by-label/boot /mnt/boot/efi
+mount /dev/disk/by-label/boot /mnt/boot/efi'
+swapon /dev/nvme0n1p2
+nixos-install --flake github:rvillebro/nix-config#xps13
 ```
