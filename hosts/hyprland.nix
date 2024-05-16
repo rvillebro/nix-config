@@ -48,10 +48,22 @@
     extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
 
-  services.xserver = {
+  services.greetd = {
     enable = true;
-    displayManager.sddm.enable = true;
-    displayManager.sddm.wayland.enable = true;
+    settings = {
+      default_session.command = ''
+        ${pkgs.greetd.tuigreet}/bin/tuigreet \
+          --time \
+          --asterisks \
+          --user-menu \
+          --cmd "${pkgs.hyprland}/bin/Hyprland"
+      '';
+    };
+  };
+
+  services.xserver = {
+    enable = false;
+    layout = "dk";
   };
   #services.greetd = {
   #  enable = true;
