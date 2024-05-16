@@ -7,36 +7,18 @@
   ...
 }: {
   programs = {
-    bash = {
+    git = {
       enable = true;
-      enableCompletion = true;
-      shellAliases = {
-        l = "eza";
-        ll = "eza -lh";
-        la = "eza -alh";
-      };
+      userName = "Rasmus Villebro";
+      userEmail = "rav@evaxion-biotech.com";
     };
 
-    direnv = {
+    ssh = {
       enable = true;
-      nix-direnv.enable = true;
-      enableBashIntegration = true;
-    };
-
-    starship = {
-      enable = true;
-      settings = {
-        character = {
-          success_symbol = "[›](bold green)";
-          error_symbol = "[›](bold red)";
-        };
-      };
-    };
-
-    tmux = {
-      enable = true;
-      clock24 = true;
-    };
+      extraConfig = ''
+        IdentityFile ~/.ssh/rav-servers
+      '';
+    }
 
     bat = {
       enable = true;
@@ -45,17 +27,7 @@
       };
     };
 
-    git = {
-      enable = true;
-      userName = "Rasmus Villebro";
-      userEmail = "rav@evaxion-biotech.com";
-    };
-
-    neovim = {
-      enable = true;
-      vimAlias = true;
-    };
-
+    pyenv.enable = true;
     btop.enable = true; # replacement of htop/nmon
     eza.enable = true; # A modern replacement for ‘ls’
     aria2.enable = true;

@@ -8,19 +8,37 @@
   pkgs,
   ...
 }: {
-  fonts.fontconfig.enable = true;
-
   # You can import other home-manager modules here
   imports = [
-    ./home.nix
+    ./shell.nix
+    ./neovim.nix
     ./programs.nix
   ];
 
+  fonts.fontconfig.enable = true;
+
+  home = {
+    username = "rav";
+    homeDirectory = "/home/rav";
+    packages = with pkgs; [
+      # archives
+      zip
+      unzip
+      pigz
+      gnutar
+
+      # nix tooling
+      alejandra
+      deadnix
+      statix
+
+      # fonts
+      (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+    ];
+  };
+
   # enable home-manager
   programs.home-manager.enable = true;
-
-  # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.11";
