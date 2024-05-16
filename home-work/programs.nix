@@ -16,9 +16,9 @@
     ssh = {
       enable = true;
       extraConfig = ''
-        IdentityFile ~/.ssh/rav-servers
+       IdentityFile ~/.ssh/rav-servers
       '';
-    }
+    };
 
     bat = {
       enable = true;
