@@ -9,6 +9,7 @@ To install fresh from NixOS minimal installer.
 First initiate a sudo shell and load danish keys:
 
 ```bash
+sudo loadkeys dk
 sudo -i
 loadkeys dk
 ```
