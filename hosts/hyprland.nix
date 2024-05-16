@@ -60,18 +60,4 @@
       '';
     };
   };
-
-  services.xserver = {
-    enable = false;
-    layout = "dk";
-  };
-  #services.greetd = {
-  #  enable = true;
-  #  settings = rec {
-  #    initial_session = {
-  #      command = "${pkgs.hyprland}/bin/Hyprland";
-  #      user = "rav";
-  #    };
-  #  };
-  #};
 }
