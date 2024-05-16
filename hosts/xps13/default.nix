@@ -27,8 +27,10 @@
 
   networking = {
     hostName = "xps13"; # Define your hostname.
-    wireless.enable = true; # Enables wireless support via wpa_supplicant.
-    # networkmanager.enable = true;
+    wireless = {
+      enable = true;
+      userControlled.enable = true;
+    }; # Enables wireless support via wpa_supplicant.
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

@@ -9,6 +9,6 @@
   users.users.rav = {
     isNormalUser = true;
     initialPassword = "password";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["wheel"];
   };
 }
