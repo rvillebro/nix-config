@@ -64,6 +64,8 @@
         modules = [
           inputs.hardware.nixosModules.dell-xps-13-9370 # fix hardware quirks for XPS13
 
+          ./hosts/xps13
+
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -71,11 +73,14 @@
             home-manager.extraSpecialArgs = {inherit inputs outputs;};
             home-manager.users.rav = import ./home;
           }
-          sops-nix.nixosModules.sops
+
+          inputs.sops-nix.nixosModules.sops
           {
-            defaultSopsFile = ./secrets/secrets.yaml;
-            age.sshKeyPaths = ["/home/rav/.ssh/ed25519_key"];
-            sops.secrets."wireless.env" = {};
+            sops = {
+              defaultSopsFile = ./secrets/secrets.yaml;
+              age.sshKeyPaths = ["/home/rav/.ssh/id_ed25519"];
+              secrets."wireless.env" = {};
+            };
           }
         ];
       };
