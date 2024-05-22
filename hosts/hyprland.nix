@@ -56,7 +56,8 @@
           --time \
           --asterisks \
           --user-menu \
-          --theme border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red \
+          --remember \
+          --greeting "Welcome! Login to access XPS13" \
           --cmd "${pkgs.hyprland}/bin/Hyprland"
       '';
     };
