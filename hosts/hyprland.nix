@@ -56,6 +56,7 @@
           --time \
           --asterisks \
           --user-menu \
+          --theme border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red \
           --cmd "${pkgs.hyprland}/bin/Hyprland"
       '';
     };
