@@ -30,6 +30,8 @@
     wireless = {
       enable = true;
       userControlled.enable = true;
+      environmentFile = "/run/secrets/wireless.env";
+      networks."@SSID_HOME@".psk = "@PSK_HOME@";
     }; # Enables wireless support via wpa_supplicant.
   };
 

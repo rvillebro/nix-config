@@ -12,7 +12,14 @@
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     hardware.url = "github:nixos/nixos-hardware";
   };
 
@@ -56,8 +63,6 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           inputs.hardware.nixosModules.dell-xps-13-9370 # fix hardware quirks for XPS13
-          # > Our main nixos configuration file <
-          ./hosts/xps13
 
           home-manager.nixosModules.home-manager
           {
@@ -66,20 +71,11 @@
             home-manager.extraSpecialArgs = {inherit inputs outputs;};
             home-manager.users.rav = import ./home;
           }
-        ];
-      };
-      nixos-test = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          # > Our main nixos configuration file <
-          ./hosts/nixos-test
-
-          home-manager.nixosModules.home-manager
+          sops-nix.nixosModules.sops
           {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = {inherit inputs outputs;};
-            home-manager.users.rav = import ./home;
+            defaultSopsFile = ./secrets/secrets.yaml;
+            age.sshKeyPaths = ["/home/rav/.ssh/ed25519_key"];
+            sops.secrets."wireless.env" = {};
           }
         ];
       };
@@ -88,15 +84,6 @@
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
-      # FIXME replace with your username@hostname
-      "rav@xps13" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          # > Our main home-manager configuration file <
-          ./home
-        ];
-      };
       "rav@work" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
