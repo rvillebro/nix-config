@@ -44,6 +44,13 @@
     options = lib.mkDefault "--delete-older-than 7d";
   };
 
+  # Set up users.
+  users.users.rav = {
+    isNormalUser = true;
+    initialPassword = "password";
+    extraGroups = ["wheel"];
+  };
+
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     vim

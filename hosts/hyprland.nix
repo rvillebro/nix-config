@@ -52,7 +52,7 @@
     enable = true;
     settings = {
       default_session.command = ''
-        ${pkgs.greetd.tuigreet}/bin/tuigreet \
+        ${pkgs.unstable.greetd.tuigreet}/bin/tuigreet \
           --time \
           --asterisks \
           --user-menu \
