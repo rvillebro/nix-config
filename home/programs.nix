@@ -30,8 +30,6 @@
       };
     };
 
-    alacritty.enable = true;
-
     tmux = {
       enable = true;
       clock24 = true;

@@ -49,11 +49,12 @@
     isNormalUser = true;
     initialPassword = "password";
     extraGroups = ["wheel"];
+    shell = pkgs.bash;
   };
 
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
-    vim
+    neovim
     wget
     curl
     git
