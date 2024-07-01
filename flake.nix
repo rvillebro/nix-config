@@ -3,17 +3,17 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     # Nixpkgs unstable
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/Hyprland";
-    sops-nix.url = "github:Mic92/sops-nix";
+    # hyprland.url = "github:hyprwm/Hyprland";
+    # sops-nix.url = "github:Mic92/sops-nix";
     hardware.url = "github:nixos/nixos-hardware";
   };
 
@@ -60,22 +60,22 @@
 
           ./hosts/xps13
 
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = {inherit inputs outputs;};
-            home-manager.users.rav = import ./home;
-          }
+          # home-manager.nixosModules.home-manager
+          # {
+          #   home-manager.useGlobalPkgs = true;
+          #   home-manager.useUserPackages = true;
+          #   home-manager.extraSpecialArgs = {inherit inputs outputs;};
+          #   home-manager.users.rav = import ./home;
+          # }
 
-          inputs.sops-nix.nixosModules.sops
-          {
-            sops = {
-              defaultSopsFile = ./secrets/secrets.yaml;
-              age.sshKeyPaths = ["/home/rav/.ssh/id_ed25519"];
-              secrets."wireless.env" = {};
-            };
-          }
+          # inputs.sops-nix.nixosModules.sops
+          # {
+          #   sops = {
+          #     defaultSopsFile = ./secrets/secrets.yaml;
+          #     age.sshKeyPaths = ["/home/rav/.ssh/id_ed25519"];
+          #     secrets."wireless.env" = {};
+          #   };
+          # }
         ];
       };
     };
