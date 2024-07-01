@@ -11,8 +11,17 @@
     firefox.enable = true;
     btop.enable = true; # replacement of htop/nmon
     eza.enable = true; # A modern replacement for ‘ls’
-    ssh.enable = true;
     aria2.enable = true;
+    alacritty.enable = true;
+    vscode = {
+      enable = true;
+      extensions = with pkgs.vscode-extensions; [
+        ms-python.python
+        rust-lang.rust-analyzer
+        golang.go
+        ms-vscode-remote.remote-ssh
+      ];
+    };
 
     direnv = {
       enable = true;
@@ -28,11 +37,6 @@
           error_symbol = "[›](bold red)";
         };
       };
-    };
-
-    tmux = {
-      enable = true;
-      clock24 = true;
     };
 
     bat = {

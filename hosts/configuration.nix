@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 {
   # Set your time zone.
   time.timeZone = "Europe/Copenhagen";
@@ -20,15 +20,16 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  services.xserver.excludePackages = [ pkgs.xterm ];
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
-nixos
+
   # Configure keymap in X11
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "dk";
-    xkbVariant = "";
+    variant = "";
   };
 
   # Configure console keymap
@@ -53,9 +54,6 @@ nixos
     #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.rav = {
     isNormalUser = true;
@@ -63,54 +61,34 @@ nixos
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       vscode
+      bitwarden-desktop
     ];
-  };
-
-  # Install firefox.
-  programs.firefox.enable = true;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-  
-  # nix settings
-  nix.settings = {
-    experimental-features = "nix-command flakes";
-    auto-optimise-store = true;
-    trusted-users = ["rav"];
-  };
-
-  # do garbage collection weekly to keep disk usage low
-  nix.gc = {
-    automatic = lib.mkDefault true;
-    dates = lib.mkDefault "weekly";
-    options = lib.mkDefault "--delete-older-than 7d";
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    neovim
     wget
+    curl
     git
+    sysstat
+    neofetch
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
+  environment.gnome.excludePackages = (with pkgs; [
+    # for packages that are pkgs.*
+    gnome-tour
+    gnome-console
+    gnome-text-editor
+  ]) ++ (with pkgs.gnome; [
+    # for packages that are pkgs.gnome.*
+    epiphany # web browser
+    geary # email reader
+    yelp # help viewer
+    simple-scan # document scanner
+    gnome-music # music app
+    gnome-logs # logs viewer
+    gnome-disk-utility # disks utility
+  ]);
 }

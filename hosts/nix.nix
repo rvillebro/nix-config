@@ -1,5 +1,6 @@
 # setup basic nix configurations
 {
+  inputs,
   outputs,
   lib,
   config,

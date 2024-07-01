@@ -9,7 +9,9 @@
   ...
 }: {
   imports = [
+    ../nix.nix
     ../configuration.nix
+
     #../system.nix
     #../hyprland.nix
     # Import your generated (nixos-generate-config) hardware configuration
@@ -26,6 +28,7 @@
   networking = {
     hostName = "xps13";
     networkmanager.enable = true;
+    firewall.enable = false;
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
