@@ -11,6 +11,7 @@
   home = {
     username = "rav";
     homeDirectory = "/home/rav";
+    file.".face".source = ./cool_rick.png;
     packages = with pkgs; [
       # archives
       zip

@@ -35,6 +35,11 @@
   # Configure console keymap
   console.keyMap = "dk-latin1";
 
+  # Configure fonts
+  fonts.fonts = with pkgs; [
+    fira-code-nerdfont
+  ];
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -79,7 +84,6 @@
   environment.gnome.excludePackages = (with pkgs; [
     # for packages that are pkgs.*
     gnome-tour
-    gnome-console
     gnome-text-editor
   ]) ++ (with pkgs.gnome; [
     # for packages that are pkgs.gnome.*

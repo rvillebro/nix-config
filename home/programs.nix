@@ -12,8 +12,11 @@
     btop.enable = true; # replacement of htop/nmon
     eza.enable = true; # A modern replacement for ‘ls’
     aria2.enable = true;
-    alacritty.enable = true;
-    thunderbird.enable = true;
+
+    thunderbird = {
+      enable = true;
+      profiles.${config.home.username}.isDefault = true;
+    };
     
     vscode = {
       enable = true;
