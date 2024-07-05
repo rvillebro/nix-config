@@ -83,8 +83,8 @@
     gnome-text-editor
   ]) ++ (with pkgs.gnome; [
     # for packages that are pkgs.gnome.*
+    geary # email client
     epiphany # web browser
-    geary # email reader
     yelp # help viewer
     simple-scan # document scanner
     gnome-music # music app

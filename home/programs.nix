@@ -13,6 +13,8 @@
     eza.enable = true; # A modern replacement for ‘ls’
     aria2.enable = true;
     alacritty.enable = true;
+    thunderbird.enable = true;
+    
     vscode = {
       enable = true;
       extensions = with pkgs.vscode-extensions; [
