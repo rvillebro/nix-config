@@ -13,18 +13,13 @@
     homeDirectory = "/home/rav";
     file.".face".source = ./cool_rick.png;
     packages = with pkgs; [
+      # password manager
+      bitwarden-desktop
+      bitwarden-cli
       # archives
       zip
       unzip
       pigz
-
-      # python
-      python312
-
-      # nix tooling
-      alejandra
-      deadnix
-      statix
     ];
     sessionVariables = {
       # clean up ~
@@ -35,7 +30,7 @@
       # set default applications
       EDITOR = "vim";
       BROWSER = "firefox";
-      TERMINAL = "alacritty";
+      TERMINAL = "console";
     };
   };
 }

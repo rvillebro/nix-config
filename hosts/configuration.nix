@@ -36,7 +36,7 @@
   console.keyMap = "dk-latin1";
 
   # Configure fonts
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     fira-code-nerdfont
   ];
 
@@ -64,10 +64,6 @@
     isNormalUser = true;
     description = "Rasmus Villebro";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      vscode
-      bitwarden-desktop
-    ];
   };
 
   # List packages installed in system profile. To search, run:

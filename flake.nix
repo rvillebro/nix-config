@@ -15,6 +15,7 @@
     # hyprland.url = "github:hyprwm/Hyprland";
     # sops-nix.url = "github:Mic92/sops-nix";
     hardware.url = "github:nixos/nixos-hardware";
+    nur.url = "github:nix-community/NUR";
   };
 
   outputs = {
