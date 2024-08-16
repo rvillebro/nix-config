@@ -12,6 +12,7 @@
   imports = [
     ./home.nix
     ./programs.nix
+    ./browser.nix
   ];
 
   xdg.enable = true;
