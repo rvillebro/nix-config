@@ -1,7 +1,22 @@
 { pkgs, ... }:
 {
-  programs.firfox = {
+  programs.firefox = {
     enable = true;
+    policies = {
+      PasswordManagerEnabled = false;
+      OfferToSaveLogins = false;
+      OfferToSaveLoginsDefault = false;
+      DisableFirefoxAccounts = true;
+      DisableFirefoxStudies = true;
+      DisableTelemetry = true;
+      DisablePocket = true;
+      DisplayMenuBar = "never";
+      DontCheckDefaultBrowser = true;
+      OverrideFirstRunPage = "";
+      HardwareAcceleration = true;
+      NoDefaultBookmarks = true;
+      Homepage = { "StartPage" = "previous-session"; };
+    };
     profiles.default = {
       id = 0;
       isDefault = true;
@@ -9,9 +24,6 @@
         ublock-origin
         bitwarden
       ];
-      settings = {
-        "identity.fxaccounts.enabled" = false;
-      };
       search = {
         default = "Google";
         order = ["Google" "GitHub" "Nix Packages" "NixOS Options" "Home Manager"];
