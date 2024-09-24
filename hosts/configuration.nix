@@ -91,4 +91,13 @@
     gnome-logs # logs viewer
     gnome-disk-utility # disks utility
   ]);
+
+
+  system.userActivationScripts = {
+    removeHomeManagerBackupFiles = {
+      text = ''
+        find ~ -type f -name "*.homeManagerBackupFileExtension" -delete
+      '';
+    };
+  };
 }

@@ -8,11 +8,19 @@
       OfferToSaveLoginsDefault = false;
       DisableFirefoxAccounts = true;
       DisableFirefoxStudies = true;
+      EnableTrackingProtection = {
+        Value= true;
+        Locked = true;
+        Cryptomining = true;
+        Fingerprinting = true;
+      };
+      DisableAccount = true;
       DisableTelemetry = true;
       DisablePocket = true;
       DisplayMenuBar = "never";
       DontCheckDefaultBrowser = true;
       OverrideFirstRunPage = "";
+      OverridePostUpdatePage = "";
       HardwareAcceleration = true;
       NoDefaultBookmarks = true;
       Homepage = { "StartPage" = "previous-session"; };

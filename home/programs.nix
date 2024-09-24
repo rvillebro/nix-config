@@ -12,6 +12,8 @@
     eza.enable = true; # A modern replacement for ‘ls’
     aria2.enable = true;
 
+    helix.enable = true;
+
     pyenv = {
       enable = true;
       enableBashIntegration = true;
