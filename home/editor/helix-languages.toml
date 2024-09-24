@@ -1,0 +1,10 @@
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+
+[language-server.pylsp]
+command = "pylsp"
+
+[[language]]
+name = "python"
+language-servers = ["ruff", "pylsp"]
