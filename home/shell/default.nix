@@ -14,10 +14,11 @@
       enableBashIntegration = true;
     };
     starship.enable = true;
+    zellij.enable = true;
   };
 
   home.file."alacritty.toml" = {
-    source = "./alacritty.toml";
+    source = ./alacritty.toml;
     target = ".config/alacritty/alacritty.toml";
   };
 }
