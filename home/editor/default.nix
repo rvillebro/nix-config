@@ -1,8 +1,4 @@
 {
-  inputs,
-  outputs,
-  lib,
-  config,
   pkgs,
   ...
 }: {
@@ -12,6 +8,7 @@
       pkgs.marksman
       pkgs.unstable.ruff
       pkgs.python312Packages.python-lsp-server
+      pkgs.rust-analyzer
     ];
   };
   home.file."helix-configuration.toml" = {
