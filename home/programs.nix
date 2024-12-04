@@ -1,19 +1,11 @@
+{ config, pkgs, ... }:
 {
-  inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
   programs = {
-    bash.enable = true;
-    btop.enable = true; # replacement of htop/nmon
-    eza.enable = true; # A modern replacement for ‘ls’
-    aria2.enable = true;
-
-    helix.enable = true;
-
+    bat.enable = true; # modern replacement for cat
+    btop.enable = true; # modern replacement of htop/nmon
+    eza.enable = true; # modern replacement for ‘ls’
+    aria2.enable = true; # download tool
+    
     pyenv = {
       enable = true;
       enableBashIntegration = true;
@@ -36,35 +28,6 @@
         jnoortheen.nix-ide
         mkhl.direnv
       ];
-    };
-
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-      enableBashIntegration = true;
-    };
-
-    starship = {
-      enable = true;
-      settings = {
-        character = {
-          success_symbol = "[›](bold green)";
-          error_symbol = "[›](bold red)";
-        };
-      };
-    };
-
-    bat = {
-      enable = true;
-      config = {
-        pager = "less -FR";
-      };
-    };
-
-    git = {
-      enable = true;
-      userName = "Rasmus Villebro";
-      userEmail = "rasmus-villebro@hotmail.com";
     };
   };
 }

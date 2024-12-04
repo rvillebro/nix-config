@@ -1,7 +1,5 @@
+{ pkgs,  ... }:
 {
-  pkgs,
-  ...
-}: {
   programs.helix = {
     enable = true;
     extraPackages = [
@@ -14,9 +12,5 @@
   home.file."helix-configuration.toml" = {
     source = ./helix-configuration.toml;
     target = ".config/helix/config.toml";
-  };
-  home.file."helix-languages.toml" = {
-    source = ./helix-languages.toml;
-    target = ".config/helix/languages.toml";
   };
 }

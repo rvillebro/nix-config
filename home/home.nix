@@ -1,13 +1,5 @@
+{ config, pkgs, ... }:
 {
-  inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
-  imports = [];
-
   home = {
     username = "rav";
     homeDirectory = "/home/rav";
@@ -30,9 +22,9 @@
       LESSKEY = "${config.xdg.configHome}/less/lesskey";
 
       # set default applications
-      EDITOR = "vim";
+      EDITOR = "hx";
       BROWSER = "firefox";
-      TERMINAL = "console";
+      TERMINAL = "alacritty";
     };
   };
 }

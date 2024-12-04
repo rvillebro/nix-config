@@ -80,6 +80,7 @@
   environment.gnome.excludePackages = (with pkgs; [
     # for packages that are pkgs.*
     gnome-tour
+    gnome-console # terminal
     gnome-text-editor
   ]) ++ (with pkgs.gnome; [
     # for packages that are pkgs.gnome.*

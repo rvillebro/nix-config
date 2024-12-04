@@ -1,15 +1,13 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
+{ pkgs, ... }: 
 {
-  pkgs,
-  ...
-}: {
   # You can import other home-manager modules here
   imports = [
     ./shell
     ./editor
-    ./browser.nix
     ./home.nix
+    ./browser.nix
     ./programs.nix    
   ];
 

@@ -1,7 +1,5 @@
+{ pkgs, ... }:
 {
-  pkgs,
-  ...
-}: {
   programs = {
     bash.enable = true;
     alacritty = {
@@ -15,6 +13,12 @@
     };
     starship.enable = true;
     zellij.enable = true;
+
+    git = {
+      enable = true;
+      userName = "Rasmus Villebro";
+      userEmail = "rasmus-villebro@hotmail.com";
+    };
   };
 
   home.file."alacritty.toml" = {
