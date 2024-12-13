@@ -10,9 +10,10 @@
 }: {
   # You can import other home-manager modules here
   imports = [
+    ./editor
     ./shell.nix
-    ./neovim.nix
-    ./programs.nix
+    ./multiplexer.nix
+    ./configuration.nix
   ];
 
   fonts.fontconfig.enable = true;
@@ -26,14 +27,6 @@
       unzip
       pigz
       gnutar
-
-      # nix tooling
-      alejandra
-      deadnix
-      statix
-
-      # fonts
-      (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
     ];
   };
 

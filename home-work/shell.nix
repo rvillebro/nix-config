@@ -13,35 +13,17 @@
   };
 
   programs = {
-    bash = {
+    zsh = {
       enable = true;
       enableCompletion = true;
-      shellAliases = {
-        l = "eza";
-        ll = "eza -lh";
-        la = "eza -alh";
-      };
+      completionInit = "autoload -U compinit && compinit -i";
+      historySubstringSearch.enable = true;
     };
-
     direnv = {
       enable = true;
       nix-direnv.enable = true;
-      enableBashIntegration = true;
+      enableZshIntegration = true;
     };
-
-    starship = {
-      enable = true;
-      settings = {
-        character = {
-          success_symbol = "[›](bold green)";
-          error_symbol = "[›](bold red)";
-        };
-      };
-    };
-
-    tmux = {
-      enable = true;
-      clock24 = true;
-    };
+    starship.enable = true;
   };
 }

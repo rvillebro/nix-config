@@ -1,9 +1,4 @@
 {
-  inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
   ...
 }: {
   programs = {
@@ -13,12 +8,12 @@
       userEmail = "rav@evaxion-biotech.com";
     };
 
-    ssh = {
-      enable = true;
-      extraConfig = ''
-       IdentityFile ~/.ssh/rav-servers
-      '';
-    };
+    # ssh = {
+    #   enable = False;
+    #   extraConfig = ''
+    #     IdentityFile ~/.ssh/rav-servers
+    #   '';
+    # };
 
     bat = {
       enable = true;
