@@ -16,6 +16,15 @@
     #./hardware-configuration.nix
   ];
 
+  boot = {
+    kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
+    initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
+    loader = {
+      grub.enable = false;
+      generic-extlinux-compatible.enable = true;
+    };
+  };
+
   # Filesystem
   fileSystems = {
     "/" = {
@@ -28,11 +37,12 @@
   # Networking
   networking = {
     hostName = "rpi4";
-    networkmanager.enable = true;
-    firewall.enable = false;
+    wireless.enable = true;
   };
 
   services.openssh.enable = true;
+
+  hardware.enableRedistributableFirmware = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   # This value determines the NixOS release from which the default
