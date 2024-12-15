@@ -9,8 +9,8 @@
   ...
 }: {
   imports = [
-    .nix.nix
-    .configuration.nix
+    ./nix.nix
+    ./configuration.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     #./hardware-configuration.nix
