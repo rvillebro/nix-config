@@ -73,8 +73,9 @@
       };
       rpi4 = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
+        system = "aarch64-linux";
         modules = [
-          inputs.hardware.nixosModules.raspberry-pi-4 # fix hardware quirks for XPS13
+          inputs.hardware.nixosModules.raspberry-pi-4  # fix hardware quirks for Raspberry Pi 4
 
           ./hosts/rpi4
 
