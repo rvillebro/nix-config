@@ -3,12 +3,7 @@
   home = {
     username = "rav";
     homeDirectory = "/home/rav";
-    file.".face".source = ./cool_rick.png;
     packages = with pkgs; [
-      # image editor
-      gimp
-      # password manager
-      bitwarden-desktop
       bitwarden-cli
       # archives
       zip
@@ -23,7 +18,6 @@
 
       # set default applications
       EDITOR = "hx";
-      BROWSER = "firefox";
       TERMINAL = "alacritty";
     };
   };

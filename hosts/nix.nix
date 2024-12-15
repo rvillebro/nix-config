@@ -13,7 +13,7 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
-      inputs.nur.overlay
+      inputs.nur.overlays.default
     ];
     config.allowUnfree = true;
   };
@@ -38,6 +38,10 @@
     experimental-features = "nix-command flakes";
     auto-optimise-store = true;
     trusted-users = ["rav"];
+    substituters = [
+      "https://mirrors.cernet.edu.cn/nix-channels/store"
+      "https://cache.nixos.org/"
+    ];
   };
 
   # do garbage collection weekly to keep disk usage low

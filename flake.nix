@@ -67,7 +67,7 @@
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "homeManagerBackupFileExtension";
             home-manager.extraSpecialArgs = {inherit inputs outputs;};
-            home-manager.users.rav = import ./home;
+            home-manager.users.rav = import ./home/xps13;
           }
         ];
       };
@@ -79,14 +79,14 @@
 
           ./hosts/rpi4
 
-          # home-manager.nixosModules.home-manager
-          # {
-          #   home-manager.useGlobalPkgs = true;
-          #   home-manager.useUserPackages = true;
-          #   home-manager.backupFileExtension = "homeManagerBackupFileExtension";
-          #   home-manager.extraSpecialArgs = {inherit inputs outputs;};
-          #   home-manager.users.rav = import ./home;
-          # }
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "homeManagerBackupFileExtension";
+            home-manager.extraSpecialArgs = {inherit inputs outputs;};
+            home-manager.users.rav = import ./home/rpi4;
+          }
         ];
       };
     };
