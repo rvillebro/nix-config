@@ -69,14 +69,22 @@
             home-manager.extraSpecialArgs = {inherit inputs outputs;};
             home-manager.users.rav = import ./home;
           }
+        ];
+      };
+      rpi4 = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          inputs.hardware.nixosModules.raspberry-pi-4 # fix hardware quirks for XPS13
 
-          # inputs.sops-nix.nixosModules.sops
+          ./hosts/rpi4
+
+          # home-manager.nixosModules.home-manager
           # {
-          #   sops = {
-          #     defaultSopsFile = ./secrets/secrets.yaml;
-          #     age.sshKeyPaths = ["/home/rav/.ssh/id_ed25519"];
-          #     secrets."wireless.env" = {};
-          #   };
+          #   home-manager.useGlobalPkgs = true;
+          #   home-manager.useUserPackages = true;
+          #   home-manager.backupFileExtension = "homeManagerBackupFileExtension";
+          #   home-manager.extraSpecialArgs = {inherit inputs outputs;};
+          #   home-manager.users.rav = import ./home;
           # }
         ];
       };
