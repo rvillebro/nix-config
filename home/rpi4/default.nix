@@ -4,10 +4,10 @@
 {
   # You can import other home-manager modules here
   imports = [
-    ./shell
     ./editor
     ./home.nix
-    ./programs.nix    
+    ./programs.nix
+    ./shell.nix
   ];
 
   xdg.enable = true;

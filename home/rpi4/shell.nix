@@ -2,10 +2,6 @@
 {
   programs = {
     bash.enable = true;
-    alacritty = {
-      enable = true;
-      package = pkgs.unstable.alacritty;
-    };
     direnv = {
       enable = true;
       nix-direnv.enable = true;
