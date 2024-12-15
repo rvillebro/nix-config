@@ -40,6 +40,13 @@
     networkmanager.enable = true;
   };
 
+  # Bluetooth
+  hardware.raspberry-pi."4".bluetooth.enable = true;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
   services.openssh.enable = true;
 
   hardware.enableRedistributableFirmware = true;
