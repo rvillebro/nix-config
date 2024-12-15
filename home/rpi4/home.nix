@@ -18,7 +18,6 @@
 
       # set default applications
       EDITOR = "hx";
-      TERMINAL = "alacritty";
     };
   };
 }
