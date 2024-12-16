@@ -57,3 +57,37 @@ mount /dev/disk/by-label/boot /mnt/boot/efi'
 swapon /dev/nvme0n1p2
 nixos-install --flake github:rvillebro/nix-config#xps13
 ```
+
+# NixOS on Raspberry PI 4
+
+## Prepare SD imade
+
+Find latest image at https://hydra.nixos.org/job/nixos/release-24.11/nixos.sd_image.aarch64-linux.
+Download and unpack NixOS SD image.
+
+```bash
+nix shell nixpkgs#wget nixpkgs#zstd
+wget <link>
+zstd --decompress <filepath to image>
+```
+
+Flash SD image on SD card using RPI imager
+
+```bash
+nix shell nixpkgs#rpi-imager
+rpi-imager
+```
+
+Select unpacked image and the SD card to flash.
+
+Once done, put the SD card in the Raspberry PI and boot it.
+
+## Installation
+
+```bash
+sudo nixos-rebuild boot --flake github:rvillebro/nix-config#rpi4
+sudo reboot
+```
+
+Once rebooted, login to root and set a password for your user.
+

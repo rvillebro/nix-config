@@ -9,8 +9,8 @@
   ...
 }: {
   imports = [
-    ../nix.nix
-    ../configuration.nix
+    ./nix.nix
+    ./configuration.nix
 
     #../system.nix
     #../hyprland.nix

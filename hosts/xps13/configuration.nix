@@ -78,13 +78,10 @@
   ];
 
   environment.gnome.excludePackages = (with pkgs; [
-    # for packages that are pkgs.*
     gnome-tour
     gnome-console # terminal
     gnome-text-editor
-  ]) ++ (with pkgs.gnome; [
-    # for packages that are pkgs.gnome.*
-    geary # email client
+    geary
     epiphany # web browser
     yelp # help viewer
     simple-scan # document scanner
@@ -92,7 +89,6 @@
     gnome-logs # logs viewer
     gnome-disk-utility # disks utility
   ]);
-
 
   system.userActivationScripts = {
     removeHomeManagerBackupFiles = {
