@@ -8,7 +8,8 @@
     ./editor
     ./home.nix
     ./browser.nix
-    ./programs.nix    
+    ./programs.nix
+    ./ssh.nix
   ];
 
   xdg.enable = true;
