@@ -4,11 +4,12 @@
   programs.ssh = {
     enable = true;
     addKeysToAgent = "yes";
-    extraConfig = ''
-    Host rpi4
-      Hostname rpi4
-      Username rav
-      ForwardAgent yes
-    '';
+    matchBlocks = {
+      "rpi4" = {
+        hostname = "rpi4";
+        user = "rav";
+        forwardAgent = true;
+      };
+    };
   };
 }
