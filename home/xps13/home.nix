@@ -9,6 +9,8 @@
       # password manager
       bitwarden-desktop
       bitwarden-cli
+      # E-book manager
+      calibre
       # archives
       zip
       unzip

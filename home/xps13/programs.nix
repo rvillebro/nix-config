@@ -5,11 +5,6 @@
     btop.enable = true; # modern replacement of htop/nmon
     eza.enable = true; # modern replacement for ‘ls’
     aria2.enable = true; # download tool
-    
-    pyenv = {
-      enable = true;
-      enableBashIntegration = true;
-    };
 
     thunderbird = {
       enable = true;
