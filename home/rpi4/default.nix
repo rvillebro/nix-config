@@ -40,7 +40,6 @@
     btop.enable = true; # modern replacement of htop/nmon
     eza.enable = true; # modern replacement for ‘ls’
     aria2.enable = true; # download tool
-    nix-ld = true; # run unpatched dynamic binaries on NixOS.
   };
 
   # Nicely reload system units when changing configs

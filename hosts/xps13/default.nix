@@ -37,6 +37,8 @@
     firewall.enable = false;
   };
 
+  programs.nix-ld.enable = true; # run unpatched dynamic binaries on NixOS.
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
