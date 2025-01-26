@@ -2,10 +2,6 @@
 {
   programs = {
     bash.enable = true;
-    alacritty = {
-      enable = true;
-      package = pkgs.unstable.alacritty;
-    };
     direnv = {
       enable = true;
       nix-direnv.enable = true;
@@ -19,10 +15,19 @@
       userName = "Rasmus Villebro";
       userEmail = "rasmus-villebro@hotmail.com";
     };
+
+    ghostty = {
+      enable = true;
+      enableBashIntegration = true;
+      installBatSyntax = true;
+      settings = {
+        theme = "catppuccin-mocha";
+      };
+    };
   };
 
-  home.file."alacritty.toml" = {
-    source = ./alacritty.toml;
-    target = ".config/alacritty/alacritty.toml";
-  };
+  # home.file."alacritty.toml" = {
+  #   source = ./alacritty.toml;
+  #   target = ".config/alacritty/alacritty.toml";
+  # };
 }

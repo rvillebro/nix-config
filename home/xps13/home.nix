@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 {
   home = {
     username = "rav";
@@ -9,8 +9,6 @@
       # password manager
       bitwarden-desktop
       bitwarden-cli
-      # E-book manager
-      calibre
       # archives
       zip
       unzip
@@ -25,7 +23,7 @@
       # set default applications
       EDITOR = "hx";
       BROWSER = "firefox";
-      TERMINAL = "alacritty";
+      TERMINAL = "ghostty";
     };
   };
 }
