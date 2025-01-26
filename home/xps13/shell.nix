@@ -25,9 +25,4 @@
       };
     };
   };
-
-  # home.file."alacritty.toml" = {
-  #   source = ./alacritty.toml;
-  #   target = ".config/alacritty/alacritty.toml";
-  # };
 }
