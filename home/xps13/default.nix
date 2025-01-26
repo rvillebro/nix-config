@@ -1,25 +1,73 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{ pkgs, ... }: 
+{ pkgs, config, ... }: 
 {
   # You can import other home-manager modules here
   imports = [
-    ./shell
-    ./editor
-    ./home.nix
+    ./editors
+    ./shell.nix
     ./browser.nix
-    ./programs.nix
-    ./ssh.nix
   ];
 
   xdg.enable = true;
 
-  # enable home-manager
-  programs.home-manager.enable = true;
+  home = {
+    username = "rav";
+    homeDirectory = "/home/rav";
+    packages = with pkgs; [
+      # image editor
+      gimp
+      # password manager
+      bitwarden-desktop
+      bitwarden-cli
+      # archives
+      zip
+      unzip
+      pigz
+    ];
+    sessionVariables = {
+      # clean up ~
+      STARSHIP_CACHE = "${config.xdg.cacheHome}/starship";
+      LESSHISTFILE = "${config.xdg.cacheHome}/less/history";
+      LESSKEY = "${config.xdg.configHome}/less/lesskey";
 
-  # Nicely reload system units when changing configs
+      # set default applications
+      EDITOR = "hx";
+      BROWSER = "firefox";
+      TERMINAL = "ghostty";
+    };
+    # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+    stateVersion = "24.05";
+  };
+
+  programs = {
+    home-manager.enable = true;
+    bat.enable = true; # modern replacement for cat
+    btop.enable = true; # modern replacement of htop/nmon
+    eza.enable = true; # modern replacement for ‘ls’
+    aria2.enable = true; # download tool
+
+    thunderbird = {
+      enable = true;
+      profiles.${config.home.username}.isDefault = true;
+    };
+    
+    ssh = {
+      enable = true;
+      addKeysToAgent = "yes";
+      matchBlocks = {
+        "rpi4" = {
+          hostname = "rpi4";
+          user = "rav";
+          forwardAgent = true;
+        };
+      };
+    };
+  };
+
+  # nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "24.05";
+  # services
+  services.ssh-agent.enable = true;
 }
