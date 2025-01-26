@@ -1,7 +1,12 @@
 { pkgs, ... }:
 {
   programs = {
-    bash.enable = true;
+    bash = {
+      enable = true;
+      shellAliases = {
+        zj = "zellij";
+      };
+    };
     direnv = {
       enable = true;
       nix-direnv.enable = true;
