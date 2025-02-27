@@ -80,7 +80,6 @@
   environment.gnome.excludePackages = (with pkgs; [
     gnome-tour
     gnome-console # terminal
-    gnome-text-editor
     geary
     epiphany # web browser
     yelp # help viewer
