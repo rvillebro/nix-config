@@ -30,6 +30,8 @@
     ];
   };
 
+  nixpkgs.overlays = [ outputs.overlays.unstable-packages ];
+
   # enable home-manager
   programs.home-manager.enable = true;
 
