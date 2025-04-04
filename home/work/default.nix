@@ -11,8 +11,8 @@
   # You can import other home-manager modules here
   imports = [
     ./editor
-    ./shell.nix
-    ./multiplexer.nix
+    ./shell
+    ./nix.nix
     ./configuration.nix
   ];
 
@@ -27,10 +27,10 @@
       unzip
       pigz
       gnutar
+      rclone
+      (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
     ];
   };
-
-  nixpkgs.overlays = [ outputs.overlays.unstable-packages ];
 
   # enable home-manager
   programs.home-manager.enable = true;

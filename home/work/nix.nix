@@ -2,6 +2,8 @@
 {
   outputs,
   lib,
+  config,
+  pkgs,
   ...
 }:
 {
@@ -10,13 +12,12 @@
     config.allowUnfree = true;
   };
 
-  nix.registry.evaxpkgs.flake = "ssh://git@gitlab.lan.evaxion-biotech.com/tools/evaxpkgs.git";
-
   # nix settings
+  nix.package = pkgs.nix;
   nix.settings = {
     experimental-features = "nix-command flakes";
-    auto-optimise-store = true;
-    trusted-users = ["rav"];
+
+    # Note that you need to be a trusted user to set these
     extra-substituters = [ 
       "https://nix-community.cachix.org"
     ];
@@ -25,10 +26,15 @@
     ];
   };
 
-  # do garbage collection weekly to keep disk usage low
-  nix.gc = {
-    automatic = lib.mkDefault true;
-    dates = lib.mkDefault "weekly";
-    options = lib.mkDefault "--delete-older-than 7d";
+  # internal evaxion pkgs repository
+  nix.registry.evaxpkgs = {
+    from = {
+      id = "evaxpkgs";
+      type = "indirect";
+    };
+    to = {
+      type = "git";
+      url = "ssh://git@git.evax.ai/tools/evaxpkgs.git";
+    };
   };
 }

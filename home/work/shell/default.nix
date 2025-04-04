@@ -1,7 +1,4 @@
 {
-  inputs,
-  outputs,
-  lib,
   config,
   pkgs,
   ...
@@ -21,7 +18,7 @@
     };
     direnv = {
       enable = true;
-      nix-direnv.enable = true;
+      # nix-direnv.enable = true;
       enableZshIntegration = true;
     };
     starship.enable = true;
