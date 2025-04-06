@@ -11,9 +11,6 @@
   imports = [
     ./nix.nix
     ./configuration.nix
-
-    #../system.nix
-    #../hyprland.nix
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
   ];
@@ -38,6 +35,13 @@
   };
 
   programs.nix-ld.enable = true; # run unpatched dynamic binaries on NixOS.
+
+  # enable home-manager
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.backupFileExtension = "homeManagerBackupFileExtension";
+  home-manager.extraSpecialArgs = {inherit inputs outputs;};
+  home-manager.users.rav = import ./home;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   # This value determines the NixOS release from which the default
