@@ -1,22 +1,24 @@
 { config, lib, pkgs, ... }:
-
 {
+  imports = [
+    ./nix.nix
+    ./configuration.nix
+  ];
+
   wsl.enable = true;
   wsl.defaultUser = "rav";
   wsl.docker-desktop.enable = true;
   wsl.useWindowsDriver = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nix.settings.auto-optimise-store = true;
-  programs.nix-ld.enable = true;
   environment.sessionVariables.LD_LIBRARY_PATH = ["/usr/lib/wsl/lib"];
-  environment.systemPackages = with pkgs; [
-    helix
-    wget
-    curl
-    git
-    sysstat
-    neofetch
-  ];
+
+  programs.nix-ld.enable = true;
+
+    # enable home-manager
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.backupFileExtension = "homeManagerBackupFileExtension";
+  home-manager.extraSpecialArgs = {inherit inputs outputs;};
+  home-manager.users.rav = import ./home;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

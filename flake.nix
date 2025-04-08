@@ -78,7 +78,7 @@
         specialArgs = {inherit inputs outputs;};
         system = "x86_64-linux";
         modules = [
-          inputs.nixos-wsl.nixosModules.default
+          inputs.nixos-wsl.nixosModules.wsl
           inputs.home-manager.nixosModules.home-manager
           ./hosts/nixos-wsl
         ];
