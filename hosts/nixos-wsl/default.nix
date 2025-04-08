@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ inputs, outputs, pkgs, ... }:
 {
   imports = [
     ./nix.nix
@@ -9,11 +9,12 @@
   wsl.defaultUser = "rav";
   wsl.docker-desktop.enable = true;
   wsl.useWindowsDriver = true;
+
   environment.sessionVariables.LD_LIBRARY_PATH = ["/usr/lib/wsl/lib"];
 
   programs.nix-ld.enable = true;
 
-    # enable home-manager
+  # enable home-manager
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.backupFileExtension = "homeManagerBackupFileExtension";
