@@ -53,5 +53,6 @@
     git
     sysstat
     neofetch
+    unstable.devenv
   ];
 }
