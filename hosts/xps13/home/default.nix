@@ -24,6 +24,10 @@
       zip
       unzip
       pigz
+      # claude-code and relevant tools
+      unstable.claude-code
+      ripgrep
+      gh
     ];
     sessionVariables = {
       # clean up ~
@@ -35,6 +39,7 @@
       EDITOR = "hx";
       BROWSER = "firefox";
       TERMINAL = "ghostty";
+      PAGER = "less -RF";
     };
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "24.05";
