@@ -28,13 +28,13 @@
     profiles.default = {
       id = 0;
       isDefault = true;
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
         ublock-origin
         bitwarden
       ];
       search = {
-        default = "Google";
-        order = ["Google" "GitHub" "Nix Packages" "NixOS Options" "Home Manager"];
+        default = "google";
+        order = ["google" "GitHub" "Nix Packages" "NixOS Options" "Home Manager"];
         engines = {
           "Nix Packages" = {
             icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
@@ -73,7 +73,7 @@
             ];
           };
           "GitHub" = {
-            iconUpdateURL = "https://github.com/favicon.ico";
+            icon = "https://github.com/favicon.ico";
             updateInterval = 24 * 60 * 60 * 1000;
             definedAliases = ["@gh"];
             urls = [
@@ -88,10 +88,10 @@
               }
             ];
           };
-          "Google".metaData.alias = "@g"; # builtin engines only support specifying one additional alias
-          "DuckDuckGo".metaData.hidden = true; # builtin engines only support specifying one additional alias
-          "Bing".metaData.hidden = true;
-          "Wikipedia (en)".metaData.hidden = true;
+          "google".metaData.alias = "@g"; # builtin engines only support specifying one additional alias
+          "ddg".metaData.hidden = true; # builtin engines only support specifying one additional alias
+          "bing".metaData.hidden = true;
+          "wikipedia".metaData.hidden = true;
         };
       };
     };
