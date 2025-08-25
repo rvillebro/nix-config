@@ -35,9 +35,9 @@
   systemd.timers.home-assistant-timer = {
     description = "Weekly home-assistant restart timer";
     timerConfig = {
-      OnCalendar = "Mon 09:10:00";
+      OnCalendar = "Sun 03:00:00";
       Persistent = false;
-      Unit = "home-assistant-reart.service";
+      Unit = "home-assistant-restart.service";
     };
     wantedBy = ["timers.target"];
   };
@@ -47,7 +47,7 @@
     path = [pkgs.systemd];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "systemctl try-restart my_program.service";
+      ExecStart = "systemctl try-restart home-assistant.service";
     };
   };
 }
