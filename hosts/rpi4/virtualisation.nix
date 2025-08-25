@@ -42,12 +42,12 @@
     wantedBy = ["timers.target"];
   };
 
-  systemd.service.home-assistant-restart = {
+  systemd.services.home-assistant-restart = {
     description = "Home-assistant restart service";
     path = [pkgs.systemd];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "systemctl try-restart my_program.service"
+      ExecStart = "systemctl try-restart my_program.service";
     };
   };
 }
