@@ -35,6 +35,7 @@
   };
 
   programs.nix-ld.enable = true; # run unpatched dynamic binaries on NixOS.
+  programs.dconf.enable = true; # dconf settings for GNOME and other applications
 
   # enable home-manager
   home-manager.useGlobalPkgs = true;

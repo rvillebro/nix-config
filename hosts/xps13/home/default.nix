@@ -28,6 +28,8 @@
       unstable.claude-code
       ripgrep
       gh
+      # gnome extensions
+      gnomeExtensions.vitals
     ];
     sessionVariables = {
       # clean up ~

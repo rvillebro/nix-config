@@ -76,7 +76,7 @@
     sysstat
     neofetch
     # install devenv system-wide
-    unstable.devenv
+    devenv
   ];
 
   environment.gnome.excludePackages = (with pkgs; [
