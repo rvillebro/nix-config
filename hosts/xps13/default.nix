@@ -11,6 +11,7 @@
   imports = [
     ./nix.nix
     ./configuration.nix
+    ./plex.nix # nix server
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
   ];

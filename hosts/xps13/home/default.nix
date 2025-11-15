@@ -28,6 +28,8 @@
       unstable.claude-code
       ripgrep
       gh
+      # codex
+      unstable.codex
       # gnome extensions
       gnomeExtensions.vitals
     ];
