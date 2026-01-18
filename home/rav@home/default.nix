@@ -16,20 +16,6 @@
     ./configuration.nix
   ];
 
-  fonts.fontconfig.enable = true;
-
-  home = {
-    username = "rav";
-    homeDirectory = "/home/rav";
-    packages = with pkgs; [
-      # archives
-      zip
-      unzip
-      pigz
-      gnutar
-    ];
-  };
-
   # enable home-manager
   programs.home-manager.enable = true;
 
