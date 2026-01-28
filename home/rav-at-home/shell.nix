@@ -1,6 +1,5 @@
 {
   config,
-  pkgs,
   ...
 }: {
   home.shell.enableShellIntegration = true;
@@ -28,13 +27,28 @@
     direnv.enable = true;
     starship.enable = true;
     zellij.enable = true;
+    bat.enable = true;
+    btop.enable = true;
+    eza.enable = true;
     git = {
       enable = true;
-      userName = "Rasmus Villebro";
-      userEmail = "rasmus-villebro@hotmail.com";
+      settings = {
+        user.name = "Rasmus Villebro";
+        user.email = "rasmus-villebro@hotmail.com";
+      };
     };
-    bat.enable = true; # a modern replacement for cat
-    btop.enable = true; # a modern replacement of htop/nmon
-    eza.enable = true; # a modern replacement for 'ls'
+    ssh = {
+      enable = true;
+      matchBlocks = {
+        "*" = {
+          addKeysToAgent = "yes";
+        };
+        "rpi4" = {
+          hostname = "rpi4";
+          user = "rav";
+          forwardAgent = true;
+        };
+      };
+    };
   };
 }

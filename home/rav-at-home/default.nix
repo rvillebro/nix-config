@@ -8,13 +8,28 @@
   pkgs,
   ...
 }: {
-  # You can import other home-manager modules here
   imports = [
     ./editor
-    ./shell
+    ./shell.nix
     ./nix.nix
-    ./configuration.nix
   ];
+
+  fonts.fontconfig.enable = true;
+
+  home = {
+    username = "rav";
+    homeDirectory = "/home/rav";
+    packages = with pkgs; [
+      # archives
+      zip
+      unzip
+      pigz
+      gnutar
+      # useful tools
+      gh
+      ripgrep
+    ];
+  };
 
   # enable home-manager
   programs.home-manager.enable = true;

@@ -1,0 +1,7 @@
+[theme]
+dark = "catppuccin_frappe"
+light = "catppuccin_latte"
+
+[editor]
+line-number = "relative"
+mouse = false
