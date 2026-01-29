@@ -11,7 +11,7 @@
     extraPackages = [
       pkgs.marksman
       pkgs.unstable.ruff
-      pkgs.python312Packages.python-lsp-server
+      pkgs.python3Packages.python-lsp-server
       pkgs.rust-analyzer
     ];
   };
@@ -19,8 +19,8 @@
     source = ./helix-configuration.toml;
     target = ".config/helix/config.toml";
   };
-  home.file."helix-languages.toml" = {
-    source = ./helix-languages.toml;
-    target = ".config/helix/languages.toml";
-  };
+  # home.file."helix-languages.toml" = {
+  #   source = ./helix-languages.toml;
+  #   target = ".config/helix/languages.toml";
+  # };
 }
