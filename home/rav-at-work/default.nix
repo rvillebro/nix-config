@@ -6,7 +6,6 @@
     ./editor
     ./shell.nix
     ./nix.nix
-    ./configuration.nix
   ];
 
   home = {
