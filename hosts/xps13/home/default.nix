@@ -24,14 +24,10 @@
       zip
       unzip
       pigz
-      # claude-code and relevant tools
-      unstable.claude-code
       ripgrep
       gh
-      # codex
-      unstable.codex
-      # gnome extensions
-      gnomeExtensions.vitals
+      # cursor
+      unstable.code-cursor-fhs
     ];
     sessionVariables = {
       # clean up ~
@@ -63,8 +59,11 @@
     
     ssh = {
       enable = true;
-      addKeysToAgent = "yes";
+      enableDefaultConfig = false;
       matchBlocks = {
+        "*" = {
+          addKeysToAgent = "yes";
+        };
         "rpi4" = {
           hostname = "rpi4";
           user = "rav";

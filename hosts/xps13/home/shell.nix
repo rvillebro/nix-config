@@ -17,8 +17,12 @@
 
     git = {
       enable = true;
-      userName = "Rasmus Villebro";
-      userEmail = "rasmus-villebro@hotmail.com";
+      settings = {
+        user = {
+          name = "Rasmus Villebro";
+          email = "rasmus-villebro@hotmail.com";
+        };
+      };
     };
 
     ghostty = {
