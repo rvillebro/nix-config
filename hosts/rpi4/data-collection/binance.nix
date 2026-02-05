@@ -17,6 +17,7 @@ in
       Type = "notify";
       ExecStart = "${pkgs.binance-collector}/bin/bc collect-stream ${streamConfigFile} --out-dir $STATE_DIRECTORY";
       Restart = "always";
+      RestartSec = "10sec";
       WatchdogSec = "5min";
 
       # Run as ephemeral dynamic user
@@ -36,8 +37,8 @@ in
       # Set directory group ownership to wsdata on each start
       # "+" prefix runs as root (needed for chgrp with DynamicUser)
       ExecStartPre = [
-        "+${pkgs.coreutils}/bin/chgrp -R ${dataGroup} ${stateDir}"
-        "+${pkgs.coreutils}/bin/chmod 02750 ${stateDir}"
+        "+${pkgs.coreutils}/bin/chgrp -R ${dataGroup} $STATE_DIRECTORY"
+        "+${pkgs.coreutils}/bin/chmod 02750 $STATE_DIRECTORY"
       ];
 
       # Hardening

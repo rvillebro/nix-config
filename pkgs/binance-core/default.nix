@@ -16,7 +16,7 @@ buildPythonPackage rec {
     (builtins.fetchGit {
       url = "git@github.com:rvillebro/cryptic.git";
       ref = "main";
-      rev = "5a21c6146d9f21e8bd8aaeda6aba19c11fe00390";
+      rev = "89868675415caf6725bcc9d67cf805483504bb4a";
     })
     + "/packages/binance-core";
 

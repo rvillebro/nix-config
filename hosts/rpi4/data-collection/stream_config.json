@@ -1,5 +1,4 @@
 {
-  "out_dir": "/var/lib/binance-collector",
   "refresh_interval": 82800,
   "streams": [
     {
