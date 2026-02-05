@@ -12,6 +12,7 @@
     ./nix.nix
     ./configuration.nix
     ./virtualisation.nix
+    ./data-collection
 
     # Import your generated (nixos-generate-config) hardware configuration
     #./hardware-configuration.nix

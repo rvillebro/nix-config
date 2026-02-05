@@ -2,13 +2,14 @@
   lib,
   buildPythonApplication,
   hatchling,
-  # dependencies
+  pytestCheckHook,
   aiohttp,
   polars,
   typer,
   textual,
   python-slugify,
   pydantic,
+  pytest-asyncio,
   binance-core,
 }:
 buildPythonApplication rec {
@@ -20,9 +21,9 @@ buildPythonApplication rec {
     (builtins.fetchGit {
       url = "git@github.com:rvillebro/cryptic.git";
       ref = "main";
-      rev = "3e8c94d5168cceba26fa95fc62a1fb292285f562";
+      rev = "5a21c6146d9f21e8bd8aaeda6aba19c11fe00390";
     })
-    + "/apps/binance-collector";
+    + "/apps/binance-collector-py";
 
   build-system = [hatchling];
 
@@ -34,6 +35,12 @@ buildPythonApplication rec {
     python-slugify
     pydantic
     binance-core
+  ];
+
+
+  nativeCheckInputs = [
+    pytestCheckHook
+    pytest-asyncio
   ];
 
   pythonImportsCheck = ["binance_collector"];

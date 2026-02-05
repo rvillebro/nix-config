@@ -41,7 +41,7 @@
   users.users.rav = {
     isNormalUser = true;
     description = "Rasmus Villebro";
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "wsdata" ];
   };
 
   # List packages installed in system profile. To search, run:
