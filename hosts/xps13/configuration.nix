@@ -75,8 +75,6 @@
     git
     sysstat
     neofetch
-    # install devenv system-wide
-    devenv
   ];
 
   environment.gnome.excludePackages = (with pkgs; [

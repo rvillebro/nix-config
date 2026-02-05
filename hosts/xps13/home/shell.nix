@@ -30,7 +30,7 @@
       enableBashIntegration = true;
       installBatSyntax = true;
       settings = {
-        theme = "catppuccin-mocha";
+        theme = "Brogrammer";
       };
     };
   };
