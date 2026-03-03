@@ -1,5 +1,6 @@
 {
   config,
+  ...
 }: {
   home.shell.enableShellIntegration = true;
 
@@ -22,13 +23,19 @@
   services.ssh-agent.enable = true;
 
   programs = {
-    bash.enable = true;
+    zsh.enable = true;
     direnv.enable = true;
     starship.enable = true;
     zellij.enable = true;
     bat.enable = true;
     btop.enable = true;
     eza.enable = true;
+    jq.enable = true;
+    gh.enable = true;
+    ripgrep.enable = true;
+    rclone.enable = true;
+    awscli.enable = true;
+
     git = {
       enable = true;
       settings = {
@@ -36,12 +43,18 @@
         user.email = "rav@evaxion.ai";
       };
     };
+
     ssh = {
       enable = true;
       matchBlocks = {
         "*" = {
-          identityFile = "${config.home.homeDirectory}/.ssh/rav-servers";
+          identityFile = "${config.home.homeDirectory}/.ssh/id_ed25519";
           addKeysToAgent = "yes";
+        };
+        "utopia-1" = {
+          hostname = "utopia-1";
+        "utopia-2" = {
+          hostname = "utopia-2";
         };
       };
     };

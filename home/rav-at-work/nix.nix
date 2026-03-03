@@ -1,6 +1,7 @@
 {
   outputs,
   pkgs,
+  ...
 }:
 {
   nixpkgs = {
@@ -8,7 +9,6 @@
     config.allowUnfree = true;
   };
 
-  # nix settings
   nix = {
     package = pkgs.nix;
     settings.experimental-features = "nix-command flakes";

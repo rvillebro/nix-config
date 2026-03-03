@@ -1,5 +1,6 @@
 { 
-  pkgs
+  pkgs,
+  ...
 }:
 {
   imports = [
@@ -17,11 +18,7 @@
       unzip
       pigz
       gnutar
-      rclone
-      jq  # json processor
-      gh  # github cli
       glab  # gitlab cli
-      ripgrep  # grep alternative
     ];
   };
 
