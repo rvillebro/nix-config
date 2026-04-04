@@ -5,6 +5,7 @@
   hatchling,
   aiohttp,
   pytest-asyncio,
+  crypticSrc,
 }:
 
 buildPythonPackage rec {
@@ -12,13 +13,7 @@ buildPythonPackage rec {
   version = "0.1.0";
   pyproject = true;
 
-  src =
-    (builtins.fetchGit {
-      url = "git@github.com:rvillebro/cryptic.git";
-      ref = "main";
-      rev = "89868675415caf6725bcc9d67cf805483504bb4a";
-    })
-    + "/packages/binance-core";
+  src = crypticSrc + "/packages/binance-core";
 
   build-system = [hatchling];
 

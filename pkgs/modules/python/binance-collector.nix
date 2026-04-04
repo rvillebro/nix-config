@@ -11,19 +11,15 @@
   pydantic,
   pytest-asyncio,
   binance-core,
+  sd-notify,
+  crypticSrc,
 }:
 buildPythonApplication rec {
   pname = "binance-collector";
   version = "1.0.0";
   pyproject = true;
 
-  src =
-    (builtins.fetchGit {
-      url = "git@github.com:rvillebro/cryptic.git";
-      ref = "main";
-      rev = "89868675415caf6725bcc9d67cf805483504bb4a";
-    })
-    + "/apps/binance-collector-py";
+  src = crypticSrc + "/apps/binance-collector-py";
 
   build-system = [hatchling];
 
@@ -35,8 +31,8 @@ buildPythonApplication rec {
     python-slugify
     pydantic
     binance-core
+    sd-notify
   ];
-
 
   nativeCheckInputs = [
     pytestCheckHook
@@ -48,6 +44,6 @@ buildPythonApplication rec {
   meta = with lib; {
     description = "Binance data collector for crypto trading";
     license = licenses.mit;
-    mainProgram = "collect-stream";
+    mainProgram = "binance-collector";
   };
 }
