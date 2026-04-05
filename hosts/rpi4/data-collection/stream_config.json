@@ -2,8 +2,108 @@
   "refresh_interval": 82800,
   "streams": [
     {
-      "name": "btcusdt_aggTrade",
-      "stream": "btcusdt@aggTrade"
+      "name": "btcusdt_depth",
+      "stream": "btcusdt@depth"
+    },
+    {
+      "name": "ethusdt_depth",
+      "stream": "ethusdt@depth"
+    },
+    {
+      "name": "xrpusdt_depth",
+      "stream": "xrpusdt@depth"
+    },
+    {
+      "name": "bnbusdt_depth",
+      "stream": "bnbusdt@depth"
+    },
+    {
+      "name": "adausdt_depth",
+      "stream": "adausdt@depth"
+    },
+    {
+      "name": "trxusdt_depth",
+      "stream": "trxusdt@depth"
+    },
+    {
+      "name": "bchusdt_depth",
+      "stream": "bchusdt@depth"
+    },
+    {
+      "name": "xlmusdt_depth",
+      "stream": "xlmusdt@depth"
+    },
+    {
+      "name": "linkusdt_depth",
+      "stream": "linkusdt@depth"
+    },
+    {
+      "name": "solusdt_depth",
+      "stream": "solusdt@depth"
+    },
+    {
+      "name": "dogeusdt_depth",
+      "stream": "dogeusdt@depth"
+    },
+    {
+      "name": "shibusdt_depth",
+      "stream": "shibusdt@depth"
+    },
+    {
+      "name": "pepeusdt_depth",
+      "stream": "pepeusdt@depth"
+    },
+    {
+      "name": "btcusdc_depth",
+      "stream": "btcusdc@depth"
+    },
+    {
+      "name": "ethusdc_depth",
+      "stream": "ethusdc@depth"
+    },
+    {
+      "name": "xrpusdc_depth",
+      "stream": "xrpusdc@depth"
+    },
+    {
+      "name": "bnbusdc_depth",
+      "stream": "bnbusdc@depth"
+    },
+    {
+      "name": "adausdc_depth",
+      "stream": "adausdc@depth"
+    },
+    {
+      "name": "trxusdc_depth",
+      "stream": "trxusdc@depth"
+    },
+    {
+      "name": "bchusdc_depth",
+      "stream": "bchusdc@depth"
+    },
+    {
+      "name": "xlmusdc_depth",
+      "stream": "xlmusdc@depth"
+    },
+    {
+      "name": "linkusdc_depth",
+      "stream": "linkusdc@depth"
+    },
+    {
+      "name": "solusdc_depth",
+      "stream": "solusdc@depth"
+    },
+    {
+      "name": "dogeusdc_depth",
+      "stream": "dogeusdc@depth"
+    },
+    {
+      "name": "shibusdc_depth",
+      "stream": "shibusdc@depth"
+    },
+    {
+      "name": "pepeusdc_depth",
+      "stream": "pepeusdc@depth"
     }
   ]
 }

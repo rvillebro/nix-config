@@ -1,3 +1,160 @@
 {
-    
+  "endpoints": [
+    {
+      "name": "btcusdt_depth",
+      "path": "api/v3/depth?symbol=BTCUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 0
+    },
+    {
+      "name": "ethusdt_depth",
+      "path": "api/v3/depth?symbol=ETHUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 138
+    },
+    {
+      "name": "xrpusdt_depth",
+      "path": "api/v3/depth?symbol=XRPUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 276
+    },
+    {
+      "name": "bnbusdt_depth",
+      "path": "api/v3/depth?symbol=BNBUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 415
+    },
+    {
+      "name": "adausdt_depth",
+      "path": "api/v3/depth?symbol=ADAUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 553
+    },
+    {
+      "name": "trxusdt_depth",
+      "path": "api/v3/depth?symbol=TRXUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 692
+    },
+    {
+      "name": "bchusdt_depth",
+      "path": "api/v3/depth?symbol=BCHUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 830
+    },
+    {
+      "name": "xlmusdt_depth",
+      "path": "api/v3/depth?symbol=XLMUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 969
+    },
+    {
+      "name": "linkusdt_depth",
+      "path": "api/v3/depth?symbol=LINKUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 1107
+    },
+    {
+      "name": "solusdt_depth",
+      "path": "api/v3/depth?symbol=SOLUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 1246
+    },
+    {
+      "name": "dogeusdt_depth",
+      "path": "api/v3/depth?symbol=DOGEUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 1384
+    },
+    {
+      "name": "shibusdt_depth",
+      "path": "api/v3/depth?symbol=SHIBUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 1523
+    },
+    {
+      "name": "pepeusdt_depth",
+      "path": "api/v3/depth?symbol=PEPEUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 1661
+    },
+    {
+      "name": "btcusdc_depth",
+      "path": "api/v3/depth?symbol=BTCUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 1800
+    },
+    {
+      "name": "ethusdc_depth",
+      "path": "api/v3/depth?symbol=ETHUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 1938
+    },
+    {
+      "name": "xrpusdc_depth",
+      "path": "api/v3/depth?symbol=XRPUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 2076
+    },
+    {
+      "name": "bnbusdc_depth",
+      "path": "api/v3/depth?symbol=BNBUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 2215
+    },
+    {
+      "name": "adausdc_depth",
+      "path": "api/v3/depth?symbol=ADAUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 2353
+    },
+    {
+      "name": "trxusdc_depth",
+      "path": "api/v3/depth?symbol=TRXUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 2492
+    },
+    {
+      "name": "bchusdc_depth",
+      "path": "api/v3/depth?symbol=BCHUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 2630
+    },
+    {
+      "name": "xlmusdc_depth",
+      "path": "api/v3/depth?symbol=XLMUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 2769
+    },
+    {
+      "name": "linkusdc_depth",
+      "path": "api/v3/depth?symbol=LINKUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 2907
+    },
+    {
+      "name": "solusdc_depth",
+      "path": "api/v3/depth?symbol=SOLUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 3046
+    },
+    {
+      "name": "dogeusdc_depth",
+      "path": "api/v3/depth?symbol=DOGEUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 3184
+    },
+    {
+      "name": "shibusdc_depth",
+      "path": "api/v3/depth?symbol=SHIBUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 3323
+    },
+    {
+      "name": "pepeusdc_depth",
+      "path": "api/v3/depth?symbol=PEPEUSDT&limit=5000",
+      "polling_interval": 3600,
+      "start_delay": 3461
+    }
+  ]
 }

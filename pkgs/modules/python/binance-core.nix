@@ -14,7 +14,6 @@ buildPythonPackage rec {
   pyproject = true;
 
   src = crypticSrc + "/packages/binance-core";
-
   build-system = [hatchling];
 
   dependencies = [aiohttp];
