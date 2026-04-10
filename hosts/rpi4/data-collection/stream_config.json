@@ -3,107 +3,133 @@
   "streams": [
     {
       "name": "btcusdt_depth",
-      "stream": "btcusdt@depth"
+      "stream": "btcusdt@depth",
+      "stale_timeout": 60
     },
     {
       "name": "ethusdt_depth",
-      "stream": "ethusdt@depth"
+      "stream": "ethusdt@depth",
+      "stale_timeout": 60
     },
     {
       "name": "xrpusdt_depth",
-      "stream": "xrpusdt@depth"
+      "stream": "xrpusdt@depth",
+      "stale_timeout": 60
     },
     {
       "name": "bnbusdt_depth",
-      "stream": "bnbusdt@depth"
+      "stream": "bnbusdt@depth",
+      "stale_timeout": 60
     },
     {
       "name": "adausdt_depth",
-      "stream": "adausdt@depth"
+      "stream": "adausdt@depth",
+      "stale_timeout": 60
     },
     {
       "name": "trxusdt_depth",
-      "stream": "trxusdt@depth"
+      "stream": "trxusdt@depth",
+      "stale_timeout": 60
     },
     {
       "name": "bchusdt_depth",
-      "stream": "bchusdt@depth"
+      "stream": "bchusdt@depth",
+      "stale_timeout": 60
     },
     {
       "name": "xlmusdt_depth",
-      "stream": "xlmusdt@depth"
+      "stream": "xlmusdt@depth",
+      "stale_timeout": 60
     },
     {
       "name": "linkusdt_depth",
-      "stream": "linkusdt@depth"
+      "stream": "linkusdt@depth",
+      "stale_timeout": 60
     },
     {
       "name": "solusdt_depth",
-      "stream": "solusdt@depth"
+      "stream": "solusdt@depth",
+      "stale_timeout": 60
     },
     {
       "name": "dogeusdt_depth",
-      "stream": "dogeusdt@depth"
+      "stream": "dogeusdt@depth",
+      "stale_timeout": 60
     },
     {
       "name": "shibusdt_depth",
-      "stream": "shibusdt@depth"
+      "stream": "shibusdt@depth",
+      "stale_timeout": 60
     },
     {
       "name": "pepeusdt_depth",
-      "stream": "pepeusdt@depth"
+      "stream": "pepeusdt@depth",
+      "stale_timeout": 60
     },
     {
       "name": "btcusdc_depth",
-      "stream": "btcusdc@depth"
+      "stream": "btcusdc@depth",
+      "stale_timeout": 120
     },
     {
       "name": "ethusdc_depth",
-      "stream": "ethusdc@depth"
+      "stream": "ethusdc@depth",
+      "stale_timeout": 120
     },
     {
       "name": "xrpusdc_depth",
-      "stream": "xrpusdc@depth"
+      "stream": "xrpusdc@depth",
+      "stale_timeout": 120
     },
     {
       "name": "bnbusdc_depth",
-      "stream": "bnbusdc@depth"
+      "stream": "bnbusdc@depth",
+      "stale_timeout": 120
     },
     {
       "name": "adausdc_depth",
-      "stream": "adausdc@depth"
+      "stream": "adausdc@depth",
+      "stale_timeout": 120
     },
     {
       "name": "trxusdc_depth",
-      "stream": "trxusdc@depth"
+      "stream": "trxusdc@depth",
+      "stale_timeout": 120
     },
     {
       "name": "bchusdc_depth",
-      "stream": "bchusdc@depth"
+      "stream": "bchusdc@depth",
+      "stale_timeout": 120
     },
     {
       "name": "xlmusdc_depth",
-      "stream": "xlmusdc@depth"
+      "stream": "xlmusdc@depth",
+      "stale_timeout": 120
     },
     {
       "name": "linkusdc_depth",
-      "stream": "linkusdc@depth"
+      "stream": "linkusdc@depth",
+      "stale_timeout": 120
     },
     {
       "name": "solusdc_depth",
-      "stream": "solusdc@depth"
+      "stream": "solusdc@depth",
+      "stale_timeout": 120
     },
     {
       "name": "dogeusdc_depth",
-      "stream": "dogeusdc@depth"
+      "stream": "dogeusdc@depth",
+      "stale_timeout": 120
     },
     {
       "name": "shibusdc_depth",
-      "stream": "shibusdc@depth"
+      "stream": "shibusdc@depth",
+      "stale_timeout": 120
     },
     {
       "name": "pepeusdc_depth",
-      "stream": "pepeusdc@depth"
+      "stream": "pepeusdc@depth",
+      "stale_timeout": 120
     }
   ]
 }
