@@ -22,9 +22,10 @@
       xorgLibXAliases = builtins.listToAttrs (map (n: { name = n; value = prev.xorg.${n}; }) xorgLibXNames);
     in
     xorgLibXAliases // {
-      # nixos-25.11 renamed libpthreadstubs → libpthread-stubs; libdrm still
-      # references the old camelCase argument name in its package.nix.
+      # nixos-25.11 renamed/moved these; various package.nix files still
+      # reference the old argument names.
       libpthreadstubs = prev.libpthread-stubs;
+      xcbutilkeysyms = prev.xorg.xcbutilkeysyms;
     };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
