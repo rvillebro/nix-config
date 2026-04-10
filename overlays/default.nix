@@ -26,6 +26,7 @@
       # reference the old argument names.
       libpthreadstubs = prev.libpthread-stubs;
       xcbutilkeysyms = prev.xorg.xcbutilkeysyms;
+      libICE = prev.xorg.libICE;
     };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
