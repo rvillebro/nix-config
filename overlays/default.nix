@@ -28,6 +28,8 @@
       xcbutilkeysyms = prev.xorg.xcbutilkeysyms;
       libICE = prev.xorg.libICE;
       libSM = prev.xorg.libSM;
+      xcbutil = prev.xorg.xcbutil;
+      xcbutilwm = prev.xorg.xcbutilwm;
     };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
