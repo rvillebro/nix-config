@@ -15,7 +15,7 @@ in
   # Create stable group for data readers
   users.groups.${serviceGroup} = { };
 
-  systemd.services.binance-stream-collector = {
+  systemd.services.binance-collector-stream = {
     description = "Binance WebSocket Stream Collector";
     after = [ "network-online.target" ];
     wants = [ "network-online.target" ];
@@ -23,7 +23,7 @@ in
 
     serviceConfig = {
       Type = "notify";
-      ExecStart = "${pkgs.binance-collector}/bin/bc collect-stream ${streamConfigFile} --out-dir $STATE_DIRECTORY";
+      ExecStart = "${pkgs.binance-collector}/bin/binance-collector stream ${streamConfigFile} --out-dir $STATE_DIRECTORY";
       Restart = "always";
       RestartSec = "10sec";
       WatchdogSec = "10min";
@@ -56,7 +56,7 @@ in
     };
   };
 
-  systemd.services.binance-rest-collector = {
+  systemd.services.binance-collector-rest = {
     description = "Binance REST API Collector";
     after = [ "network-online.target" ];
     wants = [ "network-online.target" ];
@@ -64,7 +64,7 @@ in
 
     serviceConfig = {
       Type = "notify";
-      ExecStart = "${pkgs.binance-collector}/bin/bc collect-rest ${restConfigFile} --out-dir $STATE_DIRECTORY";
+      ExecStart = "${pkgs.binance-collector}/bin/binance-collector rest ${restConfigFile} --out-dir $STATE_DIRECTORY";
       Restart = "always";
       RestartSec = "10sec";
       WatchdogSec = "10min";
