@@ -10,6 +10,11 @@
   wsl.docker-desktop.enable = true;
   wsl.useWindowsDriver = true;
 
+  wsl.wslConf = {
+    boot.systemd = true;
+    boot.initTimeout = 60000;
+  };
+
   environment.sessionVariables.LD_LIBRARY_PATH = ["/usr/lib/wsl/lib"];
 
   programs.nix-ld.enable = true;
