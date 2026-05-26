@@ -35,7 +35,7 @@
     experimental-features = "nix-command flakes";
     auto-optimise-store = true;
     trusted-users = ["rav"];
-    extra-substituters = [ 
+    extra-substituters = [
       "https://nix-community.cachix.org"
     ];
     extra-trusted-public-keys = [

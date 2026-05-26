@@ -2,6 +2,19 @@
 
 This is my nix configuration
 
+## Table of Contents
+
+- [NixOS on XP13](#nixos-on-xp13)
+  - [Network](#network)
+  - [Partitioning](#partitioning)
+  - [Formatting](#formatting)
+  - [Installation](#installation)
+- [NixOS on Raspberry PI 4](#nixos-on-raspberry-pi-4)
+  - [Prepare SD imade](#prepare-sd-imade)
+  - [Installation](#installation-1)
+- [NixOS on Windows Subsystems](#nixos-on-windows-subsystems)
+  - [Build WSL image](#build-wsl-image)
+
 
 # NixOS on XP13
 
@@ -90,4 +103,32 @@ sudo reboot
 ```
 
 Once rebooted, login to root and set a password for your user.
+
+# NixOS on Windows Subsystems
+
+## Build WSL image
+
+Requires a system with flakes-enabled Nix. Inside this checkout, run:
+
+```bash
+sudo nix run .#nixosConfigurations.nixos-wsl.config.system.build.tarballBuilder
+```
+
+The resulting `nixos.wsl` file is placed in the working directory.
+
+## Installation on Windows
+
+With WSL 2.4.4 or later, in PowerShell:
+
+```powershell
+wsl --install --from-file nixos.wsl
+```
+
+For older WSL versions:
+
+```powershell
+wsl --import NixOS %USERPROFILE%\NixOS nixos.wsl --version 2
+```
+
+Then launch with `wsl -d NixOS` and set a password for your user.
 
