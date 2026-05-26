@@ -16,8 +16,10 @@
     zellij.enable = true;
     git = {
       enable = true;
-      userName = "Rasmus Villebro";
-      userEmail = "rasmus-villebro@hotmail.com";
+      settings = {
+        user.name = "Rasmus Villebro";
+        user.email = "rasmus-villebro@hotmail.com";
+      };
     };
   };
 }
