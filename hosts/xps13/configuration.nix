@@ -74,7 +74,7 @@
     curl
     git
     sysstat
-    neofetch
+    fastfetch
   ];
 
   environment.gnome.excludePackages = (with pkgs; [

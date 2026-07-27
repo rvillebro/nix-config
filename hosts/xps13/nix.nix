@@ -15,7 +15,12 @@
       outputs.overlays.unstable-packages
       inputs.nur.overlays.default
     ];
-    config.allowUnfree = true;
+    config = {
+      allowUnfree = true;
+      permittedInsecurePackages = [
+        "electron-39.8.10"
+      ];
+    };
   };
 
   # This will add each flake input as a registry

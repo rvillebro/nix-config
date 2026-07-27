@@ -2,20 +2,13 @@
 # You can build them using 'nix build .#example'
 {
   pkgs,
-  lib ? pkgs.lib,
   ...
 }:
-let
-  pythonNewScope = extra: lib.callPackageWith (pkgs.python3Packages // extra);
-  defaultNewScope = extra: lib.callPackageWith (pkgs // extra);
-in
-lib.packagesFromDirectoryRecursive {
-  callPackage = pythonNewScope {};
-  newScope = pythonNewScope;
+pkgs.lib.packagesFromDirectoryRecursive {
+  inherit (pkgs.python3Packages) callPackage newScope;
   directory = ./modules/python;
 }
-// lib.packagesFromDirectoryRecursive {
-  callPackage = defaultNewScope {};
-  newScope = defaultNewScope;
+// pkgs.lib.packagesFromDirectoryRecursive {
+  inherit (pkgs) callPackage newScope;
   directory = ./modules/default;
 }
