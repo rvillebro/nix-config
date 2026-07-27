@@ -7,6 +7,7 @@
     ./editors
     ./shell.nix
     ./browser.nix
+    ./pi-coding-agent.nix
   ];
 
   xdg.enable = true;
@@ -26,8 +27,6 @@
       pigz
       ripgrep
       gh
-      # cursor
-      unstable.code-cursor-fhs
     ];
     sessionVariables = {
       # clean up ~
