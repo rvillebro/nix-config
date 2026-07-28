@@ -14,8 +14,8 @@ in
       unstable.pi-coding-agent
     ];
     file = {
-      ".pi/agent/skills/engineering" = {
-        source = "${mattpocock-skills}/engineering";
+      ".pi/agent/skills/mattpocock-skills" = {
+        source = "${mattpocock-skills}/skills";
         recursive = true;
       };
     };
