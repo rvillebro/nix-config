@@ -2,18 +2,22 @@
 let
   mattpocock-skills = builtins.fetchGit {
     url = "https://github.com/mattpocock/skills.git";
-    ref = "main";
-    rev = "b8be62ffacb0118fa3eaa29a0923c87c8c11985c";
-    sparseCheckout = [ "skills" ];
+    rev = "d574778f94cf620fcc8ce741584093bc650a61d3";
   };
 in
 {
-  home.packages = with pkgs; [
-    unstable.pi-coding-agent
-  ];
-
-  home.file.".pi/agent/skills/engineering" = {
-    source = "${mattpocock-skills}/engineering";
-    recursive = true;
+  home = {
+    sessionVariables = {
+      PI_SKIP_VERSION_CHECK = "1";
+    };
+    packages = with pkgs; [
+      unstable.pi-coding-agent
+    ];
+    file = {
+      ".pi/agent/skills/engineering" = {
+        source = "${mattpocock-skills}/engineering";
+        recursive = true;
+      };
+    };
   };
 }
