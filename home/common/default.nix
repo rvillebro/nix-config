@@ -9,6 +9,13 @@
     ./editors/helix.nix
   ];
 
+  # Fontconfig lets standalone home configs discover fonts installed via
+  # home.packages / nix-env. Redundant (but harmless) on NixOS hosts, where
+  # it's configured at the system level.
+  fonts.fontconfig.enable = true;
+
+  # Apply the XDG base-directory layout to standalone setups (rav@home,
+  # rav@work), re-homing HM-managed dotfiles under ~/.config. Intended.
   xdg.enable = true;
 
   home = {
