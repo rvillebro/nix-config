@@ -1,6 +1,9 @@
 # Shared home-manager configuration, common to all home configs.
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./shell.nix
     ./editors/helix.nix

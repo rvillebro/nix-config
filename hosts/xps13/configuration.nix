@@ -1,8 +1,12 @@
-{ lib, config, pkgs, ... }:
 {
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.excludePackages = [ pkgs.xterm ];
+  services.xserver.excludePackages = [pkgs.xterm];
 
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
@@ -39,9 +43,9 @@
   };
 
   # Extend the shared user account definition
-  users.users.rav.extraGroups = [ "networkmanager" "wheel" ];
+  users.users.rav.extraGroups = ["networkmanager" "wheel"];
 
-  environment.gnome.excludePackages = (with pkgs; [
+  environment.gnome.excludePackages = with pkgs; [
     gnome-tour
     gnome-console # terminal
     geary
@@ -51,5 +55,5 @@
     gnome-music # music app
     gnome-logs # logs viewer
     gnome-disk-utility # disks utility
-  ]);
+  ];
 }

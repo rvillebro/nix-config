@@ -1,7 +1,10 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{ pkgs, config, ... }: 
 {
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ../../../home/common
     ./editors
@@ -34,6 +37,14 @@
       installBatSyntax = true;
       settings = {
         theme = "Brogrammer";
+      };
+    };
+
+    git = {
+      enable = true;
+      settings = {
+        user.name = "Rasmus Villebro";
+        user.email = "rasmus-villebro@hotmail.com";
       };
     };
 

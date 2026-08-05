@@ -1,6 +1,5 @@
 # Shared shell configuration, common to all home configs.
-{ ... }:
-{
+{...}: {
   home.shell.enableShellIntegration = true;
 
   home.shellAliases = {

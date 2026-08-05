@@ -1,5 +1,9 @@
-{ inputs, outputs, pkgs, ... }:
 {
+  inputs,
+  outputs,
+  pkgs,
+  ...
+}: {
   imports = [
     ../common
     ./configuration.nix

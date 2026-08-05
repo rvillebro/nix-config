@@ -25,7 +25,7 @@
     plymouth.enable = true;
     initrd.verbose = false;
     consoleLogLevel = 0;
-    kernelParams = [ "quiet" "udev.log_level=0" ];
+    kernelParams = ["quiet" "udev.log_level=0"];
   };
 
   # Networking.
@@ -38,7 +38,7 @@
   programs.dconf.enable = true; # dconf settings for GNOME and other applications
 
   # xps13-specific nixpkgs additions
-  nixpkgs.overlays = [ inputs.nur.overlays.default ];
+  nixpkgs.overlays = [inputs.nur.overlays.default];
   nixpkgs.config.permittedInsecurePackages = [
     "electron-39.8.10"
   ];

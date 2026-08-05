@@ -1,6 +1,5 @@
 # Shared Helix editor configuration, common to all home configs.
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.helix = {
     enable = true;
     settings = {

@@ -1,5 +1,9 @@
-{ lib, config, pkgs, ... }:
 {
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   # Extend the shared user account definition
-  users.users.rav.extraGroups = [ "wheel" ];
+  users.users.rav.extraGroups = ["wheel"];
 }

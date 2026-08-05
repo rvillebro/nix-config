@@ -1,6 +1,5 @@
 # VS Code configuration. Import this module where VS Code is wanted.
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.vscode = {
     enable = true;
     profiles.default = {
