@@ -3,6 +3,7 @@
 {
   imports = [
     ./shell.nix
+    ./editors/helix.nix
   ];
 
   xdg.enable = true;

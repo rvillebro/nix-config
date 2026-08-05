@@ -4,7 +4,6 @@
 {
   imports = [
     ../../../home/common
-    ./editor
   ];
 
   home = {

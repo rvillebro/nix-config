@@ -8,7 +8,6 @@
   imports = [
     ../common
     ../common/nix.nix
-    ./editor
   ];
 
   home = {
