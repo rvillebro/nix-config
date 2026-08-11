@@ -8,6 +8,7 @@
   imports = [
     ../common
     ../common/nix.nix
+    ../common/git.nix
   ];
 
   home = {
@@ -39,25 +40,21 @@
     awscli.enable = true;
 
     git = {
-      enable = true;
-      settings = {
-        user.name = "Rasmus Villebro";
-        user.email = "rav@evaxion.ai";
-      };
+      settings.user.email = "rav@evaxion.ai";
     };
 
     ssh = {
       enable = true;
-      matchBlocks = {
+      settings = {
         "*" = {
-          identityFile = "${config.home.homeDirectory}/.ssh/id_ed25519";
-          addKeysToAgent = "yes";
+          IdentityFile = "${config.home.homeDirectory}/.ssh/id_ed25519";
+          AddKeysToAgent = "yes";
         };
         "utopia-1" = {
-          hostname = "utopia-1";
+          HostName = "utopia-1";
         };
         "utopia-2" = {
-          hostname = "utopia-2";
+          HostName = "utopia-2";
         };
       };
     };

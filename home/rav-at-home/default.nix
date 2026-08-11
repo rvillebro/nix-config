@@ -8,6 +8,7 @@
   imports = [
     ../common
     ../common/nix.nix
+    ../common/git.nix
   ];
 
   home = {
@@ -22,35 +23,26 @@
   nix.settings = {
     # Note that you need to be a trusted user to set these
     extra-substituters = [
-      "https://nix-community.cachix.org"
       "https://cache.numtide.com"
       "https://cache.nixos-cuda.org"
     ];
     extra-trusted-public-keys = [
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
       "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
     ];
   };
 
   programs = {
-    git = {
-      enable = true;
-      settings = {
-        user.name = "Rasmus Villebro";
-        user.email = "rasmus-villebro@hotmail.com";
-      };
-    };
     ssh = {
       enable = true;
-      matchBlocks = {
+      settings = {
         "*" = {
-          addKeysToAgent = "yes";
+          AddKeysToAgent = "yes";
         };
         "rpi4" = {
-          hostname = "rpi4";
-          user = "rav";
-          forwardAgent = true;
+          HostName = "rpi4";
+          User = "rav";
+          ForwardAgent = true;
         };
       };
     };

@@ -3,6 +3,7 @@
 {pkgs, ...}: {
   imports = [
     ../../../home/common
+    ../../../home/common/git.nix
   ];
 
   home = {
@@ -14,13 +15,5 @@
     };
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "24.05";
-  };
-
-  programs.git = {
-    enable = true;
-    settings = {
-      user.name = "Rasmus Villebro";
-      user.email = "rasmus-villebro@hotmail.com";
-    };
   };
 }

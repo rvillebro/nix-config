@@ -7,6 +7,7 @@
 }: {
   imports = [
     ../../../home/common
+    ../../../home/common/git.nix
     ./editors
     ./browser.nix
     ./pi-coding-agent.nix
@@ -40,14 +41,6 @@
       };
     };
 
-    git = {
-      enable = true;
-      settings = {
-        user.name = "Rasmus Villebro";
-        user.email = "rasmus-villebro@hotmail.com";
-      };
-    };
-
     thunderbird = {
       enable = true;
       profiles.${config.home.username}.isDefault = true;
@@ -56,14 +49,14 @@
     ssh = {
       enable = true;
       enableDefaultConfig = false;
-      matchBlocks = {
+      settings = {
         "*" = {
-          addKeysToAgent = "yes";
+          AddKeysToAgent = "yes";
         };
         "rpi4" = {
-          hostname = "rpi4";
-          user = "rav";
-          forwardAgent = true;
+          HostName = "rpi4";
+          User = "rav";
+          ForwardAgent = true;
         };
       };
     };
