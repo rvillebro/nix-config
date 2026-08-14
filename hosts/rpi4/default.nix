@@ -1,15 +1,35 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-{pkgs, ...}: {
+{
+  pkgs,
+  outputs,
+  ...
+}: {
   imports = [
     ../common
     ./configuration.nix
     ./virtualisation.nix
-    ./data-collection
+
+    # Binance data-collection services (stream + rest), owned by the module
+    outputs.nixosModules.binance-collector
 
     # Import your generated (nixos-generate-config) hardware configuration
     #./hardware-configuration.nix
   ];
+
+  # Binance data collection on the rpi4, via the rav.nixos.binance-collector
+  # module. Read access to collected data goes through `readers`.
+  rav.nixos.binance-collector = {
+    stream = {
+      enable = true;
+      configFile = ./binance/stream_config.json;
+    };
+    rest = {
+      enable = true;
+      configFile = ./binance/rest_config.json;
+    };
+    readers = ["rav"];
+  };
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
