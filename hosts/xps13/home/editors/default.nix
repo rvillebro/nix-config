@@ -1,8 +1,7 @@
-{ ... }:
+# xps13 uses VS Code and Zed in addition to the shared Helix config.
 {
   imports = [
-    ./helix.nix
-    ./zed-editor.nix
-    ./vs-code.nix
+    ../../../../home/common/editors/vscode.nix
+    ../../../../home/common/editors/zed-editor.nix
   ];
 }

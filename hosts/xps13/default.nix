@@ -9,7 +9,7 @@
   ...
 }: {
   imports = [
-    ./nix.nix
+    ../common
     ./configuration.nix
     ./media-server.nix # nix server
     # Import your generated (nixos-generate-config) hardware configuration
@@ -25,7 +25,7 @@
     plymouth.enable = true;
     initrd.verbose = false;
     consoleLogLevel = 0;
-    kernelParams = [ "quiet" "udev.log_level=0" ];
+    kernelParams = ["quiet" "udev.log_level=0"];
   };
 
   # Networking.
@@ -35,14 +35,15 @@
     firewall.enable = false;
   };
 
-  programs.nix-ld.enable = true; # run unpatched dynamic binaries on NixOS.
   programs.dconf.enable = true; # dconf settings for GNOME and other applications
 
+  # xps13-specific nixpkgs additions
+  nixpkgs.overlays = [inputs.nur.overlays.default];
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-39.8.10"
+  ];
+
   # enable home-manager
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.backupFileExtension = "homeManagerBackupFileExtension";
-  home-manager.extraSpecialArgs = {inherit inputs outputs;};
   home-manager.users.rav = import ./home;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

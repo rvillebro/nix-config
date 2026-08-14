@@ -1,26 +1,12 @@
-{ lib, config, pkgs, ... }:
 {
-  # Set your time zone.
-  time.timeZone = "Europe/Copenhagen";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_DK.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "da_DK.UTF-8";
-    LC_IDENTIFICATION = "da_DK.UTF-8";
-    LC_MEASUREMENT = "da_DK.UTF-8";
-    LC_MONETARY = "da_DK.UTF-8";
-    LC_NAME = "da_DK.UTF-8";
-    LC_NUMERIC = "da_DK.UTF-8";
-    LC_PAPER = "da_DK.UTF-8";
-    LC_TELEPHONE = "da_DK.UTF-8";
-    LC_TIME = "da_DK.UTF-8";
-  };
-
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.excludePackages = [ pkgs.xterm ];
+  services.xserver.excludePackages = [pkgs.xterm];
 
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
@@ -31,9 +17,6 @@
     layout = "dk";
     variant = "";
   };
-
-  # Configure console keymap
-  console.keyMap = "dk-latin1";
 
   # Configure fonts
   fonts.packages = with pkgs; [
@@ -59,25 +42,10 @@
     #media-session.enable = true;
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.rav = {
-    isNormalUser = true;
-    description = "Rasmus Villebro";
-    extraGroups = [ "networkmanager" "wheel" ];
-  };
+  # Extend the shared user account definition
+  users.users.rav.extraGroups = ["networkmanager" "wheel"];
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    neovim
-    wget
-    curl
-    git
-    sysstat
-    fastfetch
-  ];
-
-  environment.gnome.excludePackages = (with pkgs; [
+  environment.gnome.excludePackages = with pkgs; [
     gnome-tour
     gnome-console # terminal
     geary
@@ -87,13 +55,5 @@
     gnome-music # music app
     gnome-logs # logs viewer
     gnome-disk-utility # disks utility
-  ]);
-
-  system.userActivationScripts = {
-    removeHomeManagerBackupFiles = {
-      text = ''
-        find ~ -type f -name "*.homeManagerBackupFileExtension" -delete
-      '';
-    };
-  };
+  ];
 }

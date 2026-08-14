@@ -1,15 +1,8 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-{
-  inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
-    ./nix.nix
+    ../common
     ./configuration.nix
     ./virtualisation.nix
     ./data-collection
@@ -20,7 +13,7 @@
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
-    initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
+    initrd.availableKernelModules = ["xhci_pci" "usbhid" "usb_storage"];
     loader = {
       grub.enable = false;
       generic-extlinux-compatible.enable = true;
@@ -53,13 +46,7 @@
 
   hardware.enableRedistributableFirmware = true;
 
-  programs.nix-ld.enable = true; # run unpatched dynamic binaries on NixOS.
-
   # enable home-manager
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.backupFileExtension = "homeManagerBackupFileExtension";
-  home-manager.extraSpecialArgs = {inherit inputs outputs;};
   home-manager.users.rav = import ./home;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

@@ -1,7 +1,6 @@
-{ inputs, outputs, pkgs, ... }:
-{
+{...}: {
   imports = [
-    ./nix.nix
+    ../common
     ./configuration.nix
   ];
 
@@ -12,13 +11,7 @@
 
   environment.sessionVariables.LD_LIBRARY_PATH = ["/usr/lib/wsl/lib"];
 
-  programs.nix-ld.enable = true;
-
   # enable home-manager
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.backupFileExtension = "homeManagerBackupFileExtension";
-  home-manager.extraSpecialArgs = {inherit inputs outputs;};
   home-manager.users.rav = import ./home;
 
   # This value determines the NixOS release from which the default
