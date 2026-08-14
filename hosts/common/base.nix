@@ -5,6 +5,10 @@
   ...
 }: {
   nixpkgs = {
+    # All overlays apply to every host (incl. rpi4/nixos-wsl) for parity with xps13.
+    # This is fine: `additions` only provides custom packages, `modifications` is
+    # currently empty, and `unstable-packages` merely exposes the pinned unstable
+    # channel as pkgs.unstable.
     overlays = [
       outputs.overlays.additions
       outputs.overlays.modifications
