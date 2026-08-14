@@ -5,7 +5,7 @@
   ...
 }: {
   # Extend the shared user account definition
-  users.users.rav.extraGroups = ["wheel" "wsdata"];
+  users.users.rav.extraGroups = ["wheel"];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
