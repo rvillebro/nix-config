@@ -20,6 +20,10 @@ _Avoid_: Component, mixin
 A module targeting `nixosSystem` consumers. Exposes options under `rav.nixos.*`. Deals with system-level concerns like boot, networking, display, users.
 _Avoid_: System module
 
+**Binance collector**:
+The NixOS module (`rav.nixos.binance-collector`) that runs the Binance data-collection services on the rpi4 host. Owns the systemd units (stream and rest), the service user, and the group that grants read access to collected data.
+_Avoid_: Data collection service, collector config
+
 **Home-manager module**:
 A module targeting `homeManagerConfiguration` consumers (both embedded in hosts and standalone). Exposes options under `rav.home-manager.*`. Deals with user-level concerns like editor, shell, git, browser.
 _Avoid_: User module, dotfile module
