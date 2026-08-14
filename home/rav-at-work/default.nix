@@ -32,7 +32,6 @@
   };
 
   programs = {
-    zsh.enable = true;
     jq.enable = true;
     gh.enable = true;
     ripgrep.enable = true;
