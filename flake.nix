@@ -9,7 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-wsl = {
-      url =  "github:nix-community/NixOS-WSL/main";
+      url = "github:nix-community/NixOS-WSL/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur = {
@@ -37,8 +37,7 @@
     ];
     forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
-
-    packages = forAllSystems (system: import ./pkgs {pkgs=nixpkgs.legacyPackages.${system};});
+    packages = forAllSystems (system: let pkgSet = import ./pkgs {pkgs = nixpkgs.legacyPackages.${system};}; in nixpkgs.lib.filterAttrs (_: v: nixpkgs.lib.isDerivation v) pkgSet);
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
     overlays = import ./overlays {inherit inputs;};
 
@@ -65,7 +64,7 @@
         specialArgs = {inherit inputs outputs;};
         system = "aarch64-linux";
         modules = [
-          inputs.hardware.nixosModules.raspberry-pi-4  # fix hardware quirks for Raspberry Pi 4
+          inputs.hardware.nixosModules.raspberry-pi-4 # fix hardware quirks for Raspberry Pi 4
           inputs.home-manager.nixosModules.home-manager
           ./hosts/rpi4
         ];
