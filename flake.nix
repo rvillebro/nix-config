@@ -87,6 +87,7 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
+          ./home/common/nix.nix
           ./home/rav-at-work
         ];
       };
@@ -94,6 +95,19 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
+          ({...}: {
+            nix.settings = {
+              extra-substituters = [
+                "https://cache.numtide.com"
+                "https://cache.nixos-cuda.org"
+              ];
+              extra-trusted-public-keys = [
+                "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
+                "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
+              ];
+            };
+          })
+          ./home/common/nix.nix
           ./home/rav-at-home
         ];
       };
