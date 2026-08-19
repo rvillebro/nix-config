@@ -4,6 +4,9 @@
 
 GitHub Issues (uses the `gh` CLI). See `docs/agents/issue-tracker.md`.
 
+The `gh` CLI is available in this environment and should be used for all GitHub interactions — viewing, listing, creating,
+commenting on, labelling, and closing issues, as well as PRs (`gh pr create`, `gh pr list`).
+
 ### Triage labels
 
 Default canonical labels (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
