@@ -7,7 +7,6 @@
 }: {
   imports = [
     ../common
-    ../common/nix.nix
     ../common/git.nix
   ];
 
