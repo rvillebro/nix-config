@@ -1,15 +1,11 @@
-# This is your home-manager configuration file
-# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{pkgs, ...}: {
+# Thin per-host layer for the rpi4 home.
+# Imports the User home module and overrides deployment-fact defaults.
+{...}: {
   imports = [
-    ../../../home/common
-    ../../../home/common/git.nix
+    ../../../home/user
   ];
 
   home = {
-    packages = with pkgs; [
-      bitwarden-cli
-    ];
     sessionVariables = {
       TERM = "xterm-256color";
     };
