@@ -1,13 +1,12 @@
-# This is your home-manager configuration file
-# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
+# Thin per-host layer for the xps13 home.
+# Imports the User home module and keeps the GUI stack on top.
 {
   pkgs,
   config,
   ...
 }: {
   imports = [
-    ../../../home/common
-    ../../../home/common/git.nix
+    ../../../home/user
     ./editors
     ./browser.nix
     ./pi-coding-agent.nix
@@ -19,8 +18,6 @@
       gimp
       # password manager
       bitwarden-desktop
-      bitwarden-cli
-      gh
     ];
     sessionVariables = {
       # set default applications
@@ -44,21 +41,6 @@
     thunderbird = {
       enable = true;
       profiles.${config.home.username}.isDefault = true;
-    };
-
-    ssh = {
-      enable = true;
-      enableDefaultConfig = false;
-      settings = {
-        "*" = {
-          AddKeysToAgent = "yes";
-        };
-        "rpi4" = {
-          HostName = "rpi4";
-          User = "rav";
-          ForwardAgent = true;
-        };
-      };
     };
   };
 }
