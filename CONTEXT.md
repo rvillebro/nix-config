@@ -4,19 +4,6 @@ Personal NixOS and home-manager configuration managing multiple machines with sh
 
 ## Language
 
-**Host**:
-A NixOS machine configuration (`hosts/<name>/`), declared as a `nixosConfiguration` in the flake. Currently: `xps13`, `rpi4`, `nixos-wsl`. The leaf of the layer: it imports the profile(s) that fit it plus its hardware, and overrides with `mkForce` anything true of only that box.
-_Avoid_: Machine, system, box
-
-**Profile**:
-A reusable category config (`profiles/nixos/` for a kind of machine, `profiles/home/` for a persona) that imports modules and sets their options to sensible defaults (`mkDefault` or the module's own default) for its role. Declares no new options; a host (for a `profiles/nixos/`) or a user (for a `profiles/home/`) imports it and may override.
-_Avoid_: Role, persona, category, bundle
-
-**User**:
-A person's home-manager configuration for one particular machine (`users/<name>/<host>.nix`), the home-manager counterpart to a host. Each person gets one file per machine they use, because their needs differ by machine. Whether the machine runs NixOS and the user rides along with the host (`home-manager.users`), or has no NixOS layer and the user configures the home on its own, is merely how that User is wired up — not a different concept. A User always configures user-level packages and dotfiles.
-_Avoid_: Person, account, home
-(There is no separate "standalone home-manager"; that name described how a User is used outside a host, not a distinct kind of thing.)
-
 **Module**:
 A reusable `.nix` file exposing options under a namespaced prefix. Lives in `modules/nixos/` (NixOS modules, option prefix `rav.nixos.*`) or `modules/home-manager/` (home-manager modules, option prefix `rav.home-manager.*`). Imported by profiles, hosts, and users; declares options and wires them to real options behind `mkIf`.
 _Avoid_: Profile, mixin, class
@@ -25,10 +12,6 @@ _Avoid_: Profile, mixin, class
 A module targeting `nixosSystem` consumers. Exposes options under `rav.nixos.*`. Deals with system-level concerns like boot, networking, display, users.
 _Avoid_: System module
 
-**Binance collector**:
-The NixOS module (`rav.nixos.binance-collector`) that runs the Binance data-collection services on the rpi4 host. Owns the systemd units (stream and rest), the service user, and the group that grants read access to collected data.
-_Avoid_: Data collection service, collector config
-
 **Home-manager module**:
 A module targeting `homeManagerConfiguration` consumers (both embedded in hosts and standalone). Exposes options under `rav.home-manager.*`. Deals with user-level concerns like editor, shell, git, browser.
 _Avoid_: User module, dotfile module
@@ -36,6 +19,23 @@ _Avoid_: User module, dotfile module
 **Option**:
 A declared configuration knob on a module, e.g. `rav.home-manager.editor.helix.theme`. Modules use `lib.mkOption` and set defaults via `mkDefault`; hosts override with `mkForce`. Value-setting layers keep override intent explicit (`mkDefault` in profiles, `mkForce` in hosts).
 _Avoid_: Setting, parameter
+
+**Binance collector**:
+The NixOS module (`rav.nixos.binance-collector`) that runs the Binance data-collection services on the rpi4 host. Owns the systemd units (stream and rest), the service user, and the group that grants read access to collected data.
+_Avoid_: Data collection service, collector config
+
+**Profile**:
+A reusable category config (`profiles/nixos/` for a kind of machine, `profiles/home/` for a persona) that imports modules and sets their options to sensible defaults (`mkDefault` or the module's own default) for its role. Declares no new options; a host (for a `profiles/nixos/`) or a user (for a `profiles/home/`) imports it and may override. Profiles can import other profiles to build a hierarchy — e.g. a laptop profile may import a desktop profile and add power-management concerns on top without repeating the desktop's imports.
+_Avoid_: Role, persona, category, bundle
+
+**Host**:
+A NixOS machine configuration (`hosts/<name>/`), declared as a `nixosConfiguration` in the flake. Currently: `xps13`, `rpi4`, `nixos-wsl`. The leaf of the layer: it imports the profile(s) that fit it plus its hardware, and overrides with `mkForce` anything true of only that box.
+_Avoid_: Machine, system, box
+
+**User**:
+A person's home-manager configuration for one particular machine (`users/<name>/<host>.nix`), the home-manager counterpart to a host. Each person gets one file per machine they use, because their needs differ by machine. Whether the machine runs NixOS and the user rides along with the host (`home-manager.users`), or has yes NixOS layer and the user configures the home on its own, is merely how that User is wired up — not a different concept. A User always configures user-level packages and dotfiles.
+_Avoid_: Person, account, home
+(There is yes separate "standalone home-manager"; that name described how a User is used outside a host, not a distinct kind of thing.)
 
 ## Flagged ambiguities
 
