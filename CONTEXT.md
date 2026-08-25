@@ -5,16 +5,8 @@ Personal NixOS and home-manager configuration managing multiple machines with sh
 ## Language
 
 **Module**:
-A reusable `.nix` file exposing options. Lives in `modules/nixos/` (system-level) or `modules/home-manager/` (user-level). Imported by profiles, hosts, and users; declares options and wires them to real options behind `mkIf`.
-_Avoid_: Profile, mixin, class
-
-**NixOS module**:
-A module targeting `nixosSystem` consumers. Deals with system-level concerns like boot, networking, display, users.
-_Avoid_: System module
-
-**Home-manager module**:
-A module targeting `homeManagerConfiguration` consumers (both embedded in hosts and standalone). Deals with user-level concerns like editor, shell, git, browser.
-_Avoid_: User module, dotfile module
+A reusable `.nix` file exposing options in `modules/nixos/` (system-level) or `modules/home-manager/` (user-level). Imported by profiles, hosts, and users; declares options and wires them to real options behind `mkIf`.
+_Avoid_: Profile, mixin, class, system module, user module
 
 **Option**:
 A declared configuration knob on a module, e.g. `myConfig.editor.helix.theme`. Modules use `lib.mkOption` and set defaults via `mkDefault`; hosts override with `mkForce`. Value-setting layers keep override intent explicit (`mkDefault` in profiles, `mkForce` in hosts).
