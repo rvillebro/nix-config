@@ -5,23 +5,23 @@ Personal NixOS and home-manager configuration managing multiple machines with sh
 ## Language
 
 **Module**:
-A reusable `.nix` file exposing options under a namespaced prefix. Lives in `modules/nixos/` (NixOS modules, option prefix `rav.nixos.*`) or `modules/home-manager/` (home-manager modules, option prefix `rav.home-manager.*`). Imported by profiles, hosts, and users; declares options and wires them to real options behind `mkIf`.
+A reusable `.nix` file exposing options. Lives in `modules/nixos/` (system-level) or `modules/home-manager/` (user-level). Imported by profiles, hosts, and users; declares options and wires them to real options behind `mkIf`.
 _Avoid_: Profile, mixin, class
 
 **NixOS module**:
-A module targeting `nixosSystem` consumers. Exposes options under `rav.nixos.*`. Deals with system-level concerns like boot, networking, display, users.
+A module targeting `nixosSystem` consumers. Deals with system-level concerns like boot, networking, display, users.
 _Avoid_: System module
 
 **Home-manager module**:
-A module targeting `homeManagerConfiguration` consumers (both embedded in hosts and standalone). Exposes options under `rav.home-manager.*`. Deals with user-level concerns like editor, shell, git, browser.
+A module targeting `homeManagerConfiguration` consumers (both embedded in hosts and standalone). Deals with user-level concerns like editor, shell, git, browser.
 _Avoid_: User module, dotfile module
 
 **Option**:
-A declared configuration knob on a module, e.g. `rav.home-manager.editor.helix.theme`. Modules use `lib.mkOption` and set defaults via `mkDefault`; hosts override with `mkForce`. Value-setting layers keep override intent explicit (`mkDefault` in profiles, `mkForce` in hosts).
+A declared configuration knob on a module, e.g. `myConfig.editor.helix.theme`. Modules use `lib.mkOption` and set defaults via `mkDefault`; hosts override with `mkForce`. Value-setting layers keep override intent explicit (`mkDefault` in profiles, `mkForce` in hosts).
 _Avoid_: Setting, parameter
 
 **Binance collector**:
-The NixOS module (`rav.nixos.binance-collector`) that runs the Binance data-collection services on the rpi4 host. Owns the systemd units (stream and rest), the service user, and the group that grants read access to collected data.
+The NixOS module that runs the Binance data-collection services on the rpi4 host. Owns the systemd units (stream and rest), the service user, and the group that grants read access to collected data.
 _Avoid_: Data collection service, collector config
 
 **Profile**:
