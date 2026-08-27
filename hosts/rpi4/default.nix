@@ -10,16 +10,17 @@
     ./configuration.nix
     ./virtualisation.nix
 
-    # Binance data-collection services (stream + rest), owned by the module
-    outputs.nixosModules.binance-collector
+    # Binance data-collection services (stream + rest), owned by the module.
+    # Imports the whole modules/nixos collection ({ imports = [ ... ] }).
+    outputs.nixosModules
 
     # Import your generated (nixos-generate-config) hardware configuration
     #./hardware-configuration.nix
   ];
 
-  # Binance data collection on the rpi4, via the rav.nixos.binance-collector
+  # Binance data collection on the rpi4, via the myConfig.binance-collector
   # module. Read access to collected data goes through `readers`.
-  rav.nixos.binance-collector = {
+  myConfig.binance-collector = {
     stream = {
       enable = true;
       configFile = ./binance/stream_config.json;
