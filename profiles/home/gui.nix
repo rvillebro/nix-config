@@ -1,8 +1,4 @@
-# GUI home persona: the desktop-only graphical toolset (xps13 only).
-#
-# Machine-independent, as derived from the old `hosts/xps13/home` tree. No
-# value here is set with `mkDefault` — this persona is a consumer leaf that a
-# user pulls in rather than a default that gets overridden.
+# GUI home profile: the desktop-only graphical toolset (xps13 only).
 {
   config,
   pkgs,
@@ -10,20 +6,16 @@
 }: {
   home = {
     packages = with pkgs; [
-      # image editor
       gimp
-      # password manager (desktop app)
       bitwarden-desktop
     ];
     sessionVariables = {
-      # set default applications
       BROWSER = "firefox";
       TERMINAL = "ghostty";
     };
   };
 
   programs = {
-    # --- editors (in addition to the shared Helix in the base persona) ---
     vscode = {
       enable = true;
       profiles.default = {
@@ -48,7 +40,6 @@
       ];
     };
 
-    # --- browser ---
     firefox = {
       enable = true;
       policies = {
@@ -148,8 +139,8 @@
                 }
               ];
             };
-            "google".metaData.alias = "@g"; # builtin engines only support specifying one additional alias
-            "ddg".metaData.hidden = true; # builtin engines only support specifying one additional alias
+            "google".metaData.alias = "@g";
+            "ddg".metaData.hidden = true;
             "bing".metaData.hidden = true;
             "wikipedia".metaData.hidden = true;
           };
@@ -157,7 +148,6 @@
       };
     };
 
-    # --- terminal + mail ---
     ghostty = {
       enable = true;
       enableBashIntegration = true;
