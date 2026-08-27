@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  cfg = config.rav.nixos.binance-collector;
+  cfg = config.myConfig.binance-collector;
 
   # Single unit builder generating both collector services from
   # (subcommand, config file, state-directory name). Preserves the
@@ -49,7 +49,7 @@
       };
   };
 in {
-  options.rav.nixos.binance-collector = {
+  options.myConfig.binance-collector = {
     stream = {
       enable = lib.mkEnableOption "the Binance WebSocket stream collector";
 
@@ -114,15 +114,15 @@ in {
       {
         assertion = !cfg.stream.enable || cfg.stream.configFile != null;
         message = ''
-          rav.nixos.binance-collector.stream.enable requires
-          rav.nixos.binance-collector.stream.configFile to be set.
+          myConfig.binance-collector.stream.enable requires
+          myConfig.binance-collector.stream.configFile to be set.
         '';
       }
       {
         assertion = !cfg.rest.enable || cfg.rest.configFile != null;
         message = ''
-          rav.nixos.binance-collector.rest.enable requires
-          rav.nixos.binance-collector.rest.configFile to be set.
+          myConfig.binance-collector.rest.enable requires
+          myConfig.binance-collector.rest.configFile to be set.
         '';
       }
     ];
