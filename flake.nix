@@ -112,5 +112,42 @@
         ];
       };
     };
+
+    # Standalone evaluation wrappers for each NixOS role profile, so the
+    # profiles/nixos/* leaves can be verified with `nix eval` on both arches
+    # independent of any host. This is the 'Seam B' check from spec #40: each
+    # profile is bundled as its own anonymous system and evaluated on the paths
+    # that prove its role placement.
+    nixosProfiles = let
+      lib = nixpkgs.lib;
+      # Minimal canonical host anchor so each role profile evaluates as a
+      # complete standalone system on both arches: `base` is a prerequisite for
+      # every host (rav account, overlays), and a root fs + bootloader +
+      # stateVersion satisfy NixOS' bootability assertions that a profile on its
+      # own would not.
+      anchor = {
+        boot.loader.grub.devices = ["/dev/sda"];
+        fileSystems."/" = {
+          device = "/dev/sda1";
+          fsType = "ext4";
+        };
+        system.stateVersion = "24.05";
+      };
+      probe = system: role:
+        lib.nixosSystem {
+          inherit system;
+          specialArgs = {inherit inputs outputs;};
+          modules = [./profiles/nixos/base.nix role anchor];
+        };
+      both = role: {
+        x86_64-linux = probe "x86_64-linux" role;
+        aarch64-linux = probe "aarch64-linux" role;
+      };
+    in {
+      base = both {};
+      desktop = both ./profiles/nixos/desktop.nix;
+      server = both ./profiles/nixos/server.nix;
+      media-server = both ./profiles/nixos/media-server.nix;
+    };
   };
 }
