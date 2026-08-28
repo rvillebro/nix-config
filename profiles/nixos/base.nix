@@ -1,8 +1,4 @@
-# Base NixOS role profile: the shared system baseline imported by every Host.
-# Drawn from the old hosts/common base + nix trees. Declares no options. Values
-# a host may plausibly vary (timezone, nix settings, gc schedule, overlays) are
-# set with `lib.mkDefault` so the host leaf can override without conflict;
-# uniform base facts are plain values.
+# Base NixOS profile: the shared system baseline for every Host.
 {
   outputs,
   inputs,
@@ -12,10 +8,6 @@
   ...
 }: {
   nixpkgs = {
-    # All overlays apply to every host (incl. rpi4/nixos-wsl) for parity with xps13.
-    # This is fine: `additions` only provides custom packages, `modifications` is
-    # currently empty, and `unstable-packages` merely exposes the pinned unstable
-    # channel as pkgs.unstable.
     overlays = lib.mkDefault [
       outputs.overlays.additions
       outputs.overlays.modifications
@@ -24,10 +16,8 @@
     config.allowUnfree = true;
   };
 
-  # Set your time zone (per-machine; hosts may choose differently).
   time.timeZone = lib.mkDefault "Europe/Copenhagen";
 
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_DK.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "da_DK.UTF-8";
@@ -41,18 +31,15 @@
     LC_TIME = "da_DK.UTF-8";
   };
 
-  # Configure console keymap
   console.keyMap = "dk-latin1";
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.rav = {
     isNormalUser = true;
     description = "Rasmus Villebro";
   };
 
-  # List packages installed in system profile.
-  # Note: left as a plain list, not mkDefault — environment.systemPackages has a
-  # non-empty built-in default, and list definitions concatenate at the leaf.
+  # Plain list, not mkDefault: environment.systemPackages has a non-empty
+  # built-in default, and list definitions concatenate at the leaf.
   environment.systemPackages = with pkgs; [
     neovim
     wget
@@ -62,16 +49,11 @@
     fastfetch
   ];
 
-  programs.nix-ld.enable = true; # run unpatched dynamic binaries on NixOS.
+  programs.nix-ld.enable = true;
 
-  # This will add each flake input as a registry
-  # To make nix3 commands consistent with your flake
-  # (Left as a plain value, not mkDefault: hosts layer additional registries on
-  # top of this attrset rather than override the whole set.)
+  # Plain value, not mkDefault: hosts layer additional registries onto the set.
   nix.registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
 
-  # This will additionally add your inputs to the system's legacy channels
-  # Making legacy nix commands consistent as well, awesome!
   nix.nixPath = ["/etc/nix/path"];
   environment.etc =
     lib.mapAttrs' (name: value: {
@@ -80,7 +62,6 @@
     })
     config.nix.registry;
 
-  # nix settings
   nix.settings = lib.mkDefault {
     experimental-features = "nix-command flakes";
     auto-optimise-store = true;
@@ -93,7 +74,7 @@
     ];
   };
 
-  # do garbage collection weekly to keep disk usage low
+  # weekly gc keeps disk usage low (hosts may tune the schedule)
   nix.gc = lib.mkDefault {
     automatic = true;
     dates = "weekly";

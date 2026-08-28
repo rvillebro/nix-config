@@ -1,13 +1,9 @@
-# Server NixOS role profile: openssh + podman/home-assistant posture (rpi4 only).
-# Drawn from the old hosts/rpi4/{default,virtualisation}.nix trees. `devenv` is
-# dropped (no longer a special-case extra). Declares no options; only the
-# firewall posture (the one thing a server host may vary) is `lib.mkDefault`.
+# Server NixOS profile: openssh + podman/home-assistant capability (rpi4 only).
 {
   pkgs,
   lib,
   ...
 }: {
-  # Remote access + the podman/home-assistant stack.
   services.openssh.enable = true;
 
   virtualisation = {
@@ -25,12 +21,10 @@
           "/etc/localtime:/etc/localtime:ro"
           "/run/dbus:/run/dbus:ro"
         ];
-        # Note: The image will not be updated on rebuilds, unless the version label changes
+        # The image is not updated on rebuilds unless the version label changes.
         image = "ghcr.io/home-assistant/home-assistant:stable";
         extraOptions = [
-          # Use the host network namespace for all sockets
           "--network=host"
-          # Pass devices into the container, so Home Assistant can discover and make use of them
           "--device=/dev/serial/by-id/usb-Itead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_V2_ce0109eb7c4bef11be56c2a079f42d1b-if00-port0:/dev/ttyACM0"
         ];
         serviceName = "home-assistant";
@@ -40,10 +34,8 @@
     };
   };
 
-  # Firewall posture: open everything for the broadly-host-networked containers.
-  # (Per-machine; a host may prefer a closed firewall with specific ports.)
+  # open posture for the host-networked containers (hosts may tighten it)
   networking.firewall.enable = lib.mkDefault false;
-  # networking.firewall.allowedTCPPorts = [ 8123 ];  # home assistant port
 
   systemd.timers.home-assistant-timer = {
     description = "Weekly home-assistant restart timer";

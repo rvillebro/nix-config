@@ -1,8 +1,5 @@
-# Media-server NixOS role profile: dormant, zero-consumer profile preserving the
-# shape-intent for a future headless box. All services are commented out; only
-# the shared `multimedia` group/user scaffold is active. Referenced by no host.
+# Media-server NixOS profile: dormant, zero-consumer scaffold for a future headless box.
 {pkgs, ...}: {
-  # A shared group/user for media downloads to land in (the one active fact).
   users.groups.multimedia = {};
   users.users.multimedia = {
     isSystemUser = true;
