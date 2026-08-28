@@ -1,7 +1,8 @@
 # Base NixOS role profile: the shared system baseline imported by every Host.
-# Drawn from the old hosts/common base + nix trees. Declares no options; every
-# value is set with `lib.mkDefault` so a host/user leaf can override without
-# conflict.
+# Drawn from the old hosts/common base + nix trees. Declares no options. Values
+# a host may plausibly vary (timezone, nix settings, gc schedule, overlays) are
+# set with `lib.mkDefault` so the host leaf can override without conflict;
+# uniform base facts are plain values.
 {
   outputs,
   inputs,
@@ -20,15 +21,15 @@
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
     ];
-    config.allowUnfree = lib.mkDefault true;
+    config.allowUnfree = true;
   };
 
-  # Set your time zone.
+  # Set your time zone (per-machine; hosts may choose differently).
   time.timeZone = lib.mkDefault "Europe/Copenhagen";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = lib.mkDefault "en_DK.UTF-8";
-  i18n.extraLocaleSettings = lib.mkDefault {
+  i18n.defaultLocale = "en_DK.UTF-8";
+  i18n.extraLocaleSettings = {
     LC_ADDRESS = "da_DK.UTF-8";
     LC_IDENTIFICATION = "da_DK.UTF-8";
     LC_MEASUREMENT = "da_DK.UTF-8";
@@ -41,7 +42,7 @@
   };
 
   # Configure console keymap
-  console.keyMap = lib.mkDefault "dk-latin1";
+  console.keyMap = "dk-latin1";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.rav = {
@@ -61,7 +62,7 @@
     fastfetch
   ];
 
-  programs.nix-ld.enable = lib.mkDefault true; # run unpatched dynamic binaries on NixOS.
+  programs.nix-ld.enable = true; # run unpatched dynamic binaries on NixOS.
 
   # This will add each flake input as a registry
   # To make nix3 commands consistent with your flake

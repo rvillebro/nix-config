@@ -1,8 +1,8 @@
 # Server NixOS role profile: openssh + podman/home-assistant posture (rpi4 only).
-# Drawn from the old hosts/rpi4/{default,virtualisation}.nix trees. Defaults are
-# set with `lib.mkDefault`; `devenv` is dropped (no longer a special-case extra).
+# Drawn from the old hosts/rpi4/{default,virtualisation}.nix trees. `devenv` is
+# dropped (no longer a special-case extra). Declares no options; only the
+# firewall posture (the one thing a server host may vary) is `lib.mkDefault`.
 {
-  config,
   pkgs,
   lib,
   ...
@@ -41,7 +41,8 @@
   };
 
   # Firewall posture: open everything for the broadly-host-networked containers.
-  networking.firewall.enable = false;
+  # (Per-machine; a host may prefer a closed firewall with specific ports.)
+  networking.firewall.enable = lib.mkDefault false;
   # networking.firewall.allowedTCPPorts = [ 8123 ];  # home assistant port
 
   systemd.timers.home-assistant-timer = {

@@ -2,14 +2,14 @@
 # The X11 wing, GNOME desktop + GDM, keymap/fonts, printing, and the
 # networking/wifi posture for the desktop box. Drawn from the old
 # hosts/xps13/{default,configuration}.nix trees. Hyprland and greetd were
-# dropped from the profile. Declares no options; values are set with
-# `lib.mkDefault` so the host leaf can override.
+# dropped from the profile. Declares no options; only the networking posture
+# (the one thing a desktop host may vary) is set with `lib.mkDefault`.
 {
   lib,
   pkgs,
   ...
 }: {
-  # Networking / wifi for the desktop laptop.
+  # Networking / wifi for the desktop laptop (a host may choose ethernet-only).
   networking.networkmanager.enable = lib.mkDefault true;
 
   programs.dconf.enable = true; # dconf settings for GNOME and other applications
