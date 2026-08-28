@@ -16,7 +16,7 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # special hardware confgurations
+    # special hardware configurations
     hardware.url = "github:nixos/nixos-hardware";
   };
 
@@ -27,6 +27,7 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
+    lib = import ./lib {inherit inputs nixpkgs home-manager outputs;};
     # Supported systems for your flake packages, shell, etc.
     systems = [
       "aarch64-linux"
@@ -51,65 +52,36 @@
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      xps13 = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
+      xps13 = lib.mkHost {
+        hostName = "xps13";
         system = "x86_64-linux";
-        modules = [
-          inputs.hardware.nixosModules.dell-xps-13-9370 # fix hardware quirks for XPS13
-          inputs.home-manager.nixosModules.home-manager
-          ./hosts/xps13
-        ];
+        module = ./hosts/xps13;
+        users = {rav = ./users/rav/xps13.nix;};
       };
-      rpi4 = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
+      rpi4 = lib.mkHost {
+        hostName = "rpi4";
         system = "aarch64-linux";
-        modules = [
-          inputs.hardware.nixosModules.raspberry-pi-4 # fix hardware quirks for Raspberry Pi 4
-          inputs.home-manager.nixosModules.home-manager
-          ./hosts/rpi4
-        ];
+        module = ./hosts/rpi4;
+        users = {rav = ./users/rav/rpi4.nix;};
       };
-      nixos-wsl = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
+      nixos-wsl = lib.mkHost {
+        hostName = "nixos-wsl";
         system = "x86_64-linux";
-        modules = [
-          inputs.nixos-wsl.nixosModules.wsl
-          inputs.home-manager.nixosModules.home-manager
-          ./hosts/nixos-wsl
-        ];
+        module = ./hosts/nixos-wsl;
+        users = {rav = ./users/rav/nixos-wsl.nix;};
       };
     };
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
-      "rav@work" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ./home/common/nix.nix
-          ./home/rav-at-work
-        ];
+      "rav@home" = lib.mkHome {
+        system = "x86_64-linux";
+        modules = [./users/rav/home.nix];
       };
-      "rav@home" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ({...}: {
-            nix.settings = {
-              extra-substituters = [
-                "https://cache.numtide.com"
-                "https://cache.nixos-cuda.org"
-              ];
-              extra-trusted-public-keys = [
-                "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
-                "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
-              ];
-            };
-          })
-          ./home/common/nix.nix
-          ./home/rav-at-home
-        ];
+      "rav@work" = lib.mkHome {
+        system = "x86_64-linux";
+        modules = [./users/rav/work.nix];
       };
     };
   };

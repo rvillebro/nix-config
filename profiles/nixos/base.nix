@@ -8,7 +8,10 @@
   ...
 }: {
   nixpkgs = {
-    overlays = lib.mkDefault [
+    # Plain list, not mkDefault: overlays is a list option whose definitions
+    # concatenate, so a host leaf can append (e.g. nur on xps13) without
+    # dropping the shared set.
+    overlays = [
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
