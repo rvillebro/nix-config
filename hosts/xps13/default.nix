@@ -8,7 +8,6 @@
     ../../profiles/nixos/media-server.nix # dormant, zero-consumer
   ];
 
-  # Bootloader.
   boot = {
     loader = {
       systemd-boot.enable = true;
@@ -20,7 +19,6 @@
     kernelParams = ["quiet" "udev.log_level=0"];
   };
 
-  # Networking.
   networking = {
     hostName = "xps13";
     networkmanager.enable = true;
@@ -34,9 +32,5 @@
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It's perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
   system.stateVersion = "24.05";
 }

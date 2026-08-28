@@ -1,11 +1,9 @@
-# nixos-wsl host leaf: imports the base profile + WSL glue. Stays named
-# `nixos-wsl` (renaming deferred); keeps only WSL facts and per-box overrides.
+# nixos-wsl host leaf: imports the base profile + WSL glue.
 {...}: {
   imports = [
     ../../profiles/nixos/base.nix
   ];
 
-  # Extend the shared user account definition.
   users.users.rav.extraGroups = ["wheel"];
 
   wsl = {
