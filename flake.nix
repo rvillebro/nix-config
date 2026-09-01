@@ -38,7 +38,8 @@
     ];
     forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
-    packages = forAllSystems (system: let pkgSet = import ./pkgs {pkgs = nixpkgs.legacyPackages.${system};}; in nixpkgs.lib.filterAttrs (_: v: nixpkgs.lib.isDerivation v) pkgSet);
+    # packages = forAllSystems (system: let pkgSet = import ./pkgs {pkgs = nixpkgs.legacyPackages.${system};}; in nixpkgs.lib.filterAttrs (_: v: nixpkgs.lib.isDerivation v) pkgSet);
+    packages = forAllSystems (system: import ./pkgs {pkgs = nixpkgs.legacyPackages.${system};});
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
     overlays = import ./overlays {inherit inputs;};
 

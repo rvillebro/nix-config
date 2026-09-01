@@ -3,7 +3,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   home.packages = with pkgs; [
     glab
   ];
@@ -12,6 +13,17 @@
     rclone.enable = true;
     awscli.enable = true;
     git.settings.user.email = "rav@evaxion.ai";
+
+    zed-editor = {
+      enable = true;
+      extensions = [
+        "nix"
+      ];
+      extraPackages = with pkgs; [
+        nixd
+        nil
+      ];
+    };
 
     ssh = {
       enable = true;
