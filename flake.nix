@@ -84,6 +84,14 @@
         system = "x86_64-linux";
         modules = [./users/rav/work.nix];
       };
+      "rav@work-server-cpu" = lib.mkHome {
+        system = "x86_64-linux";
+        modules = [./users/rav/work-server-cpu.nix];
+      };
+      "rav@work-server-gpu" = lib.mkHome {
+        system = "x86_64-linux";
+        modules = [./users/rav/work-server-gpu.nix];
+      };
     };
   };
 }
