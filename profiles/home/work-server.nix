@@ -4,11 +4,6 @@
   pkgs,
   ...
 }: {
-  imports = [
-    ./base.nix
-    ./dev.nix
-  ];
-
   home.packages = with pkgs; [
     glab
   ];

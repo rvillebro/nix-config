@@ -17,7 +17,7 @@ The NixOS module that runs the Binance data-collection services on the rpi4 host
 _Avoid_: Data collection service, collector config
 
 **Profile**:
-A reusable category config (`profiles/nixos/` for a kind of machine, `profiles/home/` for a persona) that imports modules and sets their options to sensible defaults (`mkDefault` or the module's own default) for its role. Declares no new options; a host (for a `profiles/nixos/`) or a user (for a `profiles/home/`) imports it and may override. Profiles can import other profiles to build a hierarchy — e.g. a laptop profile may import a desktop profile and add power-management concerns on top without repeating the desktop's imports.
+A reusable category config (`profiles/nixos/` for a kind of machine, `profiles/home/` for a persona) that imports modules and sets their options to sensible defaults (`mkDefault` or the module's own default) for its role. Declares no new options; a host (for a `profiles/nixos/`) or a user (for a `profiles/home/`) imports it and may override. Profiles never import other profiles — the leaf (host or user) lists every profile it imports, so its `imports` list is a complete inventory of what is pulled in.
 _Avoid_: Role, persona, category, bundle
 
 **Host**:
@@ -34,7 +34,7 @@ _Avoid_: Person, account, home
 - **"Configuration"** can refer to the entire repo, a host's `default.nix`, or a module's option set. Prefer the specific term (Host, Profile, Module, Option) over the generic "configuration."
 - **"Profile"** here means a reusable config class (`profiles/nixos/`, `profiles/home/`), not a User. The configs that already exist (under `users/rav-*/` or via people) are all Users, never Profiles — a User wired to run without a host is still a User, don't call it one.
 - **"Standalone"** describes how a User is wired (no host), not a distinct concept. There is no `standalone home-manager` term; it was removed as a duplicate of User.
-- **Layering** — values flow downward through the layers. Nothing above a host imports a host; nothing above a profile imports a profile. Modules only declare; profiles and users set `mkDefault`; hosts override with `mkForce`.
+- **Layering** — values flow downward through the layers. Nothing above a host imports a host; nothing above a profile imports a profile. Profiles never import profiles (see ADR 0003) — only leaves (hosts/users) compose profiles. Modules only declare; profiles and users set `mkDefault`; hosts override with `mkForce`.
   _The repo is not yet organised into `modules/ -> profiles/ -> hosts/` + `users/`; this vocabulary describes that target shape, not the current directory layout._
 
 ## Example dialogue

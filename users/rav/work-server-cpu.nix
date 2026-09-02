@@ -2,6 +2,8 @@
 {
   imports = [
     ./nix.nix
-    ../../profiles/home/work-server-cpu.nix
+    ../../profiles/home/base.nix
+    ../../profiles/home/dev.nix
+    ../../profiles/home/work-server.nix
   ];
 }

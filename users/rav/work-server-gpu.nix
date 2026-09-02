@@ -2,6 +2,12 @@
 {
   imports = [
     ./nix.nix
-    ../../profiles/home/work-server-gpu.nix
+    ../../profiles/home/base.nix
+    ../../profiles/home/dev.nix
+    ../../profiles/home/work-server.nix
+  ];
+
+  home.packages = with pkgs; [
+    nvtopPackages.full
   ];
 }
