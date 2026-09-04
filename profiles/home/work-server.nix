@@ -4,9 +4,15 @@
   pkgs,
   ...
 }: {
-  home.packages = with pkgs; [
-    glab
-  ];
+  home = {
+    packages = with pkgs; [
+      glab
+    ];
+    shellAliases = {
+      wd = "cd /work/$USER";
+      pd = "cd /people/$USER";
+    };
+  };
 
   programs = {
     rclone.enable = true;
@@ -17,7 +23,7 @@
       enable = true;
       settings = {
         "*" = {
-          IdentityFile = "${config.home.homeDirectory}/.ssh/id_ed25519";
+          IdentityFile = "${config.home.homeDirectory}/.ssh/rav-servers";
           AddKeysToAgent = "yes";
         };
       };

@@ -1,5 +1,5 @@
 # Standalone User leaf for rav@work-server-gpu.
-{
+{pkgs, ...}: {
   imports = [
     ./nix.nix
     ../../profiles/home/base.nix
