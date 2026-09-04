@@ -2,7 +2,7 @@
 {pkgs, ...}: let
   mattpocock-skills = builtins.fetchGit {
     url = "https://github.com/mattpocock/skills.git";
-    rev = "d574778f94cf620fcc8ce741584093bc650a61d3";
+    rev = "6acc160e4e0cd062dbbbd7a1b26ae92855edf07e";
   };
 in {
   home = {
