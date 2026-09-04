@@ -13,6 +13,18 @@ in {
       unstable.pi-coding-agent
     ];
     file = {
+      # pi settings: default model + scoped models for Ctrl+P cycling.
+      # Declarative: edits made inside pi (/settings) are overwritten on switch.
+      ".pi/agent/settings.json".text = builtins.toJSON {
+        defaultProvider = "openrouter";
+        defaultModel = "z-ai/glm-5.3-flash";
+        defaultThinkingLevel = "high";
+        enabledModels = [
+          "z-ai/glm-*"
+          "anthropic/claude-*"
+          "openai/gpt-*"
+        ];
+      };
       ".pi/agent/skills/mattpocock-skills" = {
         source = "${mattpocock-skills}/skills";
         recursive = true;
