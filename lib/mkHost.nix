@@ -1,45 +1,20 @@
 # Build a NixOS Host configuration from its thin leaf (hosts/<name>).
-#
-# `hostName` picks the host-integration module for that box among the NixOS
-# hardware quirks (dell-xps / raspberry-pi-4) or the NixOS-WSL glue (wsl).
-# `module` is the host leaf directory; `users` optionally wires home-manager
-# Users as `home-manager.users.<name>`, each pointing at the User's leaf
-# (users/<person>/<host>.nix). Hosts may instead declare their own Users and
-# hardware imports directly in their leaf (see hosts/xps13) — wiring that is
-# still centralized here is shared via modules/nixos/home-manager-wiring.nix.
+# Host leaves declare their own Users and import their own hardware/glue
+# modules (see hosts/xps13), so what remains is bare wiring: the shared
+# home-manager glue (modules/nixos/home-manager-wiring.nix) plus the leaf.
 {
   inputs,
   outputs,
   nixpkgs,
 }: {
-  hostName,
   system,
   module,
-  users ? {},
-}: let
-  # Chosen host input: hardware quirks module or WSL glue for this box.
-  hostInput =
-    {
-      rpi4 = inputs.hardware.nixosModules.raspberry-pi-4;
-      nixos-wsl = inputs.nixos-wsl.nixosModules.wsl;
-    }
-    .${
-      hostName
-    };
-
-  # Turn the users map ({ rav = ./users/rav/xps13.nix }) into a module wiring
-  # `home-manager.users.rav = import ./users/rav/xps13.nix`.
-  userWiring = {
-    home-manager.users = nixpkgs.lib.mapAttrs (_: path: import path) users;
-  };
-in
-  nixpkgs.lib.nixosSystem {
-    inherit system;
-    specialArgs = {inherit inputs outputs;};
-    modules = [
-      ../modules/nixos/home-manager-wiring.nix
-      hostInput
-      module
-      userWiring
-    ];
-  }
+}:
+nixpkgs.lib.nixosSystem {
+  inherit system;
+  specialArgs = {inherit inputs outputs;};
+  modules = [
+    ../modules/nixos/home-manager-wiring.nix
+    module
+  ];
+}

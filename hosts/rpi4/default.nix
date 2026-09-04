@@ -1,15 +1,22 @@
-# rpi4 host leaf: imports the server profile + hardware; keeps the binance
-# module wiring and the handful of plain per-box overrides true of this box.
+# rpi4 host leaf: the complete inventory of the machine — its profiles, its
+# hardware, and the Users it declares — plus the binance module wiring and the
+# handful of plain per-box overrides true of this box.
 {
+  inputs,
   pkgs,
   outputs,
   ...
 }: {
   imports = [
+    ../../modules/nixos/home-manager-wiring.nix
+    inputs.hardware.nixosModules.raspberry-pi-4
     ../../profiles/nixos/base.nix
     ../../profiles/nixos/server.nix
     outputs.nixosModules
   ];
+
+  # Declared Users: rav's home-manager configuration for this machine.
+  home-manager.users.rav = import ../../users/rav/rpi4.nix;
 
   myConfig.binance-collector = {
     stream = {

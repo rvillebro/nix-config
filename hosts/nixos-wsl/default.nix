@@ -1,8 +1,14 @@
-# nixos-wsl host leaf: imports the base profile + WSL glue.
-{...}: {
+# nixos-wsl host leaf: the complete inventory of the machine — its profile,
+# its WSL glue, and the User it declares.
+{inputs, ...}: {
   imports = [
+    ../../modules/nixos/home-manager-wiring.nix
+    inputs.nixos-wsl.nixosModules.wsl
     ../../profiles/nixos/base.nix
   ];
+
+  # Declared Users: rav's home-manager configuration for this machine.
+  home-manager.users.rav = import ../../users/rav/nixos-wsl.nix;
 
   users.users.rav.extraGroups = ["wheel"];
 
