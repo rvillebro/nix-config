@@ -53,11 +53,11 @@
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      xps13 = lib.mkHost {
-        hostName = "xps13";
+      # xps13 declares its own Users and hardware imports in its leaf.
+      xps13 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        module = ./hosts/xps13;
-        users = {rav = ./users/rav/xps13.nix;};
+        specialArgs = {inherit inputs outputs;};
+        modules = [./hosts/xps13];
       };
       rpi4 = lib.mkHost {
         hostName = "rpi4";
