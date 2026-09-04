@@ -21,8 +21,10 @@ in {
         defaultThinkingLevel = "high";
         enabledModels = [
           "z-ai/glm-*"
+          "deepseek/deepseek-*"
           "anthropic/claude-*"
           "openai/gpt-*"
+          "google/gemini-*"
         ];
       };
       ".pi/agent/skills/mattpocock-skills" = {
