@@ -4,21 +4,17 @@
 
 GitHub Issues (uses the `gh` CLI). See `docs/agents/issue-tracker.md`.
 
-The `gh` CLI is available in this environment and should be used for all GitHub interactions — viewing, listing, creating,
-commenting on, labelling, and closing issues, as well as PRs (`gh pr create`, `gh pr list`).
-
 ### Triage labels
 
 Default canonical labels (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
 
 ### Domain docs
 
-Single-context — `CONTEXT.md` and `docs/adr/` at the repo root. See `docs/agents/domain.md`.
+Single-context; `CONTEXT.md` and `docs/adr/` at the repo root. See `docs/agents/domain.md`.
 
 ### Formatting
 
-The flake's `formatter` output is alejandra; `nix fmt` runs it. Always point it at files (or `.` for the
-whole repo) — with no args it reads stdin and fails:
+The flake's `formatter` output is alejandra; `nix fmt` runs it. Always point it at files (or `.` for the whole repo), with no args it reads stdin and fails:
 
 ```
 nix fmt -- --check <files>   # verify (list files, or `.` for everything)
