@@ -29,7 +29,8 @@ nix-config/
 ├── flake.nix
 ├── flake.lock
 ├── lib/
-│   └── default.nix              # helper functions (mkHost, mkHome, ...)
+│   ├── default.nix              # helper functions (mkHome, ...)
+│   └── mkHome.nix               # standalone home-manager builder
 ├── modules/
 │   ├── nixos/                   # system-level option-declaring modules
 │   │   ├── networking.nix
@@ -374,53 +375,19 @@ values with `mkDefault`; **hosts** set values plainly, and reach for
 
 ---
 
-## 7. Optional: cutting boilerplate with a `lib/mkHost` helper
+## 7. Why there is no `lib/mkHost` helper
 
 Once you have more than 2–3 hosts, the repeated `nixpkgs.lib.nixosSystem { ... }`
-blocks in `flake.nix` get tedious. A small helper collapses them:
+blocks in `flake.nix` can be tempting to collapse into a `mkHost` helper that
+takes a host name, a list of users, and wires everything up. Resist it for
+hosts: a helper becomes a layer between the flake and the host leaf where
+wiring can hide — which users live on a machine, which hardware module it
+needs, which shared settings apply — so reading the leaf no longer tells you
+what the machine pulls in. Bare `nixosSystem` calls with `system`,
+`specialArgs`, and the leaf (see section 4) keep the flake a boring registry,
+and the host leaf remains the complete inventory of the machine.
 
-```nix
-# lib/default.nix
-{ nixpkgs, home-manager, inputs }:
-{
-  mkHost = { hostName, system ? "x86_64-linux", users ? { } }:
-    nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = { inherit inputs; };
-      modules = [
-        ../hosts/${hostName}
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = { inherit inputs; };
-          home-manager.users = builtins.mapAttrs
-            (name: path: import path)
-            users;
-        }
-      ];
-    };
-}
-```
-
-```nix
-# flake.nix (excerpt)
-let
-  myLib = import ./lib { inherit (inputs) nixpkgs home-manager; inherit inputs; };
-in
-{
-  nixosConfigurations.laptop1 = myLib.mkHost {
-    hostName = "laptop1";
-    users.me = ../users/me/laptop1.nix;
-  };
-  nixosConfigurations.server1 = myLib.mkHost {
-    hostName = "server1";
-    users.me = ../users/me/server1.nix;
-  };
-}
-```
-
-This is entirely optional — plenty of real-world repos never bother and
-just keep the `nixosConfigurations` block explicit. Add it only once the
-duplication actually bothers you; premature abstraction here just adds a
-layer of indirection to debug later.
+A `lib/` helper still earns its keep for standalone home-manager
+configurations: `lib/mkHome.nix` wraps
+`home-manager.lib.homeManagerConfiguration` with the shared `pkgs` and
+`extraSpecialArgs`, and that wiring never grows beyond it.

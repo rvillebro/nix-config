@@ -1,8 +1,8 @@
 # Shared home-manager wiring for NixOS Hosts: the HM NixOS module import plus
 # the settings every Host needs for its declared Users (global pkgs, user
 # packages, backup-file handling, specialArgs). Wiring glue, not a capability
-# module — imported explicitly by `lib/mkHost.nix` and by Host leaves (which
-# declare their Users via `home-manager.users.<name>`); deliberately not part
+# module — imported explicitly by every Host leaf (which declares its
+# Users via `home-manager.users.<name>`); deliberately not part
 # of the exported `modules/nixos` collection.
 {
   inputs,
