@@ -34,7 +34,6 @@ _Avoid_: Person, account, home
 - **"Profile"** here means a reusable config class (`profiles/nixos/`, `profiles/home/`), not a User. The configs that already exist (under `users/rav-*/` or via people) are all Users, never Profiles — a User wired to run without a host is still a User, don't call it one.
 - **"Standalone"** describes how a User is wired (no host), not a distinct concept. There is no `standalone home-manager` term; it was removed as a duplicate of User.
 - **Layering** — the repo is one chain, not a tree: modules ← profiles ← users ← hosts. Values flow downward through the layers. Profiles never import profiles (see ADR 0003) — only Users and Hosts compose profiles. Users are the flex point: a Host declares its Users in its own leaf, or the flake exposes the User directly (standalone home), making the User the leaf. Modules only declare; every layer sets plain values and reaches for `mkDefault`/`mkForce` only to express override intent (see Option).
-  _The Host-declares-Users wiring still lives in the flake (`mkHost`'s `users` param), not yet in the host leaves; this vocabulary describes the target shape._
 
 ## Example dialogue
 
