@@ -1,12 +1,18 @@
-# xps13 host leaf: imports the desktop profile + its hardware; keeps only the
-# hardware facts and the handful of plain per-box overrides true of this box.
+# xps13 host leaf: the complete inventory of the machine — its profiles, its
+# hardware, and the Users it declares — plus the handful of plain per-box
+# overrides true of only this box.
 {inputs, ...}: {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/nixos/home-manager-wiring.nix
+    inputs.hardware.nixosModules.dell-xps-13-9370
     ../../profiles/nixos/base.nix
     ../../profiles/nixos/desktop.nix
     ../../profiles/nixos/media-server.nix # dormant, zero-consumer
   ];
+
+  # Declared Users: rav's home-manager configuration for this machine.
+  home-manager.users.rav = import ../../users/rav/xps13.nix;
 
   boot = {
     loader = {

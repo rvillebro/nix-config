@@ -4,7 +4,9 @@
 # hardware quirks (dell-xps / raspberry-pi-4) or the NixOS-WSL glue (wsl).
 # `module` is the host leaf directory; `users` optionally wires home-manager
 # Users as `home-manager.users.<name>`, each pointing at the User's leaf
-# (users/<person>/<host>.nix).
+# (users/<person>/<host>.nix). Hosts may instead declare their own Users and
+# hardware imports directly in their leaf (see hosts/xps13) — wiring that is
+# still centralized here is shared via modules/nixos/home-manager-wiring.nix.
 {
   inputs,
   outputs,
@@ -18,7 +20,6 @@
   # Chosen host input: hardware quirks module or WSL glue for this box.
   hostInput =
     {
-      xps13 = inputs.hardware.nixosModules.dell-xps-13-9370;
       rpi4 = inputs.hardware.nixosModules.raspberry-pi-4;
       nixos-wsl = inputs.nixos-wsl.nixosModules.wsl;
     }
@@ -31,31 +32,13 @@
   userWiring = {
     home-manager.users = nixpkgs.lib.mapAttrs (_: path: import path) users;
   };
-
-  # Shared home-manager wiring for NixOS Hosts (same for every host).
-  homeManagerWiring = {
-    home-manager = {
-      useGlobalPkgs = true;
-      useUserPackages = true;
-      backupFileExtension = "homeManagerBackupFileExtension";
-      extraSpecialArgs = {inherit inputs outputs;};
-    };
-
-    # Clean up leftover home-manager backup files (matching backupFileExtension
-    # above). The glob only matches files HM created under that extension, so it
-    # never removes unrelated user files.
-    system.userActivationScripts.removeHomeManagerBackupFiles.text = ''
-      find ~ -type f -name "*.homeManagerBackupFileExtension" -delete
-    '';
-  };
 in
   nixpkgs.lib.nixosSystem {
     inherit system;
     specialArgs = {inherit inputs outputs;};
     modules = [
-      inputs.home-manager.nixosModules.home-manager
+      ../modules/nixos/home-manager-wiring.nix
       hostInput
-      homeManagerWiring
       module
       userWiring
     ];
