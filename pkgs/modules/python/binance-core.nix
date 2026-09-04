@@ -7,7 +7,6 @@
   pytest-asyncio,
   crypticSrc,
 }:
-
 buildPythonPackage rec {
   pname = "binance-core";
   version = "0.1.0";

@@ -7,7 +7,6 @@
   pytest-asyncio,
   crypticSrc,
 }:
-
 buildPythonPackage rec {
   pname = "sd-notify";
   version = "0.1.0";

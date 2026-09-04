@@ -65,7 +65,7 @@
     })
     config.nix.registry;
 
-  nix.settings = lib.mkDefault {
+  nix.settings = {
     experimental-features = "nix-command flakes";
     auto-optimise-store = true;
     trusted-users = ["rav"];
@@ -78,7 +78,7 @@
   };
 
   # weekly gc keeps disk usage low (hosts may tune the schedule)
-  nix.gc = lib.mkDefault {
+  nix.gc = {
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 7d";

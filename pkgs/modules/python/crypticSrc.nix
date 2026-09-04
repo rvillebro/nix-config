@@ -1,4 +1,4 @@
-{ }:
+{}:
 builtins.fetchGit {
   url = "git@github.com:rvillebro/cryptic.git";
   ref = "main";
