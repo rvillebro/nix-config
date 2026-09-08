@@ -7,6 +7,8 @@
     ../../profiles/home/work-server.nix
   ];
 
+  targets.genericLinux.enable = true;
+
   home.packages = with pkgs; [
     nvtopPackages.full
   ];

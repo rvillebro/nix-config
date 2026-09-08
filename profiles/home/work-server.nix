@@ -9,8 +9,6 @@
       glab
     ];
     shellAliases = {
-      wd = "cd /work/$USER";
-      pd = "cd /people/$USER";
       sstate = "sinfo -Np any --Format NodeHost,AllocMem,Memory,CPUsState,GRES:25,GRESUSED:35,STATELONG";
     };
   };
@@ -50,8 +48,77 @@
         fi
       }
     '';
+    # pd/wd: jump to a directory under /people/<user> or /work/<user>. The
+    # optional argument is a path relative to that base; an absolute path is
+    # used as-is; no argument returns to the base directory itself. Tab
+    # completes directories relative to the base.
+    baseCd = ''
+      # Shared implementation for pd and wd
+      __basecd() {
+        local base="$1" name="$2"
+        shift 2
+        if [ "$#" -gt 1 ]; then
+          echo "Usage: $name [path]"
+          return 1
+        fi
+        if [ "$#" -eq 0 ]; then
+          cd "$base" || return 1
+        elif [[ "$1" == /* ]]; then
+          cd "$1" || return 1
+        else
+          cd "$base/$1" || return 1
+        fi
+      }
+
+      pd() {
+        __basecd "/people/$USER" pd "$@"
+      }
+
+      wd() {
+        __basecd "/work/$USER" wd "$@"
+      }
+
+      # Directory-path completion relative to a base directory ($1) for the
+      # word being completed ($2). Suggests directories only, building the
+      # relative path level by level; absolute words are completed as-is.
+      __basecd_compgen() {
+        local base="$1" word="$2" root stem m
+        if [[ "$word" == /* ]]; then
+          # Absolute word: list against the filesystem, reply with full paths
+          root="''${word%/*}"
+          root="''${root%/}"
+          [ -z "$root" ] && root="/"
+          stem="''${word##*/}"
+          [ -d "$root" ] || return 0
+          while IFS= read -r m; do
+            COMPREPLY+=("$m/")
+          done < <(compgen -d -- "''${root%/}/$stem" 2>/dev/null)
+        else
+          # Relative word: list against the base, reply with base-relative paths
+          if [[ "$word" == */ ]]; then
+            root="$base/''${word%/}"
+            stem=""
+          elif [[ "$word" == */* ]]; then
+            root="$base/''${word%/*}"
+            stem="''${word##*/}"
+          else
+            root="$base"
+            stem="$word"
+          fi
+          [ -d "$root" ] || return 0
+          while IFS= read -r m; do
+            COMPREPLY+=("''${m#"$base"/}/")
+          done < <(compgen -d -- "$root/$stem" 2>/dev/null)
+        fi
+      }
+
+      _pd_complete() { __basecd_compgen "/people/$USER" "$2"; }
+      _wd_complete() { __basecd_compgen "/work/$USER" "$2"; }
+      complete -o nospace -F _pd_complete pd
+      complete -o nospace -F _wd_complete wd
+    '';
   in
-    slurmView "sout" "StdOut" + slurmView "serr" "StdErr";
+    slurmView "sout" "StdOut" + slurmView "serr" "StdErr" + baseCd;
 
   programs = {
     rclone.enable = true;

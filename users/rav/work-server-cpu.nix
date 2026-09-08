@@ -6,4 +6,6 @@
     ../../profiles/home/dev.nix
     ../../profiles/home/work-server.nix
   ];
+
+  targets.genericLinux.enable = true;
 }
