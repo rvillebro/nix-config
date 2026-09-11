@@ -11,7 +11,14 @@
     ../../profiles/nixos/media-server.nix # dormant, zero-consumer
   ];
 
-  # Declared Users: rav's home-manager configuration for this machine.
+  nix.settings.trusted-users = ["rav"];
+
+  # Declared Users: rav, at the system level and via home-manager.
+  users.users.rav = {
+    isNormalUser = true;
+    description = "Rasmus Villebro";
+    extraGroups = ["networkmanager" "wheel"];
+  };
   home-manager.users.rav = import ../../users/rav/xps13.nix;
 
   boot = {
@@ -22,7 +29,10 @@
     plymouth.enable = true;
     initrd.verbose = false;
     consoleLogLevel = 0;
-    kernelParams = ["quiet" "udev.log_level=0"];
+    kernelParams = [
+      "quiet"
+      "udev.log_level=0"
+    ];
   };
 
   networking = {

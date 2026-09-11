@@ -15,8 +15,15 @@
     outputs.nixosModules
   ];
 
-  # Declared Users: rav's home-manager configuration for this machine.
+  # Declared Users: rav, at the system level and via home-manager.
+  users.users.rav = {
+    isNormalUser = true;
+    description = "Rasmus Villebro";
+    extraGroups = ["wheel"];
+  };
   home-manager.users.rav = import ../../users/rav/rpi4.nix;
+
+  nix.settings.trusted-users = ["rav"];
 
   myConfig.binance-collector = {
     stream = {
@@ -29,8 +36,6 @@
     };
     readers = ["rav"];
   };
-
-  users.users.rav.extraGroups = ["wheel"];
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
