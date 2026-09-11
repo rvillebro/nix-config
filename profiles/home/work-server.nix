@@ -1,9 +1,5 @@
 # Shared work server home profile: the work-only toolset for all work servers.
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home = {
     packages = with pkgs; [
       glab
@@ -123,13 +119,11 @@
   programs = {
     rclone.enable = true;
     awscli.enable = true;
-    git.settings.user.email = "rav@evaxion.ai";
 
     ssh = {
       enable = true;
       settings = {
         "*" = {
-          IdentityFile = "${config.home.homeDirectory}/.ssh/rav-servers";
           AddKeysToAgent = "yes";
         };
       };

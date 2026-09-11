@@ -1,15 +1,10 @@
 # Base home profile: the shared, person-level baseline for every User.
 {
-  lib,
   config,
   pkgs,
   ...
 }: {
   home = {
-    username = lib.mkDefault "rav";
-    homeDirectory = lib.mkDefault "/home/rav";
-    stateVersion = lib.mkDefault "25.11";
-
     packages = with pkgs; [
       zip
       unzip
@@ -88,13 +83,7 @@
       ];
     };
 
-    git = {
-      enable = true;
-      settings = {
-        user.name = "Rasmus Villebro";
-        user.email = lib.mkDefault "rasmus-villebro@hotmail.com";
-      };
-    };
+    git.enable = true;
 
     ssh = {
       enable = true;

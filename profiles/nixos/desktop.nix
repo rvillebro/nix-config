@@ -34,8 +34,6 @@
     pulse.enable = true;
   };
 
-  users.users.rav.extraGroups = ["networkmanager" "wheel"];
-
   environment.gnome.excludePackages = with pkgs; [
     gnome-tour
     gnome-console

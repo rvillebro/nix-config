@@ -7,10 +7,15 @@
     ../../profiles/nixos/base.nix
   ];
 
-  # Declared Users: rav's home-manager configuration for this machine.
+  # Declared Users: rav, at the system level and via home-manager.
+  users.users.rav = {
+    isNormalUser = true;
+    description = "Rasmus Villebro";
+    extraGroups = ["wheel"];
+  };
   home-manager.users.rav = import ../../users/rav/nixos-wsl.nix;
 
-  users.users.rav.extraGroups = ["wheel"];
+  nix.settings.trusted-users = ["rav"];
 
   wsl = {
     enable = true;

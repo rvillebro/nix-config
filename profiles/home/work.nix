@@ -1,9 +1,5 @@
 # Work home profile: the work-only toolset (rav@work standalone only).
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = with pkgs; [
     glab
   ];
@@ -11,7 +7,6 @@
   programs = {
     rclone.enable = true;
     awscli.enable = true;
-    git.settings.user.email = "rav@evaxion.ai";
 
     zed-editor = {
       enable = true;
@@ -28,7 +23,6 @@
       enable = true;
       settings = {
         "*" = {
-          IdentityFile = "${config.home.homeDirectory}/.ssh/id_ed25519";
           AddKeysToAgent = "yes";
         };
         "utopia-1" = {

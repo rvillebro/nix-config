@@ -17,15 +17,15 @@ The NixOS module that runs the Binance data-collection services on the rpi4 host
 _Avoid_: Data collection service, collector config
 
 **Profile**:
-A reusable category config (`profiles/nixos/` for a kind of machine, `profiles/home/` for a persona) that imports modules and sets their options to sensible defaults for its role — plain values, or `mkDefault` where a leaf is expected to override. Declares no new options; a host (for a `profiles/nixos/`) or a user (for a `profiles/home/`) imports it and may override. Profiles never import other profiles — the leaf (host or user) lists every profile it imports, so its `imports` list is a complete inventory of what is pulled in.
+A reusable category config (`profiles/nixos/` for a kind of machine, `profiles/home/` for a persona) that imports modules and sets their options to sensible defaults for its role — plain values, or `mkDefault` where a leaf is expected to override. Declares no new options; a host (for a `profiles/nixos/`) or a user (for a `profiles/home/`) imports it and may override. A Profile never sets a person's identity — system user entries, username, homeDirectory, stateVersion, git name/email, and ssh key material all belong to the User or Host leaf. Profiles never import other profiles — the leaf (host or user) lists every profile it imports, so its `imports` list is a complete inventory of what is pulled in.
 _Avoid_: Role, persona, category, bundle
 
 **Host**:
-A NixOS machine configuration (`hosts/<name>/`), declared as a `nixosConfiguration` in the flake. Currently: `xps13`, `rpi4`, `nixos-wsl`. The leaf for machines: its leaf file is the complete inventory of what the machine pulls in — the profile(s) that fit it, its hardware, and the Users it declares — and it overrides anything true of only that box (`mkForce` only when a plain set would not win). A Host only sets NixOS-level things; home-level configuration, even machine-specific, belongs in the User file. A Host always declares its own Users; the flake never wires Users to a Host behind the Host's back.
+A NixOS machine configuration (`hosts/<name>/`), declared as a `nixosConfiguration` in the flake. Currently: `xps13`, `rpi4`, `nixos-wsl`. The leaf for machines: its leaf file is the complete inventory of what the machine pulls in — the profile(s) that fit it, its hardware, and the Users it declares — and it overrides anything true of only that box (`mkForce` only when a plain set would not win). A Host only sets NixOS-level things; home-level configuration, even machine-specific, belongs in the User file. A Host always declares its own Users — both the system-level `users.users.<name>` entry and the `home-manager.users.*` wiring; the flake never wires Users to a Host behind the Host's back.
 _Avoid_: Machine, system, box
 
 **User**:
-A person's home-manager configuration for one particular machine (`users/<name>/<host>.nix`), the home-manager counterpart to a host. Each person gets one file per machine they use, because their needs differ by machine. A User is the flex point of the chain: a Host pulls it up (declaring it in the Host's leaf), or the flake exposes it directly as a standalone home — in which case the User is the leaf. How a User is wired is not a different concept. A User always configures user-level packages and dotfiles.
+A person's home-manager configuration for one particular machine (`users/<name>/<host>.nix`), the home-manager counterpart to a host. Each person gets one file per machine they use, because their needs differ by machine. A User is the flex point of the chain: a Host pulls it up (declaring it in the Host's leaf), or the flake exposes it directly as a standalone home — in which case the User is the leaf. How a User is wired is not a different concept. A User always configures user-level packages and dotfiles, and owns everything that names the person: home identity (username, homeDirectory, stateVersion) and personal identity (git name/email, ssh key material).
 _Avoid_: Person, account, home
 
 ## Flagged ambiguities
@@ -34,6 +34,7 @@ _Avoid_: Person, account, home
 - **"Profile"** here means a reusable config class (`profiles/nixos/`, `profiles/home/`), not a User. The configs that already exist (under `users/rav-*/` or via people) are all Users, never Profiles — a User wired to run without a host is still a User, don't call it one.
 - **"Standalone"** describes how a User is wired (no host), not a distinct concept. There is no `standalone home-manager` term; it was removed as a duplicate of User.
 - **Layering** — the repo is one chain, not a tree: modules ← profiles ← users ← hosts. Values flow downward through the layers. Profiles never import profiles (see ADR 0003) — only Users and Hosts compose profiles. Users are the flex point: a Host declares its Users in its own leaf, or the flake exposes the User directly (standalone home), making the User the leaf. Modules only declare; every layer sets plain values and reaches for `mkDefault`/`mkForce` only to express override intent (see Option).
+- **Identity** — anything that names or describes a person (system user entries, username, homeDirectory, stateVersion, git name/email, ssh keys) lives in User and Host leaves, never Profiles.
 
 ## Example dialogue
 

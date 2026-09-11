@@ -36,11 +36,6 @@
 
   console.keyMap = "dk-latin1";
 
-  users.users.rav = {
-    isNormalUser = true;
-    description = "Rasmus Villebro";
-  };
-
   # Plain list, not mkDefault: environment.systemPackages has a non-empty
   # built-in default, and list definitions concatenate at the leaf.
   environment.systemPackages = with pkgs; [
@@ -68,7 +63,6 @@
   nix.settings = {
     experimental-features = "nix-command flakes";
     auto-optimise-store = true;
-    trusted-users = ["rav"];
     extra-substituters = [
       "https://nix-community.cachix.org"
     ];

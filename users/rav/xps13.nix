@@ -6,5 +6,14 @@
     ../../profiles/home/gui.nix
   ];
 
-  home.stateVersion = "24.05";
+  home = {
+    username = "rav";
+    homeDirectory = "/home/rav";
+    stateVersion = "24.05";
+  };
+
+  programs.git.settings = {
+    user.name = "Rasmus Villebro";
+    user.email = "rasmus-villebro@hotmail.com";
+  };
 }
