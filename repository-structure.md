@@ -321,7 +321,7 @@ box, `homeConfigurations`.
 Rebuild commands:
 
 ```bash
-sudo nixos-rebuild switch --flake .#laptop1
+nixos-rebuild switch --sudo --flake .#laptop1
 home-manager switch --flake .#me@work-mac   # standalone only
 ```
 

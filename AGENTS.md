@@ -23,6 +23,17 @@ nix fmt <files>              # apply
 
 The `--` forwards flags to alejandra; `nix fmt --check ...` without `--` fails (`unrecognised flag`).
 
+### Updating a NixOS host
+
+To apply config changes to a NixOS machine (xps13, rpi4, nixos-wsl), run from the repo root:
+
+```
+nixos-rebuild switch --sudo --flake .
+```
+
+`--flake .` selects the `nixosConfiguration` matching the current hostname, so no
+`#<host>` suffix is needed. Do not use plain `sudo nixos-rebuild` here.
+
 ### Verifying a config change
 
 Evaluate a host/standalone attribute directly rather than reading the store path:
