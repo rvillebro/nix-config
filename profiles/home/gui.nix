@@ -3,7 +3,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   home = {
     packages = with pkgs; [
       gimp
@@ -37,6 +38,7 @@
       enable = true;
       extensions = [
         "nix"
+        "toml"
       ];
       extraPackages = with pkgs; [
         nixd
@@ -91,7 +93,7 @@
           engines = {
             "Nix Packages" = {
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = ["@np"];
+              definedAliases = [ "@np" ];
               urls = [
                 {
                   template = "https://search.nixos.org/packages";
@@ -106,7 +108,7 @@
             };
             "NixOS Options" = {
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = ["@no"];
+              definedAliases = [ "@no" ];
               urls = [
                 {
                   template = "https://search.nixos.org/options";
@@ -121,7 +123,7 @@
             };
             "Home Manager" = {
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = ["@hm"];
+              definedAliases = [ "@hm" ];
               urls = [
                 {
                   template = "https://home-manager-options.extranix.com/";
@@ -137,7 +139,7 @@
             "GitHub" = {
               icon = "https://github.com/favicon.ico";
               updateInterval = 24 * 60 * 60 * 1000;
-              definedAliases = ["@gh"];
+              definedAliases = [ "@gh" ];
               urls = [
                 {
                   template = "https://github.com/search";
