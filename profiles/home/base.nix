@@ -3,7 +3,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   home = {
     packages = with pkgs; [
       zip
@@ -50,6 +51,7 @@
     home-manager.enable = true;
 
     bash.enable = true;
+    git.enable = true;
     direnv = {
       enable = true;
       nix-direnv.enable = true;
@@ -81,18 +83,6 @@
         pkgs.python3Packages.python-lsp-server
         pkgs.rust-analyzer
       ];
-    };
-
-    git.enable = true;
-
-    ssh = {
-      enable = true;
-      enableDefaultConfig = false;
-      settings = {
-        "*" = {
-          AddKeysToAgent = "yes";
-        };
-      };
     };
   };
 

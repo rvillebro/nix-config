@@ -18,9 +18,17 @@
     user.email = "rav@evaxion.ai";
   };
 
-  programs.ssh.settings."*".IdentityFile = [
-    "${config.home.homeDirectory}/.ssh/id_ed25519"
-  ];
+  programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+    settings = {
+      "*" = {
+        AddKeysToAgent = "yes";
+        IdentityFile = ["${config.home.homeDirectory}/.ssh/id_ed25519"];
+      };
+      "utopia-1".HostName = "utopia-1";
+    };
+  };
 
   targets.genericLinux.enable = true;
 }

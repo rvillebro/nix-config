@@ -119,15 +119,6 @@
   programs = {
     rclone.enable = true;
     awscli.enable = true;
-
-    ssh = {
-      enable = true;
-      settings = {
-        "*" = {
-          AddKeysToAgent = "yes";
-        };
-      };
-    };
   };
 
   nix.registry.evaxpkgs = {

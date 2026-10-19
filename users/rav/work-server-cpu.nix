@@ -18,9 +18,13 @@
     user.email = "rav@evaxion.ai";
   };
 
-  programs.ssh.settings."*".IdentityFile = [
-    "${config.home.homeDirectory}/.ssh/rav-servers"
-  ];
+  programs.ssh = {
+    enable = true;
+    settings."*" = {
+      AddKeysToAgent = "yes";
+      IdentityFile = ["${config.home.homeDirectory}/.ssh/rav-servers"];
+    };
+  };
 
   targets.genericLinux.enable = true;
 }

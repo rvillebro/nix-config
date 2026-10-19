@@ -12,26 +12,12 @@
       enable = true;
       extensions = [
         "nix"
+        "toml"
       ];
       extraPackages = with pkgs; [
         nixd
         nil
       ];
-    };
-
-    ssh = {
-      enable = true;
-      settings = {
-        "*" = {
-          AddKeysToAgent = "yes";
-        };
-        "utopia-1" = {
-          HostName = "utopia-1";
-        };
-        "utopia-2" = {
-          HostName = "utopia-2";
-        };
-      };
     };
   };
 
