@@ -1,10 +1,12 @@
 # Dev home profile: shared headless tooling for every User.
-{pkgs, ...}: let
-  mattpocock-skills = builtins.fetchGit {
+{ pkgs, ... }:
+let
+  mattpocock-skills = fetchGit {
     url = "https://github.com/mattpocock/skills.git";
-    rev = "6acc160e4e0cd062dbbbd7a1b26ae92855edf07e";
+    rev = "24fe0ef7737efae15c87225755e9f6f5965e4888";
   };
-in {
+in
+{
   home = {
     sessionVariables = {
       PI_SKIP_VERSION_CHECK = "1";
