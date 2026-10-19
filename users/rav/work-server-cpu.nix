@@ -20,6 +20,7 @@
 
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
     settings."*" = {
       AddKeysToAgent = "yes";
       IdentityFile = ["${config.home.homeDirectory}/.ssh/rav-servers"];
