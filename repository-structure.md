@@ -29,8 +29,7 @@ nix-config/
 ├── flake.nix
 ├── flake.lock
 ├── lib/
-│   ├── default.nix              # helper functions (mkHome, ...)
-│   └── mkHome.nix               # standalone home-manager builder
+│   └── default.nix              # helper functions (currently empty skeleton)
 ├── modules/
 │   ├── nixos/                   # system-level option-declaring modules
 │   │   ├── networking.nix
@@ -387,7 +386,10 @@ what the machine pulls in. Bare `nixosSystem` calls with `system`,
 `specialArgs`, and the leaf (see section 4) keep the flake a boring registry,
 and the host leaf remains the complete inventory of the machine.
 
-A `lib/` helper still earns its keep for standalone home-manager
-configurations: `lib/mkHome.nix` wraps
-`home-manager.lib.homeManagerConfiguration` with the shared `pkgs` and
-`extraSpecialArgs`, and that wiring never grows beyond it.
+The same reasoning applies to standalone home-manager configurations: a
+`lib/mkHome.nix` wrapper around `homeManagerConfiguration` would hide the
+shared `pkgs` and `extraSpecialArgs` wiring behind a second layer for no
+gain, so the flake calls `home-manager.lib.homeManagerConfiguration`
+directly instead. The `lib/` directory remains as an empty skeleton for
+genuinely generic helpers, but any new helper must justify the layer it
+creates.

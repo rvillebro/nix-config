@@ -27,7 +27,7 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    lib = import ./lib {inherit inputs nixpkgs home-manager outputs;};
+    lib = import ./lib;
     # Supported systems for your flake packages, shell, etc.
     systems = [
       "aarch64-linux"
@@ -74,20 +74,24 @@
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
-      "rav@home" = lib.mkHome {
-        system = "x86_64-linux";
+      "rav@home" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs;};
         modules = [./users/rav/home.nix];
       };
-      "rav@work" = lib.mkHome {
-        system = "x86_64-linux";
+      "rav@work" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs;};
         modules = [./users/rav/work.nix];
       };
-      "rav@work-server-cpu" = lib.mkHome {
-        system = "x86_64-linux";
+      "rav@work-server-cpu" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs;};
         modules = [./users/rav/work-server-cpu.nix];
       };
-      "rav@work-server-gpu" = lib.mkHome {
-        system = "x86_64-linux";
+      "rav@work-server-gpu" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs;};
         modules = [./users/rav/work-server-gpu.nix];
       };
     };
