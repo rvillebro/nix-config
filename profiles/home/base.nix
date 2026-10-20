@@ -3,8 +3,7 @@
   config,
   pkgs,
   ...
-}:
-{
+}: {
   home = {
     packages = with pkgs; [
       zip
@@ -37,15 +36,6 @@
   fonts.fontconfig.enable = true;
 
   xdg.enable = true;
-
-  nix.settings = {
-    extra-substituters = [
-      "https://nix-community.cachix.org"
-    ];
-    extra-trusted-public-keys = [
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
-  };
 
   programs = {
     home-manager.enable = true;
