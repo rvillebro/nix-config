@@ -20,80 +20,73 @@
     hardware.url = "github:nixos/nixos-hardware";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-    lib = import ./lib;
-    # Supported systems for your flake packages, shell, etc.
-    systems = [
-      "aarch64-linux"
-      "i686-linux"
-      "x86_64-linux"
-      "aarch64-darwin"
-      "x86_64-darwin"
-    ];
-    forAllSystems = nixpkgs.lib.genAttrs systems;
-  in {
-    # packages = forAllSystems (system: let pkgSet = import ./pkgs {pkgs = nixpkgs.legacyPackages.${system};}; in nixpkgs.lib.filterAttrs (_: v: nixpkgs.lib.isDerivation v) pkgSet);
-    packages = forAllSystems (system: import ./pkgs {pkgs = nixpkgs.legacyPackages.${system};});
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
-    overlays = import ./overlays {inherit inputs;};
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }@inputs:
+    let
+      inherit (self) outputs;
+      lib = import ./lib;
+      systems = [
+        "aarch64-linux"
+        "x86_64-linux"
+      ];
+      forAllSystems = nixpkgs.lib.genAttrs systems;
+    in
+    {
+      packages = forAllSystems (system: import ./pkgs { pkgs = nixpkgs.legacyPackages.${system}; });
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+      overlays = import ./overlays { inherit inputs; };
 
-    # Reusable nixos modules you might want to export
-    # These are usually stuff you would upstream into nixpkgs
-    nixosModules = import ./modules/nixos;
-    # Reusable home-manager modules you might want to export
-    # These are usually stuff you would upstream into home-manager
-    homeManagerModules = import ./modules/home-manager;
+      # Reusable nixos modules you might want to export
+      nixosModules = import ./modules/nixos;
+      # Reusable home-manager modules you might want to export
+      homeManagerModules = import ./modules/home-manager;
 
-    # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild --flake .#your-hostname'
-    # Each Host leaf declares its own Users and hardware imports.
-    nixosConfigurations = {
-      xps13 = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs outputs;};
-        modules = [./hosts/xps13];
+      # NixOS configuration entrypoint
+      nixosConfigurations = {
+        xps13 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./hosts/xps13 ];
+        };
+        rpi4 = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./hosts/rpi4 ];
+        };
+        nixos-wsl = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./hosts/nixos-wsl ];
+        };
       };
-      rpi4 = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        specialArgs = {inherit inputs outputs;};
-        modules = [./hosts/rpi4];
-      };
-      nixos-wsl = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs outputs;};
-        modules = [./hosts/nixos-wsl];
+
+      # Standalone home-manager configuration entrypoint
+      homeConfigurations = {
+        "rav@home" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./users/rav/home.nix ];
+        };
+        "rav@work" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./users/rav/work.nix ];
+        };
+        "rav@work-server-cpu" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./users/rav/work-server-cpu.nix ];
+        };
+        "rav@work-server-gpu" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./users/rav/work-server-gpu.nix ];
+        };
       };
     };
-
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#your-username@your-hostname'
-    homeConfigurations = {
-      "rav@home" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./users/rav/home.nix];
-      };
-      "rav@work" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./users/rav/work.nix];
-      };
-      "rav@work-server-cpu" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./users/rav/work-server-cpu.nix];
-      };
-      "rav@work-server-gpu" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./users/rav/work-server-gpu.nix];
-      };
-    };
-  };
 }
