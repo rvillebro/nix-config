@@ -14,6 +14,10 @@ This is my nix configuration
   - [Installation](#installation-1)
 - [NixOS on Windows Subsystems](#nixos-on-windows-subsystems)
   - [Build WSL image](#build-wsl-image)
+- [Standalone Home Manager](#standalone-home-manager)
+  - [First activation](#first-activation)
+  - [Subsequent activations](#subsequent-activations)
+  - [Notes](#notes)
 
 
 # NixOS on XP13
@@ -131,4 +135,37 @@ wsl --import NixOS %USERPROFILE%\NixOS nixos.wsl --version 2
 ```
 
 Then launch with `wsl -d NixOS` and set a password for your user.
+
+# Standalone Home Manager
+
+Besides the NixOS hosts, this flake exposes standalone Home Manager configurations for user profiles: `rav@home`, `rav@work`, `rav@work-server-cpu` and `rav@work-server-gpu` (see `homeConfigurations` in `flake.nix`).
+
+## First activation
+
+On a machine where `home-manager` is not yet installed, run it straight from its flake:
+
+```bash
+nix run github:nix-community/home-manager/release-26.05 -- switch --flake github:rvillebro/nix-config#rav@home -b backup
+```
+
+If you have the repo cloned locally (e.g. when testing changes), point `--flake` at the checkout instead:
+
+```bash
+nix run github:nix-community/home-manager/release-26.05 -- switch --flake .#rav@home -b backup
+```
+
+`-b backup` renames existing files that would be overwritten to `<file>.backup` instead of aborting the switch.
+
+## Subsequent activations
+
+After the first activation, `home-manager` is available in the user profile, so from the repo root simply run:
+
+```bash
+home-manager switch --flake .#rav@home -b backup
+```
+
+## Notes
+
+- The release branch in the `nix run` command (`release-26.05`) must match the `home-manager` input pinned in `flake.lock`.
+- Home Manager does not update flake inputs automatically; run `nix flake update` in the repo before switching to pick up newer revisions.
 
