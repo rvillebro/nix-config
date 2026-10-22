@@ -31,6 +31,17 @@
     };
   };
 
+  services.home-manager.autoUpgrade = {
+    enable = true;
+    useFlake = true;
+    flakeDir = "${config.home.homeDirectory}/nix-config";
+    frequency = "03:00";
+    preSwitchCommands = [
+      "${pkgs.gitMinimal}/bin/git pull"
+      "nix flake update"
+    ];
+  };
+
   targets.genericLinux.enable = true;
 
   home.packages = with pkgs; [

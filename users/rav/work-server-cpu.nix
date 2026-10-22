@@ -1,5 +1,9 @@
 # Standalone User leaf for rav@work-server-cpu.
-{config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ./nix.nix
     ../../profiles/home/base.nix
@@ -25,6 +29,17 @@
       AddKeysToAgent = "yes";
       IdentityFile = ["${config.home.homeDirectory}/.ssh/rav-servers"];
     };
+  };
+
+  services.home-manager.autoUpgrade = {
+    enable = true;
+    useFlake = true;
+    flakeDir = "${config.home.homeDirectory}/nix-config";
+    frequency = "03:00";
+    preSwitchCommands = [
+      "${pkgs.gitMinimal}/bin/git pull"
+      "nix flake update"
+    ];
   };
 
   targets.genericLinux.enable = true;
