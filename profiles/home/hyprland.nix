@@ -65,7 +65,7 @@ in {
   programs.noctalia = {
     enable = true;
     settings = {
-      shell.font = "FiraCode Nerd Font";
+      shell.font_family = "FiraCode Nerd Font";
       theme = {
         mode = "dark";
         source = "builtin";
