@@ -4,10 +4,6 @@
   pkgs,
   ...
 }: {
-  imports = [../../modules/home-manager/hyprland.nix];
-
-  myConfig.hyprland.enable = true;
-
   home = {
     packages = with pkgs; [
       gimp

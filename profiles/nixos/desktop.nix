@@ -1,15 +1,12 @@
-# Desktop NixOS profile: the graphical-desktop capability (xps13 only). Imports
-# the Hyprland compositor module (ADR 0004); the GNOME block at the bottom is
-# transitional and is deleted once the Hyprland migration checklist passes.
+# Desktop NixOS profile: the graphical-desktop capability (xps13 only) — the
+# Hyprland session with the system services its desktop shell depends on, plus
+# the transitional GNOME block kept until the migration checklist passes
+# (ADR 0004).
 {
   lib,
   pkgs,
   ...
 }: {
-  imports = [../../modules/nixos/hyprland.nix];
-
-  myConfig.hyprland.enable = true;
-
   networking.networkmanager.enable = lib.mkDefault true;
 
   # Kept for Electron/GTK apps even after GNOME removal (ADR 0004).
@@ -29,6 +26,23 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+
+  # The Hyprland session, and the system services its desktop shell's widgets
+  # depend on: network (NetworkManager above), bluetooth, battery/power
+  # profiles, and the keyring the GNOME bundle previously provided.
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+  # Hyprland's own portal covers screencast; the GTK portal is needed for
+  # file-picker dialogs outside GNOME.
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  # Polkit for the session (privilege prompts outside GNOME); the agent runs
+  # as a systemd user service from the home side.
+  security.polkit.enable = true;
+  hardware.bluetooth.enable = true;
+  services.power-profiles-daemon.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
   # Transitional GNOME block, kept so the fallback session survives until the
   # Hyprland checklist passes (ADR 0004). Delete wholesale in the removal commit.

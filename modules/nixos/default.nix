@@ -2,8 +2,5 @@
 # These should be stuff you would like to share with others, not your personal configurations.
 # Consumers pull in the whole collection with `imports = [ ../../modules/nixos ]`.
 {
-  imports = [
-    ./binance-collector.nix
-    ./hyprland.nix
-  ];
+  imports = [./binance-collector.nix];
 }

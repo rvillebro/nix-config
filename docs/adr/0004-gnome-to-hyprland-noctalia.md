@@ -14,6 +14,6 @@ Parallel transition, not big-bang: Hyprland is added while GNOME stays available
 ## Consequences
 
 - `profiles/nixos/desktop.nix` becomes the generic graphical-desktop capability (pipewire, fonts, printing, NetworkManager); GNOME/GDM-specific bits move out and are deleted in the removal commit.
-- Hyprland, Noctalia Shell, and Noctalia Greeter arrive as flake inputs (both following the repo's nixpkgs) with system modules plus a home-manager module for Hyprland/Noctalia/theming config, imported by `profiles/home/gui.nix`.
+- The system services live inline in `profiles/nixos/desktop.nix` (the desktop capability, fixed facts — no module per ADR 0002) and the session config in a new `profiles/home/hyprland.nix`, imported explicitly by the User leaf (ADR 0003).
 - `programs.dconf.enable` is kept even after GNOME removal: Electron apps (Bitwarden) still use the dconf backend.
 - The `dk` keyboard layout is configured in Hyprland's input config immediately; `services.xserver.xkb` goes away together with the transitional GNOME block in the removal commit.
