@@ -16,6 +16,18 @@ _Avoid_: Setting, parameter
 The NixOS module that runs the Binance data-collection services on the rpi4 host. Owns the systemd units (stream and rest), the service user, and the group that grants read access to collected data.
 _Avoid_: Data collection service, collector config
 
+**Hyprland**:
+The Wayland compositor providing xps13's graphical session — window tiling, keybinds, and the session GDM/greetd launches.
+_Avoid_: window manager (loosely), desktop environment, tiling manager
+
+**Noctalia Shell**:
+The Quickshell-based desktop shell running inside the Hyprland session on xps13. Owns the launcher, lock screen, notifications, wallpaper, screenshots, and the tray widgets (network, bluetooth, battery, power profile).
+_Avoid_: bar, status bar, shell (ambiguous)
+
+**Noctalia Greeter**:
+The greetd-based graphical login screen on xps13, visually matched to Noctalia Shell.
+_Avoid_: display manager, login manager
+
 **Profile**:
 A reusable category config (`profiles/nixos/` for a kind of machine, `profiles/home/` for a persona) that imports modules and sets their options to sensible defaults for its role — plain values, or `mkDefault` where a leaf is expected to override. Declares no new options; a host (for a `profiles/nixos/`) or a user (for a `profiles/home/`) imports it and may override. A Profile never sets a person's identity — system user entries, username, homeDirectory, stateVersion, git name/email, and ssh key material all belong to the User or Host leaf. Profiles never import other profiles — the leaf (host or user) lists every profile it imports, so its `imports` list is a complete inventory of what is pulled in.
 _Avoid_: Role, persona, category, bundle
