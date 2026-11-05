@@ -1,7 +1,6 @@
 # Desktop NixOS profile: the graphical-desktop capability (xps13 only) — the
-# Hyprland session with the system services its desktop shell depends on, the
-# greetd login, and the transitional GNOME block kept until the migration
-# checklist passes (ADR 0004).
+# Hyprland session with the system services its desktop shell depends on, and
+# the greetd login (ADR 0004).
 {
   inputs,
   lib,
@@ -38,9 +37,9 @@
     xwayland.enable = true;
   };
   # Hyprland's own portal covers screencast; the GTK portal is needed for
-  # file-picker dialogs outside GNOME.
+  # file-picker dialogs in non-GNOME apps.
   xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
-  # Polkit for the session (privilege prompts outside GNOME); the agent runs
+  # Polkit for the session (privilege prompts in non-GNOME apps); the agent runs
   # as a systemd user service from the home side.
   security.polkit.enable = true;
   hardware.bluetooth.enable = true;
@@ -62,25 +61,4 @@
       };
     };
   };
-
-  # Transitional GNOME block, kept so the fallback session survives until the
-  # Hyprland checklist passes (ADR 0004). Delete wholesale in the removal commit.
-  services.xserver.enable = true;
-  services.xserver.excludePackages = [pkgs.xterm];
-  services.desktopManager.gnome.enable = true;
-  services.xserver.xkb = {
-    layout = "dk";
-    variant = "";
-  };
-  environment.gnome.excludePackages = with pkgs; [
-    gnome-tour
-    gnome-console
-    geary
-    epiphany
-    yelp
-    simple-scan
-    gnome-music
-    gnome-logs
-    gnome-disk-utility
-  ];
 }
