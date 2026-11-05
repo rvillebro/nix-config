@@ -65,4 +65,25 @@
       };
     };
   };
+
+  # Hyprland 0.55 prints its "Welcome to Hyprland!" ASCII banner
+  # unconditionally to stdout (src/main.cpp, not config-gated), and greetd
+  # wires session stdout to the console — visible during the greeter→session
+  # DRM handoff. Greetd runs the session command through /bin/sh -c, so
+  # redirecting stdout at the session's Exec line silences it while keeping
+  # stderr (real startup errors stay visible). The original package keeps
+  # providing the binary; only the session entries are replaced.
+  services.displayManager.sessionPackages = lib.mkForce [
+    (pkgs.runCommand "hyprland-quiet-session" {
+        # Only the plain session — we never select the uwsm one.
+        passthru.providedSessions = ["hyprland"];
+        preferLocalBuild = true;
+        allowSubstitutes = false;
+      } ''
+        mkdir -p $out/share/wayland-sessions
+        sed "s|^Exec=.*|Exec=${pkgs.hyprland}/bin/start-hyprland >/dev/null|" \
+          ${pkgs.hyprland}/share/wayland-sessions/hyprland.desktop \
+          > $out/share/wayland-sessions/hyprland.desktop
+      '')
+  ];
 }
