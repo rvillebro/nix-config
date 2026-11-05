@@ -67,10 +67,6 @@ in {
         source = "builtin";
         builtin = "Catppuccin";
       };
-      # Fade the desktop wallpaper in at shell startup instead of popping it
-      # over Hyprland's plain fallback backdrop (upstream renders the source
-      # transparently, so the fade composes with misc below).
-      wallpaper.transition_on_startup = true;
     };
   };
 
@@ -128,8 +124,8 @@ in {
       ];
 
       # No default backdrop (ASCII-art splash) before Noctalia's wallpaper
-      # daemon draws; the gap renders as a plain background that the Noctalia
-      # wallpaper fades in over (transition_on_startup above).
+      # daemon draws; the gap renders as a plain background until Noctalia's
+      # wallpaper appears.
       misc = {
         force_default_wallpaper = 0;
         disable_hyprland_logo = true;
