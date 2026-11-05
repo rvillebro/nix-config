@@ -25,20 +25,9 @@ in {
     XCURSOR_SIZE = cursorSize;
   };
 
-  # Privilege prompts (pkexec/sudo GUI) need an agent in the session; this
-  # channel has no NixOS module for it, so wire the packaged user unit here.
-  systemd.user.services.hyprpolkitagent = {
-    Unit = {
-      Description = "Hyprland Polkit authentication agent";
-      PartOf = ["graphical-session.target"];
-      After = ["graphical-session.target"];
-    };
-    Service = {
-      ExecStart = "${pkgs.hyprpolkitagent}/libexec/hyprpolkitagent";
-      Restart = "on-failure";
-    };
-    Install.WantedBy = ["graphical-session.target"];
-  };
+  # Privilege prompts (pkexec/sudo GUI) need an agent in the session; the
+  # packaged user service covers it.
+  services.hyprpolkitagent.enable = true;
 
   # GNOME owned GTK theming before; home-manager owns it now.
   gtk = {
@@ -79,7 +68,11 @@ in {
     settings = {
       # Noctalia answers loginctl lock-session while it is running.
       general = {
-        lock_cmd = "loginctl lock-session";
+        # NOTE: lock_cmd must NOT be "loginctl lock-session". hypridle runs
+        # lock_cmd every time it *receives* the logind Lock event, so pointing
+        # it back at loginctl creates an infinite re-lock loop (unlocks, then
+        # locks again immediately). Noctalia shows the lock screen on the
+        # D-Bus Lock event itself, so hypridle needs no lock_cmd here.
         after_sleep_cmd = "hyprctl dispatch dpms on";
         ignore_dbus_inhibit = false;
       };
@@ -126,11 +119,14 @@ in {
         "wl-paste --watch cliphist store"
       ];
 
-      windowrule = ["float, class:^(dev.noctalia.Noctalia)$"];
+      # Hyprland 0.53+ windowrule syntax: match props and valued boolean
+      # effects ("float on"); the old "float, class:..." form is invalid.
+      windowrule = ["float on, match:class ^(dev.noctalia.Noctalia)$"];
 
       bind = [
         # Core
         "$mod, Return, exec, ghostty"
+        "$mod, W, exec, firefox"
         "$mod, Q, killactive"
         "$mod, M, exit"
         "$mod, V, togglefloating"
@@ -175,6 +171,11 @@ in {
         "$mod SHIFT, 7, movetoworkspace, 7"
         "$mod SHIFT, 8, movetoworkspace, 8"
         "$mod SHIFT, 9, movetoworkspace, 9"
+      ];
+
+      # Touchpad gestures: three-finger horizontal swipe switches workspaces
+      gesture = [
+        "3, horizontal, workspace"
       ];
 
       bindm = [

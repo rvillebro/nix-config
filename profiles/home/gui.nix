@@ -166,6 +166,10 @@
       installBatSyntax = true;
       settings = {
         theme = "Brogrammer";
+        window-padding-x = 8;
+        window-padding-y = 8;
+        window-padding-balance = true;
+        window-padding-color = "background";
       };
     };
 
