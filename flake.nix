@@ -18,6 +18,15 @@
     };
     # special hardware configurations
     hardware.url = "github:nixos/nixos-hardware";
+    # Hyprland desktop stack (ADR 0004): the shell and the greetd greeter.
+    noctalia = {
+      url = "github:noctalia-dev/noctalia";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    noctalia-greeter = {
+      url = "github:noctalia-dev/noctalia-greeter";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {

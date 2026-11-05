@@ -3,8 +3,7 @@
   config,
   pkgs,
   ...
-}:
-{
+}: {
   home = {
     packages = with pkgs; [
       gimp
@@ -93,7 +92,7 @@
           engines = {
             "Nix Packages" = {
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = [ "@np" ];
+              definedAliases = ["@np"];
               urls = [
                 {
                   template = "https://search.nixos.org/packages";
@@ -108,7 +107,7 @@
             };
             "NixOS Options" = {
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = [ "@no" ];
+              definedAliases = ["@no"];
               urls = [
                 {
                   template = "https://search.nixos.org/options";
@@ -123,7 +122,7 @@
             };
             "Home Manager" = {
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = [ "@hm" ];
+              definedAliases = ["@hm"];
               urls = [
                 {
                   template = "https://home-manager-options.extranix.com/";
@@ -139,7 +138,7 @@
             "GitHub" = {
               icon = "https://github.com/favicon.ico";
               updateInterval = 24 * 60 * 60 * 1000;
-              definedAliases = [ "@gh" ];
+              definedAliases = ["@gh"];
               urls = [
                 {
                   template = "https://github.com/search";
@@ -167,6 +166,10 @@
       installBatSyntax = true;
       settings = {
         theme = "Brogrammer";
+        window-padding-x = 8;
+        window-padding-y = 8;
+        window-padding-balance = true;
+        window-padding-color = "background";
       };
     };
 

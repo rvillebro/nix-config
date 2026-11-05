@@ -1,4 +1,7 @@
-# Desktop NixOS profile: the GNOME/GDM desktop capability (xps13 only).
+# Desktop NixOS profile: the graphical-desktop capability (xps13 only) — the
+# Hyprland session with the system services its desktop shell depends on, plus
+# the transitional GNOME block kept until the migration checklist passes
+# (ADR 0004).
 {
   lib,
   pkgs,
@@ -6,18 +9,8 @@
 }: {
   networking.networkmanager.enable = lib.mkDefault true;
 
+  # Kept for Electron/GTK apps even after GNOME removal (ADR 0004).
   programs.dconf.enable = true;
-
-  services.xserver.enable = true;
-  services.xserver.excludePackages = [pkgs.xterm];
-
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
-
-  services.xserver.xkb = {
-    layout = "dk";
-    variant = "";
-  };
 
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
@@ -34,6 +27,33 @@
     pulse.enable = true;
   };
 
+  # The Hyprland session, and the system services its desktop shell's widgets
+  # depend on: network (NetworkManager above), bluetooth, battery/power
+  # profiles, and the keyring the GNOME bundle previously provided.
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+  # Hyprland's own portal covers screencast; the GTK portal is needed for
+  # file-picker dialogs outside GNOME.
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  # Polkit for the session (privilege prompts outside GNOME); the agent runs
+  # as a systemd user service from the home side.
+  security.polkit.enable = true;
+  hardware.bluetooth.enable = true;
+  services.power-profiles-daemon.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+
+  # Transitional GNOME block, kept so the fallback session survives until the
+  # Hyprland checklist passes (ADR 0004). Delete wholesale in the removal commit.
+  services.xserver.enable = true;
+  services.xserver.excludePackages = [pkgs.xterm];
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
+  services.xserver.xkb = {
+    layout = "dk";
+    variant = "";
+  };
   environment.gnome.excludePackages = with pkgs; [
     gnome-tour
     gnome-console
