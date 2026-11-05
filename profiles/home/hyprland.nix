@@ -7,11 +7,11 @@
   pkgs,
   ...
 }: let
-  cursorSize = "24";
-  cursorTheme = {
-    package = pkgs.catppuccin-cursors.mochaMauve;
-    name = "Catppuccin-Mocha-Mauve-Cursors";
-  };
+  # Exact cursor theme directory name under the package's share/icons —
+  # xcursor/hyprcursor resolve by directory name (case-sensitive), and the
+  # greeter resolves the same way, so login and session cursors match.
+  cursorName = "catppuccin-mocha-mauve-cursors";
+  cursorSize = 24;
 in {
   imports = [inputs.noctalia.homeModules.default];
 
@@ -20,9 +20,17 @@ in {
     cliphist
   ];
 
-  home.sessionVariables = {
-    XCURSOR_THEME = cursorTheme.name;
-    XCURSOR_SIZE = cursorSize;
+  # Owns the cursor theme installation: the ~/.icons and default index.theme
+  # symlinks (how apps actually resolve the theme), the GTK cursor theme, and
+  # the XCURSOR/HYPRCURSOR session variables. The Hyprland env block below
+  # re-declares the same values because greetd sessions do not inherit
+  # home-manager sessionVariables.
+  home.pointerCursor = {
+    package = pkgs.catppuccin-cursors.mochaMauve;
+    name = cursorName;
+    size = cursorSize;
+    gtk.enable = true;
+    hyprcursor.enable = true;
   };
 
   # Privilege prompts (pkexec/sudo GUI) need an agent in the session; the
@@ -48,7 +56,6 @@ in {
       package = pkgs.papirus-icon-theme;
       name = "Papirus-Dark";
     };
-    cursorTheme = cursorTheme;
   };
 
   programs.noctalia = {
@@ -110,9 +117,20 @@ in {
       };
 
       env = [
-        "XCURSOR_THEME,${cursorTheme.name}"
-        "XCURSOR_SIZE,${cursorSize}"
+        "XCURSOR_THEME,${cursorName}"
+        "XCURSOR_SIZE,${toString cursorSize}"
+        "HYPRCURSOR_THEME,${cursorName}"
+        "HYPRCURSOR_SIZE,${toString cursorSize}"
       ];
+
+      # No default backdrop (ASCII-art splash) before Noctalia's wallpaper
+      # daemon draws; the gap renders as a plain background until Noctalia's
+      # wallpaper appears.
+      misc = {
+        force_default_wallpaper = 0;
+        disable_hyprland_logo = true;
+        disable_splash_rendering = true;
+      };
 
       exec-once = [
         "noctalia"

@@ -43,6 +43,11 @@
 
   # xps13-specific nixpkgs additions (appended to the shared base overlays).
   nixpkgs.overlays = [inputs.nur.overlays.default];
+
+  # rav may sync the shell's appearance (wallpaper, palette, font) to the
+  # Noctalia Greeter without a polkit prompt — Settings → Security →
+  # Noctalia Greeter → Sync Now. Person-scoped, hence set on this leaf.
+  services.displayManager.noctalia-greeter.passwordless-sync-users = ["rav"];
   nixpkgs.config.permittedInsecurePackages = [
     "electron-39.8.10"
   ];
