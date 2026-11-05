@@ -39,6 +39,14 @@
   # Hyprland's own portal covers screencast; the GTK portal is needed for
   # file-picker dialogs in non-GNOME apps.
   xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  # Without an explicit config, portals are chosen by UseIn matching against
+  # XDG_CURRENT_DESKTOP (= "Hyprland"): the Hyprland portal matches, but the
+  # GTK portal declares UseIn=gnome and is skipped entirely — so its Settings
+  # interface (org.freedesktop.appearance color-scheme, which Firefox and
+  # friends read for dark mode) is never registered on the bus. This config
+  # routes per-interface: FileChooser/Settings/etc. from gtk, ScreenCast/
+  # Screenshot/GlobalShortcuts from hyprland.
+  xdg.portal.config.common.default = ["gtk" "hyprland"];
   # Polkit for the session (privilege prompts in non-GNOME apps); the agent runs
   # as a systemd user service from the home side.
   security.polkit.enable = true;

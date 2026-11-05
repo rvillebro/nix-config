@@ -37,6 +37,14 @@ in {
   # packaged user service covers it.
   services.hyprpolkitagent.enable = true;
 
+  # The HM hyprland module installs the hyprland portal into the *user*
+  # profile, whose share/xdg-desktop-portal/portals dir shadows the system
+  # profile (the portal daemon stops scanning XDG_DATA_DIRS at the first
+  # match) — leaving gtk.portal invisible and the Settings interface (dark
+  # mode) unregistered. The NixOS module already installs it system-side
+  # alongside the GTK portal, so drop the user-side duplicate.
+  wayland.windowManager.hyprland.portalPackage = null;
+
   # GNOME owned GTK theming before; home-manager owns it now.
   gtk = {
     enable = true;
@@ -57,6 +65,14 @@ in {
       name = "Papirus-Dark";
     };
   };
+
+  # What apps read for dark-mode detection: Firefox, Chromium/Electron, and
+  # libadwaita apps query the xdg-desktop-portal Settings interface
+  # (org.freedesktop.appearance color-scheme), which the GTK portal sources
+  # from this GSettings key. GNOME used to own it; without it apps stay light
+  # even with the dark GTK theme above. The gtk module pulls in dconf, so this
+  # persists on its own.
+  dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
 
   programs.noctalia = {
     enable = true;
