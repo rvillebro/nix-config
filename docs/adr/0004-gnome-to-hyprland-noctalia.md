@@ -1,5 +1,9 @@
 # GNOME replaced by Hyprland + Noctalia on the desktop
 
+*Executed 2026-11 (PRs #60–#63); the migration strategy below is kept as the
+record of how. The decision and its consequences remain the standing rationale
+for `profiles/nixos/desktop.nix`, `profiles/home/hyprland.nix`, and the greeter
+setup.*
 The xps13 is the only graphical machine in the repo, and its desktop ran GNOME/GDM. We decided to replace GNOME with a Wayland stack: **Hyprland** as compositor/tiler, **Noctalia Shell** as the desktop shell, and **Noctalia Greeter** (greetd-based) as the login screen. GNOME's bundle was heavier than needed and a tiling compositor + Quickshell shell fits the repo's minimal, declarative style better.
 
 ## Migration strategy
