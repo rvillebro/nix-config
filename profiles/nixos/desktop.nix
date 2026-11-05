@@ -1,12 +1,15 @@
 # Desktop NixOS profile: the graphical-desktop capability (xps13 only) — the
-# Hyprland session with the system services its desktop shell depends on, plus
-# the transitional GNOME block kept until the migration checklist passes
-# (ADR 0004).
+# Hyprland session with the system services its desktop shell depends on, the
+# greetd login, and the transitional GNOME block kept until the migration
+# checklist passes (ADR 0004).
 {
+  inputs,
   lib,
   pkgs,
   ...
 }: {
+  imports = [inputs.noctalia-greeter.nixosModules.default];
+
   networking.networkmanager.enable = lib.mkDefault true;
 
   # Kept for Electron/GTK apps even after GNOME removal (ADR 0004).
@@ -44,11 +47,26 @@
   services.power-profiles-daemon.enable = true;
   services.gnome.gnome-keyring.enable = true;
 
+  # Login: Noctalia Greeter on greetd (ADR 0004). The greetd module creates the
+  # `greeter` user and wires the session command; gnome-keyring PAM unlock is
+  # automatic for greetd in this nixpkgs. Cursor theme matches the home profile.
+  services.displayManager.noctalia-greeter = {
+    enable = true;
+    settings = {
+      session.default = "Hyprland";
+      keyboard.layout = "dk";
+      cursor = {
+        theme = "Catppuccin-Mocha-Mauve-Cursors";
+        size = 24;
+        path = pkgs.catppuccin-cursors.mochaMauve;
+      };
+    };
+  };
+
   # Transitional GNOME block, kept so the fallback session survives until the
   # Hyprland checklist passes (ADR 0004). Delete wholesale in the removal commit.
   services.xserver.enable = true;
   services.xserver.excludePackages = [pkgs.xterm];
-  services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
   services.xserver.xkb = {
     layout = "dk";
