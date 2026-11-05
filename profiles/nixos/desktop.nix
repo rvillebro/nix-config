@@ -48,14 +48,18 @@
 
   # Login: Noctalia Greeter on greetd (ADR 0004). The greetd module creates the
   # `greeter` user and wires the session command; gnome-keyring PAM unlock is
-  # automatic for greetd in this nixpkgs. Cursor theme matches the home profile.
+  # automatic for greetd in this nixpkgs. Cursor theme matches the home profile
+  # (exact case-sensitive directory name under the package's share/icons —
+  # anything else falls back to the wlroots built-in cursor). Who may sync the
+  # shell's appearance to the greeter passwordless is a person-scoped override,
+  # so it is set on the User-bearing Host leaf, not here.
   services.displayManager.noctalia-greeter = {
     enable = true;
     settings = {
       session.default = "Hyprland";
       keyboard.layout = "dk";
       cursor = {
-        theme = "Catppuccin-Mocha-Mauve-Cursors";
+        theme = "catppuccin-mocha-mauve-cursors";
         size = 24;
         path = pkgs.catppuccin-cursors.mochaMauve;
       };
