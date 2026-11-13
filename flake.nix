@@ -27,6 +27,11 @@
       url = "github:noctalia-dev/noctalia-greeter";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Trial on xps13: Umbriel compositor as a second session alongside
+    # Hyprland. Tracked on the `cachix` branch and deliberately NOT
+    # following our nixpkgs — its binary cache only matches the locked
+    # nixpkgs the project builds against (see Umbriel's installation docs).
+    umbriel.url = "github:noctalia-dev/umbriel/cachix";
   };
 
   outputs = {
