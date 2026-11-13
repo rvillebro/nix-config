@@ -20,11 +20,6 @@ in {
     cliphist
   ];
 
-  # Owns the cursor theme installation: the ~/.icons and default index.theme
-  # symlinks (how apps actually resolve the theme), the GTK cursor theme, and
-  # the XCURSOR/HYPRCURSOR session variables. The Hyprland env block below
-  # re-declares the same values because greetd sessions do not inherit
-  # home-manager sessionVariables.
   home.pointerCursor = {
     package = pkgs.catppuccin-cursors.mochaMauve;
     name = cursorName;

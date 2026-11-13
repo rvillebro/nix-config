@@ -23,6 +23,10 @@ nix fmt <files>              # apply
 
 The `--` forwards flags to alejandra; `nix fmt --check ...` without `--` fails (`unrecognised flag`).
 
+### Grouping module options
+
+In nix modules, write all options under the same top-level attribute together in one block (`services = { ... }`, `programs = { ... }`) instead of scattering `services.<name>.enable` lines across the file.
+
 ### Updating a NixOS host
 
 To apply config changes to a NixOS machine (xps13, rpi4, nixos-wsl), run from the repo root:
