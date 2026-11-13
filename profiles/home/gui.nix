@@ -165,7 +165,7 @@
       enableBashIntegration = true;
       installBatSyntax = true;
       settings = {
-        theme = "Brogrammer";
+        theme = "dark:GitHub Dark,light:GitHub";
         window-padding-x = 8;
         window-padding-y = 8;
         window-padding-balance = true;
