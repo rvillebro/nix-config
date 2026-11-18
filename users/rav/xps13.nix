@@ -1,10 +1,10 @@
-# Host-wired User leaf for xps13: base + dev + gui + hyprland personas.
+# Host-wired User leaf for xps13: base + dev + gui + umbriel personas.
 {
   imports = [
     ../../profiles/home/base.nix
     ../../profiles/home/dev.nix
     ../../profiles/home/gui.nix
-    ../../profiles/home/hyprland.nix
+    ../../profiles/home/umbriel.nix
   ];
 
   home = {

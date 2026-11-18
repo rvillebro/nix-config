@@ -16,16 +16,12 @@ _Avoid_: Setting, parameter
 The NixOS module that runs the Binance data-collection services on the rpi4 host. Owns the systemd units (stream and rest), the service user, and the group that grants read access to collected data.
 _Avoid_: Data collection service, collector config
 
-**Hyprland**:
-The Wayland compositor providing xps13's graphical session — window tiling, keybinds, and the session GDM/greetd launches.
-_Avoid_: window manager (loosely), desktop environment, tiling manager
-
 **Umbriel**:
-The Wayland compositor from the Noctalia family, trialed on xps13 as a second session selectable at the greeter, with Hyprland remaining the default. Its user config lives outside nix in `~/.config/umbriel/config.toml` (live-reloadable); nix installs only the package.
-_Avoid_: compositor (unqualified), replacement for Hyprland (until adopted)
+The Wayland compositor providing xps13's graphical session (ADR 0005), adopted after a trial as a second session. Its user config lives outside nix in `~/.config/umbriel/config.toml` (live-reloadable); nix installs only the package.
+_Avoid_: compositor (unqualified), window manager (loosely), desktop environment
 
 **Noctalia Shell**:
-The Quickshell-based desktop shell running inside the Hyprland session on xps13. Owns the launcher, lock screen, notifications, wallpaper, screenshots, and the tray widgets (network, bluetooth, battery, power profile).
+The Quickshell-based desktop shell running inside the Umbriel session on xps13. Owns the launcher, lock screen, notifications, wallpaper, screenshots, and the tray widgets (network, bluetooth, battery, power profile).
 _Avoid_: bar, status bar, shell (ambiguous)
 
 **Noctalia Greeter**:

@@ -18,7 +18,7 @@
     };
     # special hardware configurations
     hardware.url = "github:nixos/nixos-hardware";
-    # Hyprland desktop stack (ADR 0004): the shell and the greetd greeter.
+    # Umbriel desktop stack (ADR 0005): the shell and the greetd greeter.
     noctalia = {
       url = "github:noctalia-dev/noctalia";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -27,10 +27,10 @@
       url = "github:noctalia-dev/noctalia-greeter";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Trial on xps13: Umbriel compositor as a second session alongside
-    # Hyprland. Tracked on the `cachix` branch and deliberately NOT
-    # following our nixpkgs — its binary cache only matches the locked
-    # nixpkgs the project builds against (see Umbriel's installation docs).
+    # Umbriel compositor on xps13 (ADR 0005). Tracked on the `cachix` branch
+    # and deliberately NOT following our nixpkgs — its binary cache only
+    # matches the locked nixpkgs the project builds against (see Umbriel's
+    # installation docs).
     umbriel.url = "github:noctalia-dev/umbriel/cachix";
   };
 

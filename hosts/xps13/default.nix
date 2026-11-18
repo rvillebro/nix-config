@@ -9,14 +9,13 @@
     ../../profiles/nixos/base.nix
     ../../profiles/nixos/desktop.nix
     ../../profiles/nixos/media-server.nix # dormant, zero-consumer
-    inputs.umbriel.nixosModules.default # trial: second session alongside Hyprland
   ];
 
   nix.settings = {
     trusted-users = ["rav"];
 
-    # Umbriel's project binary cache — without it this trial compiles a large
-    # C++23 compositor locally. Matches the pinned `umbriel/cachix` input.
+    # Umbriel's project binary cache — without it the compositor compiles a
+    # large C++23 codebase locally. Matches the pinned `umbriel/cachix` input.
     extra-substituters = ["https://umbriel.cachix.org"];
     extra-trusted-public-keys = [
       "umbriel.cachix.org-1:JfNq/2yg2S6D6z4Z2dVSZrZlDPQTKtexB6GAVLD98nw="
@@ -47,25 +46,11 @@
 
   networking = {
     hostName = "xps13";
-    networkmanager.enable = true;
     firewall.enable = false;
   };
 
   # xps13-specific nixpkgs additions (appended to the shared base overlays).
   nixpkgs.overlays = [inputs.nur.overlays.default];
-
-  # rav may sync the shell's appearance (wallpaper, palette, font) to the
-  # Noctalia Greeter without a polkit prompt — Settings → Security →
-  # Noctalia Greeter → Sync Now. Person-scoped, hence set on this leaf.
-  services.displayManager.noctalia-greeter.passwordless-sync-users = ["rav"];
-
-  # Umbriel trial: registers the Umbriel session for the greeter (Hyprland
-  # stays the default). The user config lives unmanaged in
-  # ~/.config/umbriel/config.toml (live-reloadable, no rebuild needed).
-  programs.umbriel.enable = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-39.8.10"
-  ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.05";
