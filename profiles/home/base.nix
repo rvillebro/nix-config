@@ -14,7 +14,6 @@
     ];
 
     shellAliases = {
-      zj = "zellij";
       cat = "bat";
       ls = "eza";
       ll = "eza -l";
@@ -48,7 +47,6 @@
       enableBashIntegration = true;
     };
     starship.enable = true;
-    zellij.enable = true;
 
     bat.enable = true;
     btop.enable = true;
@@ -57,6 +55,11 @@
     gh.enable = true;
     jq.enable = true;
     ripgrep.enable = true;
+
+    zoxide = {
+      enable = true;
+      enableBashIntegration = true;
+    };
 
     helix = {
       enable = true;

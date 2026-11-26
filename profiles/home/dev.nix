@@ -15,6 +15,7 @@ in
       unstable.pi-coding-agent
       unstable.nodejs
       unstable.bun
+      unstable.herdr
     ];
     file = {
       ".pi/agent/settings.json".text = builtins.toJSON {
@@ -31,5 +32,8 @@ in
         recursive = true;
       };
     };
+  };
+  programs.claude-code = {
+    enable = true;
   };
 }
