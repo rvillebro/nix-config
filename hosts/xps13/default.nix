@@ -16,9 +16,16 @@
 
     # Umbriel's project binary cache — without it the compositor compiles a
     # large C++23 codebase locally. Matches the pinned `umbriel/cachix` input.
-    extra-substituters = ["https://umbriel.cachix.org"];
+    # The noctalia cache serves both the Noctalia shell and the greeter
+    # (verified: the greeter build is published there); matches the pinned
+    # `noctalia/cachix` and `noctalia-greeter/cachix` inputs.
+    extra-substituters = [
+      "https://umbriel.cachix.org"
+      "https://noctalia.cachix.org"
+    ];
     extra-trusted-public-keys = [
       "umbriel.cachix.org-1:JfNq/2yg2S6D6z4Z2dVSZrZlDPQTKtexB6GAVLD98nw="
+      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
     ];
   };
 

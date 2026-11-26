@@ -19,14 +19,12 @@
     # special hardware configurations
     hardware.url = "github:nixos/nixos-hardware";
     # Umbriel desktop stack (ADR 0005): the shell and the greetd greeter.
-    noctalia = {
-      url = "github:noctalia-dev/noctalia";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    noctalia-greeter = {
-      url = "github:noctalia-dev/noctalia-greeter";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # Both tracked on their `cachix` branches and deliberately NOT following
+    # our nixpkgs — overriding their inputs changes the derivation hash, so
+    # the noctalia.cachix.org cache (which covers the greeter too) would miss
+    # and everything would compile locally (see Noctalia's NixOS docs).
+    noctalia.url = "github:noctalia-dev/noctalia/cachix";
+    noctalia-greeter.url = "github:noctalia-dev/noctalia-greeter/cachix";
     # Umbriel compositor on xps13 (ADR 0005). Tracked on the `cachix` branch
     # and deliberately NOT following our nixpkgs — its binary cache only
     # matches the locked nixpkgs the project builds against (see Umbriel's
