@@ -164,7 +164,7 @@
       enableBashIntegration = true;
       installBatSyntax = true;
       settings = {
-        theme = "dark:GitHub Dark,light:GitHub";
+        theme = "Japanesque";
         window-padding-x = 8;
         window-padding-y = 8;
         window-padding-balance = true;
