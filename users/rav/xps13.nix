@@ -13,7 +13,11 @@
     stateVersion = "24.05";
   };
 
-  home.packages = [pkgs.unstable.herdr pkgs.yazi pkgs.lazygit];
+  home.packages = [
+    pkgs.unstable.herdr-desktop
+    pkgs.yazi
+    pkgs.lazygit
+  ];
 
   programs = {
     delta = {
