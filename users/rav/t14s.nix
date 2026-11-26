@@ -1,4 +1,4 @@
-# Standalone User leaf for rav@work: the shared baseline plus work-only tooling.
+# Standalone User leaf for rav@t14s (work laptop): the shared baseline plus work-only tooling.
 {config, ...}: {
   imports = [
     ./nix.nix

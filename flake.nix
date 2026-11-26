@@ -110,10 +110,10 @@
           extraSpecialArgs = {inherit inputs outputs;};
           modules = [./users/rav/home.nix];
         };
-        "rav@work" = home-manager.lib.homeManagerConfiguration {
+        "rav@t14s" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {inherit inputs outputs;};
-          modules = [./users/rav/work.nix];
+          modules = [./users/rav/t14s.nix];
         };
       }
       // builtins.listToAttrs (

@@ -44,7 +44,7 @@ Evaluate a host/standalone attribute directly rather than reading the store path
 
 ```
 nix eval --raw '.#nixosConfigurations.<host>.config.<path>'          # NixOS hosts (xps13/rpi4/nixos-wsl)
-nix eval --json '.#homeConfigurations."<profile>".config.<path>'    # standalone (rav@home, rav@work)
+nix eval --json '.#homeConfigurations."<profile>".config.<path>'    # standalone (rav@home, rav@t14s)
 ```
 
 For systemd units, evaluate `<service>.serviceConfig` (not `systemd.units`/`unitText`). `nix run

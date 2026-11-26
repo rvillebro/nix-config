@@ -138,7 +138,7 @@ Then launch with `wsl -d NixOS` and set a password for your user.
 
 # Standalone Home Manager
 
-Besides the NixOS hosts, this flake exposes standalone Home Manager configurations for user profiles: `rav@home`, `rav@work`, `rav@work-server-cpu` and `rav@work-server-gpu` (see `homeConfigurations` in `flake.nix`).
+Besides the NixOS hosts, this flake exposes standalone Home Manager configurations for user profiles: `rav@home`, `rav@t14s` (work laptop), `rav@work-server-cpu` and `rav@work-server-gpu` (see `homeConfigurations` in `flake.nix`).
 
 ## First activation
 

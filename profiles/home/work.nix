@@ -1,4 +1,4 @@
-# Work home profile: the work-only toolset (rav@work standalone only).
+# Work home profile: the work-only toolset (rav@t14s standalone only).
 {pkgs, ...}: {
   home.packages = with pkgs; [
     glab

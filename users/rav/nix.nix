@@ -1,4 +1,4 @@
-# Standalone-only nix facts for the standalone User leaves (rav@home, rav@work).
+# Standalone-only nix facts for the standalone User leaves (rav@home, rav@t14s).
 {
   outputs,
   pkgs,
