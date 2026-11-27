@@ -1,12 +1,10 @@
 # Dev home profile: shared headless tooling for every User.
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   mattpocock-skills = fetchGit {
     url = "https://github.com/mattpocock/skills.git";
     rev = "24fe0ef7737efae15c87225755e9f6f5965e4888";
   };
-in
-{
+in {
   home = {
     sessionVariables = {
       PI_SKIP_VERSION_CHECK = "1";
@@ -15,7 +13,6 @@ in
       unstable.pi-coding-agent
       unstable.nodejs
       unstable.bun
-      unstable.herdr
     ];
     file = {
       ".pi/agent/settings.json".text = builtins.toJSON {

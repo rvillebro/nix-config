@@ -80,7 +80,10 @@ in {
     homeDirectory = "/home/rav";
     stateVersion = "25.11";
 
-    packages = [pkgs.nerd-fonts.geist-mono];
+    packages = [
+      pkgs.nerd-fonts.geist-mono
+      pkgs.unstable.herdr-desktop
+    ];
     sessionVariables.TERMINAL = "ghostty";
   };
 

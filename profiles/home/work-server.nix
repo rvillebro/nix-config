@@ -3,6 +3,7 @@
   home = {
     packages = with pkgs; [
       glab
+      unstable.herdr-core
     ];
     shellAliases = {
       sstate = "sinfo -Np any --Format NodeHost,AllocMem,Memory,CPUsState,GRES:25,GRESUSED:35,STATELONG";
