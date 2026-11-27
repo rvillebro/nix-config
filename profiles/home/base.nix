@@ -39,7 +39,25 @@
   programs = {
     home-manager.enable = true;
 
-    bash.enable = true;
+    bash = {
+      enable = true;
+      # `ssh <host> <cmd>` runs a non-interactive shell, which returns from
+      # ~/.bashrc at the interactive-only guard and would otherwise run with
+      # a bare system PATH, missing profile tools (e.g. `hc`). bashrcExtra
+      # is emitted before that guard and runs in non-interactive shells;
+      # guard on interactivity so interactive shells don't double-source
+      # what targets.genericLinux (initExtra) already sources for them.
+      bashrcExtra = let
+        hmSessionVars = "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh";
+      in ''
+        if [[ $- != *i* ]]; then
+          export PATH="$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$HOME/.local/bin:$PATH"
+          if [ -f "${hmSessionVars}" ]; then
+            . "${hmSessionVars}"
+          fi
+        fi
+      '';
+    };
     git.enable = true;
     direnv = {
       enable = true;
