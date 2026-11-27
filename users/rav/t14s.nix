@@ -83,6 +83,7 @@ in {
     packages = [
       pkgs.nerd-fonts.geist-mono
       pkgs.unstable.herdr-desktop
+      pkgs.unstable.herdr-core
     ];
     sessionVariables.TERMINAL = "ghostty";
   };
